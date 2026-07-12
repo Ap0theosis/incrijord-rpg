@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dbgxetmrkpa4e"]
+
+[ext_resource type="PackedScene" uid="uid://d02ktuuko3f6" path="res://allace.tscn" id="1_ig7tw"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ig7tw"]
+scenes/1/scene = ExtResource("1_ig7tw")
+
+[sub_resource type="TileSet" id="TileSet_ghksg"]
+tile_shape = 3
+tile_offset_axis = 1
+tile_size = Vector2i(190, 170)
+sources/0 = SubResource("TileSetScenesCollectionSource_ig7tw")
+
+[node name="Main" type="Node2D" unique_id=368505422]
+
+[node name="Allace" parent="." unique_id=266527067 instance=ExtResource("1_ig7tw")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1703539940]
+tile_map_data = PackedByteArray(0, 0, 10, 0, 253, 255, 0, 0, 0, 0, 0, 0, 1, 0)
+tile_set = SubResource("TileSet_ghksg")
