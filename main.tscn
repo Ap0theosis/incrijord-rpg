@@ -1,20 +1,61 @@
 [gd_scene format=3 uid="uid://dbgxetmrkpa4e"]
 
+[ext_resource type="Script" uid="uid://br8hw6kqcdex3" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://d02ktuuko3f6" path="res://allace.tscn" id="1_ig7tw"]
-
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ig7tw"]
-scenes/1/scene = ExtResource("1_ig7tw")
 
 [sub_resource type="TileSet" id="TileSet_ghksg"]
 tile_shape = 3
 tile_offset_axis = 1
 tile_size = Vector2i(190, 170)
-sources/0 = SubResource("TileSetScenesCollectionSource_ig7tw")
 
 [node name="Main" type="Node2D" unique_id=368505422]
+script = ExtResource("1_0xm2m")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1703539940 groups=["grid"]]
+tile_set = SubResource("TileSet_ghksg")
+
+[node name="GridMarkers" type="Node2D" parent="." unique_id=2073605045]
 
 [node name="Allace" parent="." unique_id=266527067 instance=ExtResource("1_ig7tw")]
+position = Vector2(602, 345)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1703539940]
-tile_map_data = PackedByteArray(0, 0, 10, 0, 253, 255, 0, 0, 0, 0, 0, 0, 1, 0)
-tile_set = SubResource("TileSet_ghksg")
+[node name="Camera" type="Camera2D" parent="." unique_id=1741512331]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1631576763]
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD" unique_id=1255977952]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer" unique_id=1124522370]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ZoomOut" type="Button" parent="HUD/MarginContainer/HBoxContainer" unique_id=1371982202]
+layout_mode = 2
+text = "-"
+
+[node name="ZoomValue" type="Label" parent="HUD/MarginContainer/HBoxContainer" unique_id=1717108904]
+layout_mode = 2
+text = "100%"
+
+[node name="ZoomIn" type="Button" parent="HUD/MarginContainer/HBoxContainer" unique_id=1089113633]
+layout_mode = 2
+text = "+"
+
+[node name="ZoomReset" type="Button" parent="HUD/MarginContainer/HBoxContainer" unique_id=1167308593]
+layout_mode = 2
+text = "Reset"
+
+[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomOut" to="." method="_on_zoom_out_pressed"]
+[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomIn" to="." method="_on_zoom_in_pressed"]
+[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomReset" to="." method="_on_zoom_reset_pressed"]

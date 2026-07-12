@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cth1gvra8gclj"
-path="res://.godot/imported/allace.webp-3c22d9a2bebfc7895d5e4ce8671c4cb2.ctex"
+uid="uid://culb0cb0ok8a1"
+path="res://.godot/imported/fay-icon.png-2d0bfc69a00c9a1a62e5a348e28cc4b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://allace.webp"
-dest_files=["res://.godot/imported/allace.webp-3c22d9a2bebfc7895d5e4ce8671c4cb2.ctex"]
+source_file="res://fay-icon.png"
+dest_files=["res://.godot/imported/fay-icon.png-2d0bfc69a00c9a1a62e5a348e28cc4b5.ctex"]
 
 [params]
 

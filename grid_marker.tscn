@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://7acjfn0q4qyp"]
+
+[ext_resource type="Texture2D" uid="uid://0f0bbxt0aaov" path="res://hex-grid.png" id="1_0j65c"]
+
+[node name="GridMarker" type="Node2D" unique_id=1351847339]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1878994970]
+self_modulate = Color(0.15127608, 0.15127608, 0.15127608, 1)
+texture = ExtResource("1_0j65c")
