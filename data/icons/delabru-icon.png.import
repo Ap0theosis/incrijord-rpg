@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oqntmadkr0xb"
-path="res://.godot/imported/hex-mask.png-453a3eccd9b5b1d5f7ce5ecadffabe5e.ctex"
+uid="uid://ddfh4sb1gw0g0"
+path="res://.godot/imported/delabru-icon.png-be23923851586f0ecb26a767a891c1a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hex-mask.png"
-dest_files=["res://.godot/imported/hex-mask.png-453a3eccd9b5b1d5f7ce5ecadffabe5e.ctex"]
+source_file="res://data/icons/delabru-icon.png"
+dest_files=["res://.godot/imported/delabru-icon.png-be23923851586f0ecb26a767a891c1a2.ctex"]
 
 [params]
 

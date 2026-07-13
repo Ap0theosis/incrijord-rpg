@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://d02ktuuko3f6"]
 
-[ext_resource type="Texture2D" uid="uid://d0o48768pmikv" path="res://allace-icon.png" id="1_c21ju"]
-[ext_resource type="Texture2D" uid="uid://et8ct8ww2osu" path="res://hex.png" id="1_e11xy"]
-[ext_resource type="Script" uid="uid://gqanybgr8541" path="res://allace.gd" id="2_av71m"]
-[ext_resource type="Texture2D" uid="uid://oqntmadkr0xb" path="res://hex-mask.png" id="2_ui8uc"]
+[ext_resource type="Script" uid="uid://gqanybgr8541" path="res://token/token.gd" id="1_gm8bg"]
+[ext_resource type="Texture2D" uid="uid://et8ct8ww2osu" path="res://token/hex.png" id="2_tjkmq"]
+[ext_resource type="Texture2D" uid="uid://oqntmadkr0xb" path="res://token/hex-mask.png" id="3_golxd"]
+[ext_resource type="Texture2D" uid="uid://dd3nc043vyxjc" path="res://icon.svg" id="4_oriu4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghksg"]
 bg_color = Color(0.22352941, 0.80784315, 0, 1)
@@ -14,16 +14,29 @@ bg_color = Color(0.4630264, 0.40817776, 0.9999828, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3v8uw"]
 bg_color = Color(0.72510576, 0.4307525, 1, 1)
 
-[node name="Allace" type="Node2D" unique_id=1425657095]
-script = ExtResource("2_av71m")
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 37.01351
+
+[node name="Token" type="Node2D" unique_id=1425657095]
+script = ExtResource("1_gm8bg")
 
 [node name="Button" type="Button" parent="." unique_id=542862556]
-z_index = 1
 offset_left = -78.0
 offset_top = -81.0
 offset_right = 81.0
 offset_bottom = 84.0
 flat = true
+
+[node name="SelectedHex" type="TextureRect" parent="." unique_id=601396068]
+visible = false
+self_modulate = Color(0.13218838, 0.00013847217, 0.20931855, 1)
+offset_left = -110.0
+offset_top = -111.0
+offset_right = 90.0
+offset_bottom = 89.0
+scale = Vector2(1.1, 1.1)
+mouse_filter = 2
+texture = ExtResource("3_golxd")
 
 [node name="Token" type="TextureRect" parent="." unique_id=857649829]
 offset_left = -100.0
@@ -31,7 +44,7 @@ offset_top = -101.0
 offset_right = 100.0
 offset_bottom = 99.0
 mouse_filter = 2
-texture = ExtResource("1_e11xy")
+texture = ExtResource("2_tjkmq")
 
 [node name="Bars" type="VBoxContainer" parent="Token" unique_id=1381284309]
 layout_mode = 1
@@ -46,6 +59,7 @@ mouse_filter = 2
 [node name="HpBar" type="ProgressBar" parent="Token/Bars" unique_id=800984879]
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_ghksg")
 step = 1.0
 value = 50.0
@@ -64,6 +78,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="Token/Bars/HpBar/HpContainer" unique_id=1040036686]
 layout_mode = 2
@@ -89,6 +104,7 @@ text = "98"
 visible = false
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_yfd23")
 step = 1.0
 value = 50.0
@@ -107,6 +123,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="Token/Bars/SanBar/SanContainer" unique_id=1909495914]
 layout_mode = 2
@@ -132,6 +149,7 @@ text = "9"
 visible = false
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_3v8uw")
 step = 1.0
 value = 50.0
@@ -150,6 +168,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="Token/Bars/PosturaBar/PosturaContainer" unique_id=203612472]
 layout_mode = 2
@@ -186,7 +205,7 @@ offset_bottom = 86.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_ui8uc")
+texture = ExtResource("3_golxd")
 expand_mode = 1
 
 [node name="Icon" type="TextureRect" parent="BG" unique_id=1408371617]
@@ -201,15 +220,39 @@ offset_top = 4.960001
 offset_right = 198.96
 offset_bottom = 204.96
 mouse_filter = 2
-texture = ExtResource("1_c21ju")
+texture = ExtResource("4_oriu4")
 expand_mode = 1
 
+[node name="MovesContainer" type="HBoxContainer" parent="." unique_id=484358644]
+visible = false
+offset_left = -58.0
+offset_top = 76.0
+offset_right = 61.0
+offset_bottom = 116.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MovesContainer" unique_id=587707517]
+layout_mode = 2
+text = "Movimentos: "
+
+[node name="Moves" type="Label" parent="MovesContainer" unique_id=1935894780]
+layout_mode = 2
+text = "4"
+
 [node name="Name" type="Label" parent="." unique_id=606901237]
-offset_left = -23.0
+custom_minimum_size = Vector2(200, 0)
+offset_left = -103.0
 offset_top = 66.0
-offset_right = 23.0
+offset_right = 97.0
 offset_bottom = 89.0
-text = "Allace"
+text = "TOKEN_NAME"
+horizontal_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="." unique_id=111681101]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1742118865]
+shape = SubResource("CircleShape2D_g4v7s")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

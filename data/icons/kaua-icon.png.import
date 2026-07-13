@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://et8ct8ww2osu"
-path="res://.godot/imported/hex.png-ea61bde9ec80337e0039cdc9c72cf6f7.ctex"
+uid="uid://d6adlucafrgp"
+path="res://.godot/imported/kaua-icon.png-47a04b45d7ac74eee0df91707482ed8b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hex.png"
-dest_files=["res://.godot/imported/hex.png-ea61bde9ec80337e0039cdc9c72cf6f7.ctex"]
+source_file="res://data/icons/kaua-icon.png"
+dest_files=["res://.godot/imported/kaua-icon.png-47a04b45d7ac74eee0df91707482ed8b.ctex"]
 
 [params]
 

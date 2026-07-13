@@ -1,12 +1,18 @@
 [gd_scene format=3 uid="uid://dbgxetmrkpa4e"]
 
 [ext_resource type="Script" uid="uid://br8hw6kqcdex3" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://d02ktuuko3f6" path="res://allace.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://d02ktuuko3f6" path="res://token/token.tscn" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://d0o48768pmikv" path="res://data/icons/allace-icon.png" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://ddfh4sb1gw0g0" path="res://data/icons/delabru-icon.png" id="4_lquwl"]
+[ext_resource type="Texture2D" uid="uid://d6adlucafrgp" path="res://data/icons/kaua-icon.png" id="5_lquwl"]
 
 [sub_resource type="TileSet" id="TileSet_ghksg"]
 tile_shape = 3
 tile_offset_axis = 1
 tile_size = Vector2i(190, 170)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0.44894964, 1.3055467e-06, 9.62615e-08, 1)
 
 [node name="Main" type="Node2D" unique_id=368505422]
 script = ExtResource("1_0xm2m")
@@ -16,12 +22,36 @@ tile_set = SubResource("TileSet_ghksg")
 
 [node name="GridMarkers" type="Node2D" parent="." unique_id=2073605045]
 
-[node name="Allace" parent="." unique_id=266527067 instance=ExtResource("1_ig7tw")]
-position = Vector2(602, 345)
+[node name="Tokens" type="Node2D" parent="." unique_id=516393696]
+
+[node name="Token" parent="Tokens" unique_id=1425657095 instance=ExtResource("1_ig7tw")]
+position = Vector2(35, -240)
+token_name = "Allace"
+token_icon = ExtResource("3_1bvp3")
+
+[node name="Token2" parent="Tokens" unique_id=1350576037 instance=ExtResource("1_ig7tw")]
+position = Vector2(407, -143)
+token_name = "Delabru"
+token_icon = ExtResource("4_lquwl")
+
+[node name="Token3" parent="Tokens" unique_id=1235005061 instance=ExtResource("1_ig7tw")]
+position = Vector2(437, 146)
+token_name = "Kauã"
+token_icon = ExtResource("5_lquwl")
 
 [node name="Camera" type="Camera2D" parent="." unique_id=1741512331]
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1631576763]
+
+[node name="Panel" type="Panel" parent="HUD" unique_id=545271435]
+custom_minimum_size = Vector2(332, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD" unique_id=1255977952]
 anchors_preset = 15
@@ -56,6 +86,58 @@ text = "+"
 layout_mode = 2
 text = "Reset"
 
+[node name="DiceContainer" type="VBoxContainer" parent="HUD/MarginContainer" unique_id=2100689220]
+custom_minimum_size = Vector2(300, 72)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="HUD/MarginContainer/DiceContainer" unique_id=1877901091]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "VOCÊ ROLOU: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Result" type="Label" parent="HUD/MarginContainer/DiceContainer" unique_id=834094690]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Roll20" type="Button" parent="HUD/MarginContainer/DiceContainer" unique_id=2052337649]
+layout_mode = 2
+size_flags_vertical = 3
+text = "D20"
+
+[node name="Roll6" type="Button" parent="HUD/MarginContainer/DiceContainer" unique_id=955733920]
+layout_mode = 2
+size_flags_vertical = 3
+text = "D6"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer" unique_id=2022034903]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="SelectedName" type="Label" parent="HUD/MarginContainer/VBoxContainer" unique_id=1541492221]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "NOME"
+horizontal_alignment = 1
+
+[node name="SelectedAttack" type="Button" parent="HUD/MarginContainer/VBoxContainer" unique_id=512882359]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_g4v7s")
+text = "ATACAR"
+
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomOut" to="." method="_on_zoom_out_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomIn" to="." method="_on_zoom_in_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomReset" to="." method="_on_zoom_reset_pressed"]
+[connection signal="pressed" from="HUD/MarginContainer/DiceContainer/Roll20" to="." method="_on_roll_20_pressed"]
+[connection signal="pressed" from="HUD/MarginContainer/DiceContainer/Roll6" to="." method="_on_roll_6_pressed"]
+[connection signal="button_down" from="HUD/MarginContainer/VBoxContainer/SelectedAttack" to="." method="_on_selected_attack_button_down"]

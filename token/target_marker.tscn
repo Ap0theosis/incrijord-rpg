@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://jf3vllgrfgio"]
+
+[ext_resource type="Script" uid="uid://lpw81wr8y2dg" path="res://token/target_marker.gd" id="1_m4wmi"]
+[ext_resource type="Texture2D" uid="uid://0f0bbxt0aaov" path="res://token/hex-grid.png" id="2_7uq2g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 36.124783
+
+[node name="TargetMarker" type="Node2D" unique_id=1351847339]
+z_index = 1
+script = ExtResource("1_m4wmi")
+
+[node name="Button" type="Button" parent="." unique_id=186619897]
+offset_left = -78.0
+offset_top = -81.0
+offset_right = 81.0
+offset_bottom = 84.0
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1878994970]
+self_modulate = Color(0.78431374, 0, 0, 1)
+texture = ExtResource("2_7uq2g")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=426123169]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=1004256291]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

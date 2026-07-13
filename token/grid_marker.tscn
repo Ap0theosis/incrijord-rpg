@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://7acjfn0q4qyp"]
+
+[ext_resource type="Texture2D" uid="uid://0f0bbxt0aaov" path="res://token/hex-grid.png" id="1_0j65c"]
+[ext_resource type="Script" uid="uid://sg8s21hs6ohk" path="res://token/grid_marker.gd" id="1_u0re5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 36.124783
+
+[node name="GridMarker" type="Node2D" unique_id=1351847339]
+script = ExtResource("1_u0re5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1878994970]
+self_modulate = Color(0.15127608, 0.15127608, 0.15127608, 1)
+texture = ExtResource("1_0j65c")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=267536584]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=83125666]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

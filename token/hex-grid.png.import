@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0f0bbxt0aaov"
-path="res://.godot/imported/hex-grid.png-b67dbe977a5272a2dafd300bc13656a8.ctex"
+path="res://.godot/imported/hex-grid.png-0a2ab3b870235a783400e7c814b620a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://hex-grid.png"
-dest_files=["res://.godot/imported/hex-grid.png-b67dbe977a5272a2dafd300bc13656a8.ctex"]
+source_file="res://token/hex-grid.png"
+dest_files=["res://.godot/imported/hex-grid.png-0a2ab3b870235a783400e7c814b620a7.ctex"]
 
 [params]
 
