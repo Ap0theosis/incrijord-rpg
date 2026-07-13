@@ -17,6 +17,11 @@ bg_color = Color(0.44894964, 1.3055467e-06, 9.62615e-08, 1)
 [node name="Main" type="Node2D" unique_id=368505422]
 script = ExtResource("1_0xm2m")
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=297530759]
+_spawnable_scenes = PackedStringArray("uid://blbk3ydylp1pr")
+spawn_path = NodePath("../Players")
+spawn_limit = 2
+
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1703539940 groups=["grid"]]
 tile_set = SubResource("TileSet_ghksg")
 
@@ -42,10 +47,6 @@ token_icon = ExtResource("5_lquwl")
 [node name="TargetMarkers" type="Node2D" parent="." unique_id=1824685374]
 
 [node name="Players" type="Node2D" parent="." unique_id=361414048]
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players" unique_id=297530759]
-_spawnable_scenes = PackedStringArray("uid://blbk3ydylp1pr")
-spawn_path = NodePath("..")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1631576763]
 

@@ -3,6 +3,10 @@ extends Node2D
 @onready var camera = $Camera2D
 var zoom = 100
 
+@export var player_id := 1:
+	set(id):
+		player_id = id
+
 func _ready():
 	# Define quem manda nesta câmera com base no nome do nó (ID da rede)
 	set_multiplayer_authority(name.to_int())
