@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Incrijord RPG"
-run/main_scene="uid://dbgxetmrkpa4e"
+run/main_scene="uid://dxeko683gdc86"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Rede="*uid://dfjshb8h8wwj3"
 
 [display]
 

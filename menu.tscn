@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dxeko683gdc86"]
+
+[ext_resource type="Script" uid="uid://c0fgptv45yxhq" path="res://menu.gd" id="1_lti8b"]
+
+[node name="Menu" type="Control" unique_id=1812320889]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_lti8b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1886657259]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostButton" type="Button" parent="VBoxContainer" unique_id=1126627869]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Criar Sala / Host"
+
+[node name="JoinButton" type="Button" parent="VBoxContainer" unique_id=2116985190]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Entrar na Sala / Join"
+
+[connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_pressed"]

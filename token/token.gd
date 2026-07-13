@@ -7,12 +7,12 @@ var selected = false
 var hex_grid : TileMapLayer = null
 var last_coor : Vector2 = Vector2(0, 0)
 
-var health = 16
-var max_health = 16
-var moves = 40
-@export var move_range = 4
+@export var health = 16
+@export var max_health = 16
+@export var moves = 40
+@export var move_range = 10
 @export var attack_range = 2
-var power = 4
+@export var power = 4
 
 @export var token_name : String = ""
 @export var token_icon : Texture2D 
@@ -36,11 +36,10 @@ const TARGET_MARKER = preload("res://token/target_marker.tscn")
 
 func _ready() -> void:
 	selection.connect(get_tree().current_scene._on_selected_token)
-	
 	hp_bar.max_value = max_health
-	
 	hex_grid = get_tree().get_first_node_in_group("grid")
-	snap_to_grid()
+	if multiplayer.is_server():
+		snap_to_grid()
 	update_hud()
 	icon_texture.texture = token_icon
 
@@ -60,6 +59,7 @@ func _on_button_button_down() -> void:
 
 func _on_button_button_up() -> void:
 	is_dragging = false
+	
 	if hex_grid:
 		var self_coor = hex_grid.local_to_map(global_position)
 		var can_move_to = []
@@ -80,8 +80,37 @@ func _on_button_button_up() -> void:
 			return
 		global_position = hex_grid.map_to_local(last_coor)
 		clear_marker()
+		
+		rpc_id(1, "solicitar_movimento_no_servidor", self_coor, can_move_to)
 	else:
 		print("Grid não encontrada!")
+
+# --- FUNÇÕES DE REDE (RPC) ---
+
+# Esta função roda APENAS no Host ("any_peer" permite que clientes chamem ela)
+@rpc("any_peer", "call_local", "reliable")
+func solicitar_movimento_no_servidor(destino_coor: Vector2, caminhos_validos: Array):
+	if not multiplayer.is_server(): 
+		return 
+		
+	# O Host verifica se a posição enviada é válida e se há movimentos restantes
+	if caminhos_validos.has(destino_coor) and moves > 0:
+		moves -= 1
+		global_position = hex_grid.map_to_local(destino_coor)
+		last_coor = destino_coor
+	else:
+		# Se for inválido, o Host força a peça a voltar para a última coordenada salva
+		global_position = hex_grid.map_to_local(last_coor)
+		
+	# Avisamos a todos os jogadores para atualizarem suas interfaces de texto/vida/movimento
+	rpc("atualizar_clientes")
+
+# Esta função roda em TODO MUNDO após o Host terminar de mexer na peça
+@rpc("authority", "call_local", "reliable")
+func atualizar_clientes():
+	update_hud()
+
+# ----------------------------
 
 func snap_to_grid() -> void:
 	var self_coor = hex_grid.local_to_map(global_position)
@@ -172,8 +201,9 @@ func attack() -> void:
 		target_markers.add_child(new_marker)
 
 func take_damage(amount: int) -> void:
-	health -= amount
-	update_hud()
+	if multiplayer.is_server():
+		health -= amount
+		rpc("atualizar_clientes")
 
 func update_hud() -> void:
 	moves_value.text = str(moves)

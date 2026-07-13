@@ -41,7 +41,11 @@ token_icon = ExtResource("5_lquwl")
 
 [node name="TargetMarkers" type="Node2D" parent="." unique_id=1824685374]
 
-[node name="Camera" type="Camera2D" parent="." unique_id=1741512331]
+[node name="Players" type="Node2D" parent="." unique_id=361414048]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players" unique_id=297530759]
+_spawnable_scenes = PackedStringArray("uid://blbk3ydylp1pr")
+spawn_path = NodePath("..")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1631576763]
 
@@ -156,7 +160,6 @@ text = "(0, 0)"
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomOut" to="." method="_on_zoom_out_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomIn" to="." method="_on_zoom_in_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomReset" to="." method="_on_zoom_reset_pressed"]
-[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/TargetReset" to="." method="_on_zoom_reset_2_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/TargetReset" to="." method="_on_target_reset_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/DiceContainer/Roll20" to="." method="_on_roll_20_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/DiceContainer/Roll6" to="." method="_on_roll_6_pressed"]

@@ -17,6 +17,17 @@ bg_color = Color(0.72510576, 0.4307525, 1, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 radius = 37.01351
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gm8bg"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:health")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:moves")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
 [node name="Token" type="Node2D" unique_id=1425657095]
 script = ExtResource("1_gm8bg")
 
@@ -253,6 +264,9 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1742118865]
 shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2064956071]
+replication_config = SubResource("SceneReplicationConfig_gm8bg")
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
