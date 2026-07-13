@@ -9,12 +9,16 @@ var last_coor : Vector2 = Vector2(0, 0)
 
 var health = 16
 var max_health = 16
-var moves = 4
+var moves = 40
+@export var move_range = 4
+@export var attack_range = 2
+var power = 4
 
 @export var token_name : String = ""
 @export var token_icon : Texture2D 
 
 @onready var grid_markers: Node2D = $"../../GridMarkers"
+@onready var target_markers: Node2D = $"../../TargetMarkers"
 const GRID_MARKER = preload("res://token/grid_marker.tscn")
 const TARGET_MARKER = preload("res://token/target_marker.tscn")
 
@@ -34,7 +38,6 @@ func _ready() -> void:
 	selection.connect(get_tree().current_scene._on_selected_token)
 	
 	hp_bar.max_value = max_health
-	hp_bar.value = health
 	
 	hex_grid = get_tree().get_first_node_in_group("grid")
 	snap_to_grid()
@@ -61,7 +64,7 @@ func _on_button_button_up() -> void:
 		var self_coor = hex_grid.local_to_map(global_position)
 		var can_move_to = []
 		for child in grid_markers.get_children():
-			if child.parent == name:
+			if child.parent == self:
 				can_move_to.append(hex_grid.local_to_map(child.global_position))
 		print("Última posição: %s\nMovimentos possíveis: %s\nTentou se mover para: %s" % [last_coor, can_move_to, self_coor])
 		if not can_move_to.has(self_coor):
@@ -88,14 +91,41 @@ func snap_to_grid() -> void:
 func spawn_marker() -> void:
 	if moves <= 0:
 		return
-	var surround = hex_grid.get_surrounding_cells(hex_grid.local_to_map(global_position))
-	for pos in surround:
-		print("Posição do vizinho %s: %s" % [pos, hex_grid.map_to_local(pos)])
+	
+	var center_cell = hex_grid.local_to_map(global_position)
+	# Usamos um dicionário como um "Set" para garantir que nenhuma posição se repita
+	var visited = {}
+	
+	# Filas para controlar a expansão por passos (range)
+	var current_fringe = [center_cell]
+	visited[center_cell] = true
+	
+	# Loop para cada ponto de alcance (move_range)
+	for step in range(move_range):
+		var next_fringe = []
+		
+		for cell in current_fringe:
+			var neighbors = hex_grid.get_surrounding_cells(cell)
+			for neighbor in neighbors:
+				if not visited.has(neighbor):
+					visited[neighbor] = true
+					next_fringe.append(neighbor)
+		
+		# A próxima camada se torna a camada atual para o próximo passo
+		current_fringe = next_fringe
+	
+	# Agora pegamos todas as chaves do dicionário (que são as posições únicas)
+	var pos_to_spawn = visited.keys()
+	
+	# Se você NÃO quiser incluir a célula central onde o personagem está:
+	pos_to_spawn.erase(center_cell)
+	
+	for pos in pos_to_spawn:
 		var new_marker = GRID_MARKER.instantiate()
 		new_marker.global_position = hex_grid.map_to_local(pos)
-		new_marker.parent = name
+		new_marker.parent = self
 		grid_markers.add_child(new_marker)
-
+	
 func clear_marker() -> void:
 	var child = grid_markers.get_children()
 	for i in child:
@@ -117,17 +147,38 @@ func _on_button_mouse_exited() -> void:
 
 func attack() -> void:
 	#var target_distance = abs(tile_a.x - tile_b.x) + abs(tile_a.y - tile_b.y)
-	var surround = hex_grid.get_surrounding_cells(hex_grid.local_to_map(global_position))
-	for pos in surround:
-		print("Posição do vizinho %s: %s" % [pos, hex_grid.map_to_local(pos)])
+	var center_cell = hex_grid.local_to_map(global_position)
+	var visited = {}
+	var current_fringe = [center_cell]
+	visited[center_cell] = true
+	
+	for step in range(attack_range):
+		var next_fringe = []
+		for cell in current_fringe:
+			var neighbors = hex_grid.get_surrounding_cells(cell)
+			for neighbor in neighbors:
+				if not visited.has(neighbor):
+					visited[neighbor] = true
+					next_fringe.append(neighbor)
+		current_fringe = next_fringe
+	var pos_to_spawn = visited.keys()
+	#pos_to_spawn.erase(center_cell)
+	
+	for pos in pos_to_spawn:
 		var new_marker = TARGET_MARKER.instantiate()
 		new_marker.global_position = hex_grid.map_to_local(pos)
-		new_marker.parent = name
-		grid_markers.add_child(new_marker)
+		new_marker.parent = self
+		new_marker.power = power
+		target_markers.add_child(new_marker)
+
+func take_damage(amount: int) -> void:
+	health -= amount
+	update_hud()
 
 func update_hud() -> void:
 	moves_value.text = str(moves)
 	hp_label.text = str(health)
+	hp_bar.value = health
 	max_hp_label.text = str(max_health)
 	
 	selected_hex.visible = selected

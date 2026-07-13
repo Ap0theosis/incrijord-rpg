@@ -39,6 +39,8 @@ position = Vector2(437, 146)
 token_name = "Kauã"
 token_icon = ExtResource("5_lquwl")
 
+[node name="TargetMarkers" type="Node2D" parent="." unique_id=1824685374]
+
 [node name="Camera" type="Camera2D" parent="." unique_id=1741512331]
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1631576763]
@@ -86,6 +88,10 @@ text = "+"
 layout_mode = 2
 text = "Reset"
 
+[node name="TargetReset" type="Button" parent="HUD/MarginContainer/HBoxContainer" unique_id=1765527873]
+layout_mode = 2
+text = "Re-select"
+
 [node name="DiceContainer" type="VBoxContainer" parent="HUD/MarginContainer" unique_id=2100689220]
 custom_minimum_size = Vector2(300, 72)
 layout_mode = 2
@@ -97,14 +103,6 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 text = "VOCÊ ROLOU: "
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Result" type="Label" parent="HUD/MarginContainer/DiceContainer" unique_id=834094690]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -135,9 +133,31 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_g4v7s")
 text = "ATACAR"
 
+[node name="MarginContainer2" type="MarginContainer" parent="HUD" unique_id=492137118]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -332.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="MousePosLabel" type="Label" parent="HUD/MarginContainer2" unique_id=1986857160]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 32
+text = "(0, 0)"
+
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomOut" to="." method="_on_zoom_out_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomIn" to="." method="_on_zoom_in_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomReset" to="." method="_on_zoom_reset_pressed"]
+[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/TargetReset" to="." method="_on_zoom_reset_2_pressed"]
+[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/TargetReset" to="." method="_on_target_reset_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/DiceContainer/Roll20" to="." method="_on_roll_20_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/DiceContainer/Roll6" to="." method="_on_roll_6_pressed"]
 [connection signal="button_down" from="HUD/MarginContainer/VBoxContainer/SelectedAttack" to="." method="_on_selected_attack_button_down"]
