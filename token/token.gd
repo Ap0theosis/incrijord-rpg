@@ -10,13 +10,19 @@ var last_coor : Vector2 = Vector2(0, 0)
 const DICES = preload("res://dices/dices.tscn")
 
 @export var health = 16
-@export var max_health = 16
 @export var moves = 40
 @export var move_range = 1
 @export var attack_range = 2
 @export var power = 4
 
-@export var token_name : String = ""
+@export var stats = {
+	"name": "",
+	"race": "",
+	"max_health": 0,
+	"max_sanity": 0,
+	"increments": 0,
+}
+
 @export var token_icon : Texture2D 
 
 @onready var grid_markers: Node2D = $"../../GridMarkers"
@@ -37,8 +43,18 @@ const TARGET_MARKER = preload("res://token/target_marker.tscn")
 @onready var icon_texture: TextureRect = $BG/Icon
 
 func _ready() -> void:
+	var token_race = stats["race"]
+	if stats["race"]:
+		for key in Races.get(token_race):
+			if stats.has(key):
+				stats[key] = Races.get(token_race)[key]
+		print(stats)
+	
+	
+	
+	
 	selection.connect(get_tree().current_scene._on_selected_token)
-	hp_bar.max_value = max_health
+	hp_bar.max_value = stats["max_health"]
 	hex_grid = get_tree().get_first_node_in_group("grid")
 	if multiplayer.is_server():
 		snap_to_grid()
@@ -188,19 +204,23 @@ func finalizar_movimento_no_servidor(self_coor: Vector2i, can_move_to: Array):
 	update_hud.rpc()
 
 @rpc("any_peer", "call_local")
-func spawn_dice(_type):
+func spawn_dice(type, advantage = 0):
 	if not multiplayer.is_server():
 		return
-	
-	var new_dice = DICES.instantiate()
-	$Dices.add_child(new_dice)
+	for child in $Dices.get_children():
+		child.queue_free()
+	for i in range(advantage + 1):
+		var new_dice = DICES.instantiate()
+		new_dice.type = type
+		new_dice.advantage = advantage
+		$Dices.add_child(new_dice, true)
 
 @rpc("authority", "call_local", "reliable")
 func update_hud() -> void:
 	moves_value.text = str(moves)
 	hp_label.text = str(health)
 	hp_bar.value = health
-	max_hp_label.text = str(max_health)
+	max_hp_label.text = str(stats["max_health"])
 	
 	selected_hex.visible = selected
-	name_label.text = token_name
+	name_label.text = stats["name"]

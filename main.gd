@@ -43,7 +43,7 @@ func _on_selected_token(id) -> void:
 			child.update_hud()
 		else:
 			selected = child
-			selected_name.text = selected.token_name
+			selected_name.text = selected.stats["name"]
 
 func _on_selected_attack_button_down() -> void:
 	if selected:
@@ -60,8 +60,8 @@ func _on_target_reset_pressed() -> void:
 
 func _on_roll_20_pressed() -> void:
 	if selected:
-		selected.spawn_dice.rpc("d20")
+		selected.spawn_dice.rpc("D20")
 
 func _on_roll_6_pressed() -> void:
 	if selected:
-		selected.spawn_dice.rpc("d6")
+		selected.spawn_dice.rpc("D6", 1)
