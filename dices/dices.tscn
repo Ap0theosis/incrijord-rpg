@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cr7llbcgpklcy" path="res://dices/dices.gd" id="1_gvcav"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gvcav"]
+properties/0/path = NodePath("VBoxContainer/Label2:text")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Dices" type="Node2D" unique_id=280438550]
 script = ExtResource("1_gvcav")
 
@@ -38,6 +43,9 @@ flat = true
 wait_time = 10.0
 one_shot = true
 autostart = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1911045720]
+replication_config = SubResource("SceneReplicationConfig_gvcav")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

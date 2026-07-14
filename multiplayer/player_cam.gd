@@ -8,7 +8,6 @@ var zoom = 100
 		player_id = id
 
 func _ready():
-	# Define quem manda nesta câmera com base no nome do nó (ID da rede)
 	set_multiplayer_authority(name.to_int())
 	
 	# Se for a MINHA câmera, eu ativo ela. Se for do outro, desativo para não dar conflito

@@ -7,10 +7,12 @@ var selected = false
 var hex_grid : TileMapLayer = null
 var last_coor : Vector2 = Vector2(0, 0)
 
+const DICES = preload("res://dices/dices.tscn")
+
 @export var health = 16
 @export var max_health = 16
 @export var moves = 40
-@export var move_range = 10
+@export var move_range = 1
 @export var attack_range = 2
 @export var power = 4
 
@@ -45,7 +47,11 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if is_dragging:
-		global_position = get_global_mouse_position()
+		var mouse_pos = get_global_mouse_position()
+		if multiplayer.is_server():
+			global_position = mouse_pos
+		else:
+			rpc_id(1, "atualizar_arrasto_tempo_real", mouse_pos)
 
 func _on_button_button_down() -> void:
 	if not selected:
@@ -59,60 +65,19 @@ func _on_button_button_down() -> void:
 
 func _on_button_button_up() -> void:
 	is_dragging = false
-	
 	if hex_grid:
 		var self_coor = hex_grid.local_to_map(global_position)
 		var can_move_to = []
 		for child in grid_markers.get_children():
 			if child.parent == self:
-				can_move_to.append(hex_grid.local_to_map(child.global_position))
-		print("Última posição: %s\nMovimentos possíveis: %s\nTentou se mover para: %s" % [last_coor, can_move_to, self_coor])
-		if not can_move_to.has(self_coor):
-			global_position = hex_grid.map_to_local(last_coor)
-			clear_marker()
-			return
-		
-		if moves > 0:
-			moves -= 1
-			snap_to_grid()
-			update_hud()
-			clear_marker()
-			return
-		global_position = hex_grid.map_to_local(last_coor)
+				can_move_to.append(Vector2i(hex_grid.local_to_map(child.global_position)))
 		clear_marker()
-		
-		rpc_id(1, "solicitar_movimento_no_servidor", self_coor, can_move_to)
+		rpc_id(1, "finalizar_movimento_no_servidor", Vector2i(self_coor), can_move_to)
 	else:
 		print("Grid não encontrada!")
 
-# --- FUNÇÕES DE REDE (RPC) ---
-
-# Esta função roda APENAS no Host ("any_peer" permite que clientes chamem ela)
-@rpc("any_peer", "call_local", "reliable")
-func solicitar_movimento_no_servidor(destino_coor: Vector2, caminhos_validos: Array):
-	if not multiplayer.is_server(): 
-		return 
-		
-	# O Host verifica se a posição enviada é válida e se há movimentos restantes
-	if caminhos_validos.has(destino_coor) and moves > 0:
-		moves -= 1
-		global_position = hex_grid.map_to_local(destino_coor)
-		last_coor = destino_coor
-	else:
-		# Se for inválido, o Host força a peça a voltar para a última coordenada salva
-		global_position = hex_grid.map_to_local(last_coor)
-		
-	# Avisamos a todos os jogadores para atualizarem suas interfaces de texto/vida/movimento
-	rpc("atualizar_clientes")
-
-# Esta função roda em TODO MUNDO após o Host terminar de mexer na peça
-@rpc("authority", "call_local", "reliable")
-func atualizar_clientes():
-	update_hud()
-
-# ----------------------------
-
 func snap_to_grid() -> void:
+	print("snap grid")
 	var self_coor = hex_grid.local_to_map(global_position)
 	global_position = hex_grid.map_to_local(self_coor)
 	last_coor = hex_grid.local_to_map(global_position)
@@ -122,14 +87,10 @@ func spawn_marker() -> void:
 		return
 	
 	var center_cell = hex_grid.local_to_map(global_position)
-	# Usamos um dicionário como um "Set" para garantir que nenhuma posição se repita
 	var visited = {}
-	
-	# Filas para controlar a expansão por passos (range)
 	var current_fringe = [center_cell]
 	visited[center_cell] = true
 	
-	# Loop para cada ponto de alcance (move_range)
 	for step in range(move_range):
 		var next_fringe = []
 		
@@ -139,14 +100,8 @@ func spawn_marker() -> void:
 				if not visited.has(neighbor):
 					visited[neighbor] = true
 					next_fringe.append(neighbor)
-		
-		# A próxima camada se torna a camada atual para o próximo passo
 		current_fringe = next_fringe
-	
-	# Agora pegamos todas as chaves do dicionário (que são as posições únicas)
 	var pos_to_spawn = visited.keys()
-	
-	# Se você NÃO quiser incluir a célula central onde o personagem está:
 	pos_to_spawn.erase(center_cell)
 	
 	for pos in pos_to_spawn:
@@ -175,7 +130,6 @@ func _on_button_mouse_exited() -> void:
 	$Token/Bars.position.y += 30
 
 func attack() -> void:
-	#var target_distance = abs(tile_a.x - tile_b.x) + abs(tile_a.y - tile_b.y)
 	var center_cell = hex_grid.local_to_map(global_position)
 	var visited = {}
 	var current_fringe = [center_cell]
@@ -183,6 +137,7 @@ func attack() -> void:
 	
 	for step in range(attack_range):
 		var next_fringe = []
+		
 		for cell in current_fringe:
 			var neighbors = hex_grid.get_surrounding_cells(cell)
 			for neighbor in neighbors:
@@ -200,11 +155,47 @@ func attack() -> void:
 		new_marker.power = power
 		target_markers.add_child(new_marker)
 
-func take_damage(amount: int) -> void:
-	if multiplayer.is_server():
-		health -= amount
-		rpc("atualizar_clientes")
+# --- FUNÇÕES DE REDE (RPC) ---
+# "authority" significa: apenas o Servidor/Host pode mandar os outros executarem.
+# "call_local" significa: o Host também vai rodar essa função na tela dele.
+# "reliable" significa: o pacote de dados TEM que chegar (essencial para status/vida).
 
+@rpc("any_peer", "call_local", "reliable")
+func take_damage(amount: int) -> void:
+	if not multiplayer.is_server():
+		return
+	health -= amount
+	update_hud.rpc()
+
+@rpc("any_peer", "unreliable")
+func atualizar_arrasto_tempo_real(new_pos: Vector2):
+	if not multiplayer.is_server():
+		return
+	global_position = new_pos
+
+@rpc("any_peer", "call_local", "reliable")
+func finalizar_movimento_no_servidor(self_coor: Vector2i, can_move_to: Array):
+	if not multiplayer.is_server(): 
+		return 
+	
+	if can_move_to.has(self_coor) and moves > 0:
+		moves -= 1
+		global_position = hex_grid.map_to_local(self_coor)
+		last_coor = self_coor
+	else:
+		global_position = hex_grid.map_to_local(last_coor)
+		
+	update_hud.rpc()
+
+@rpc("any_peer", "call_local")
+func spawn_dice(_type):
+	if not multiplayer.is_server():
+		return
+	
+	var new_dice = DICES.instantiate()
+	$Dices.add_child(new_dice)
+
+@rpc("authority", "call_local", "reliable")
 func update_hud() -> void:
 	moves_value.text = str(moves)
 	hp_label.text = str(health)

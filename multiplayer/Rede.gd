@@ -1,7 +1,7 @@
 extends Node
 
 const PORT = 8080
-const ADDRESS = "127.0.0.1"
+const ADDRESS = "26.61.222.217"
 const PLAYER_CAM = preload("res://multiplayer/player_cam.tscn")
 
 var spawn_node = null
@@ -24,7 +24,7 @@ func criar_host():
 	print("Host criado!")
 	
 	multiplayer.peer_connected.connect(adicionar_jogador)
-	#multiplayer.peer_disconnected.connect(remover_jogador)
+	multiplayer.peer_disconnected.connect(remover_jogador)
 	
 	iniciar_partida()
 	await get_tree().create_timer(0.1).timeout
@@ -73,3 +73,10 @@ func adicionar_jogador(id: int):
 		#print("Câmera do jogador ", id, " adicionada com sucesso em main/Players!")
 	#else:
 		#print("ERRO: Nó 'Players' não foi encontrado na cena atual!")
+
+func remover_jogador(id: int):
+	print("Player %s left the game!" % id)
+	if not spawn_node.has_node(str(id)):
+		return
+	spawn_node.get_node(str(id)).queue_free()
+	
