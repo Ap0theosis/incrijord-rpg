@@ -1,7 +1,7 @@
 extends Node
 
 const PORT = 8080
-const ADDRESS = "26.61.222.217"
+const ADDRESS = "127.0.0.1"
 const PLAYER_CAM = preload("res://multiplayer/player_cam.tscn")
 
 var spawn_node = null

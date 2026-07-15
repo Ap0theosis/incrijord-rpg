@@ -7,6 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://ddfh4sb1gw0g0" path="res://data/icons/delabru-icon.png" id="4_lquwl"]
 [ext_resource type="Texture2D" uid="uid://d6adlucafrgp" path="res://data/icons/kaua-icon.png" id="5_lquwl"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7mycd"]
+properties/0/path = NodePath("HUD/MarginContainer2/HBoxContainer/RegionLabel:text")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("HUD/MarginContainer2/HBoxContainer/OptionButton:selected")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [sub_resource type="TileSet" id="TileSet_ghksg"]
 tile_shape = 3
 tile_offset_axis = 1
@@ -17,6 +25,9 @@ bg_color = Color(0.44894964, 1.3055467e-06, 9.62615e-08, 1)
 
 [node name="Main" type="Node2D" unique_id=368505422]
 script = ExtResource("1_0xm2m")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2134173596]
+replication_config = SubResource("SceneReplicationConfig_7mycd")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=297530759]
 _spawnable_scenes = PackedStringArray("uid://blbk3ydylp1pr")
@@ -161,6 +172,90 @@ size_flags_vertical = 8
 theme_override_font_sizes/font_size = 32
 text = "(0, 0)"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer2" unique_id=1753881612]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="OptionButton" type="OptionButton" parent="HUD/MarginContainer2/HBoxContainer" unique_id=350786803]
+layout_mode = 2
+selected = 0
+item_count = 10
+popup/item_0/text = "Gama"
+popup/item_0/id = 0
+popup/item_1/text = "Tiamatia"
+popup/item_1/id = 1
+popup/item_2/text = "Svenia"
+popup/item_2/id = 2
+popup/item_3/text = "Magilith"
+popup/item_3/id = 3
+popup/item_4/text = "Rubiavéu"
+popup/item_4/id = 4
+popup/item_5/text = "Yamagon"
+popup/item_5/id = 5
+popup/item_6/text = "Breu"
+popup/item_6/id = 6
+popup/item_7/text = "Levorith"
+popup/item_7/id = 7
+popup/item_8/text = "Mundo Humano"
+popup/item_8/id = 8
+popup/item_9/text = "Nartá"
+popup/item_9/id = 9
+
+[node name="RegionLabel" type="RichTextLabel" parent="HUD/MarginContainer2/HBoxContainer" unique_id=345693972]
+custom_minimum_size = Vector2(300, 32)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Gama"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD" unique_id=653286571]
+custom_minimum_size = Vector2(40, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -372.0
+offset_right = -332.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" type="Button" parent="HUD/VBoxContainer" unique_id=1698004998]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "Geral"
+
+[node name="Button6" type="Button" parent="HUD/VBoxContainer" unique_id=1230623796]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "Perícias"
+
+[node name="Button2" type="Button" parent="HUD/VBoxContainer" unique_id=1199927367]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "Raça"
+
+[node name="Button3" type="Button" parent="HUD/VBoxContainer" unique_id=871937274]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "Foco"
+
+[node name="Button5" type="Button" parent="HUD/VBoxContainer" unique_id=951185209]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "Fobia"
+
+[node name="Button4" type="Button" parent="HUD/VBoxContainer" unique_id=1240979872]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "Edit"
+
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomOut" to="." method="_on_zoom_out_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomIn" to="." method="_on_zoom_in_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomReset" to="." method="_on_zoom_reset_pressed"]
@@ -168,3 +263,4 @@ text = "(0, 0)"
 [connection signal="pressed" from="HUD/MarginContainer/DiceContainer/Roll20" to="." method="_on_roll_20_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/DiceContainer/Roll6" to="." method="_on_roll_6_pressed"]
 [connection signal="button_down" from="HUD/MarginContainer/VBoxContainer/SelectedAttack" to="." method="_on_selected_attack_button_down"]
+[connection signal="item_selected" from="HUD/MarginContainer2/HBoxContainer/OptionButton" to="." method="set_region"]

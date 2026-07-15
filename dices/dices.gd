@@ -7,20 +7,16 @@ extends Control
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 
 var type = ""
-var advantage = 0
 
 const DICES = preload("res://dices/dices.tscn")
 
 func _ready() -> void:
-	var parent = get_parent()
 	type_label.text = type
 	match type:
 		"D6":
 			roll_d6()
 		"D20":
 			roll_d20()
-	
-	panel.size = v_box_container.size
 
 func roll_d20() -> void:
 	for i in range(10):
@@ -34,10 +30,8 @@ func roll_d6() -> void:
 		result_label.text = str(rng)
 		await get_tree().create_timer(0.1).timeout
 
-
 func _on_button_pressed() -> void:
 	queue_free()
-
 
 func _on_timer_timeout() -> void:
 	queue_free()

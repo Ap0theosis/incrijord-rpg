@@ -15,6 +15,7 @@ const DICES = preload("res://dices/dices.tscn")
 @export var attack_range = 2
 @export var power = 4
 
+@export var in_region = ""
 @export var stats = {
 	"name": "",
 	"race": "",
@@ -212,7 +213,6 @@ func spawn_dice(type, advantage = 0):
 	for i in range(advantage + 1):
 		var new_dice = DICES.instantiate()
 		new_dice.type = type
-		new_dice.advantage = advantage
 		$Dices.add_child(new_dice, true)
 
 @rpc("authority", "call_local", "reliable")

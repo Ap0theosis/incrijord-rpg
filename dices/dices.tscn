@@ -35,7 +35,7 @@ offset_bottom = 86.0
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1841972329]
 layout_mode = 0
 offset_right = 86.0
-offset_bottom = 50.0
+offset_bottom = 86.0
 
 [node name="TypeLabel" type="Label" parent="VBoxContainer" unique_id=507035694]
 layout_mode = 2
@@ -44,8 +44,11 @@ horizontal_alignment = 1
 
 [node name="ResultLabel" type="Label" parent="VBoxContainer" unique_id=519106462]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
 text = "..."
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Button" type="Button" parent="." unique_id=1364222693]
 layout_mode = 0

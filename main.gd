@@ -9,10 +9,15 @@ extends Node2D
 @onready var roll_6: Button = $HUD/MarginContainer/DiceContainer/Roll6
 @onready var selected_name: Label = $HUD/MarginContainer/VBoxContainer/SelectedName
 @onready var mouse_pos_label: Label = $HUD/MarginContainer2/MousePosLabel
+@onready var tokens_node: Node2D = $Tokens
 
 
 var zoom = 100
 var selected = null
+enum REGIONS {Gama, Tiamatia, Svenia, Magilith, Rubiavéu, Yamagon, Breu, Levorith, MundoHumano, Nartá}
+
+func _ready() -> void:
+	selected_name.text = "Nenhum Alvo"
 
 func _process(_delta: float) -> void:
 	mouse_pos_label.text = str(hex_grid.local_to_map(get_global_mouse_position()))
@@ -64,4 +69,9 @@ func _on_roll_20_pressed() -> void:
 
 func _on_roll_6_pressed() -> void:
 	if selected:
-		selected.spawn_dice.rpc("D6", 1)
+		selected.spawn_dice.rpc("D6", 3)
+
+func set_region(region: int):
+	$HUD/MarginContainer2/HBoxContainer/RegionLabel.text = REGIONS.find_key(region)
+	for child in tokens_node.get_children():
+		child.in_region = REGIONS.find_key(region)

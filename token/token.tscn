@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://et8ct8ww2osu" path="res://token/hex.png" id="2_tjkmq"]
 [ext_resource type="Texture2D" uid="uid://oqntmadkr0xb" path="res://token/hex-mask.png" id="3_golxd"]
 [ext_resource type="Texture2D" uid="uid://dd3nc043vyxjc" path="res://icon.svg" id="4_oriu4"]
-[ext_resource type="PackedScene" uid="uid://1fs8q7xwr4mr" path="res://dices/dices.tscn" id="5_tjkmq"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gm8bg"]
 properties/0/path = NodePath(".:position")
@@ -25,6 +24,9 @@ properties/4/replication_mode = 2
 properties/5/path = NodePath(".:stats")
 properties/5/spawn = true
 properties/5/replication_mode = 2
+properties/6/path = NodePath(".:in_region")
+properties/6/spawn = true
+properties/6/replication_mode = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghksg"]
 bg_color = Color(0.22352941, 0.80784315, 0, 1)
@@ -283,19 +285,13 @@ visible = false
 shape = SubResource("CircleShape2D_g4v7s")
 
 [node name="Dices" type="HBoxContainer" parent="." unique_id=559022638]
-custom_minimum_size = Vector2(258, 86)
-offset_left = -129.0
+custom_minimum_size = Vector2(360, 86)
+offset_left = -180.0
 offset_top = -188.0
-offset_right = 129.0
+offset_right = 180.0
 offset_bottom = -102.0
 mouse_filter = 2
 alignment = 1
-
-[node name="Dices" parent="Dices" unique_id=1359089665 instance=ExtResource("5_tjkmq")]
-layout_mode = 2
-
-[node name="Dices2" parent="Dices" unique_id=287792938 instance=ExtResource("5_tjkmq")]
-layout_mode = 2
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
