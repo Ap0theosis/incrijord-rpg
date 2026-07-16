@@ -14,7 +14,7 @@ size_flags_vertical = 4
 script = ExtResource("1_lti8b")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1886657259]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(350, 350)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,15 +28,28 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HostButton" type="Button" parent="VBoxContainer" unique_id=1126627869]
-custom_minimum_size = Vector2(0, 30)
+[node name="SinglePlayer" type="Button" parent="VBoxContainer" unique_id=602832281]
 layout_mode = 2
-text = "Criar Sala / Host"
+theme_override_font_sizes/font_size = 32
+text = "Solo / Teste"
+
+[node name="HostButton" type="Button" parent="VBoxContainer" unique_id=1126627869]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Criar Sala"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer" unique_id=1083593348]
+layout_mode = 2
+size_flags_vertical = 10
+placeholder_text = "IP [NÃO FUNCIONA AINDA]"
+alignment = 1
 
 [node name="JoinButton" type="Button" parent="VBoxContainer" unique_id=2116985190]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-text = "Entrar na Sala / Join"
+theme_override_font_sizes/font_size = 32
+text = "Entrar na Sala"
 
+[connection signal="pressed" from="VBoxContainer/SinglePlayer" to="." method="_on_single_player_pressed"]
 [connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_pressed"]

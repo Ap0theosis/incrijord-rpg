@@ -3,6 +3,7 @@ extends Node
 const PORT = 8080
 const ADDRESS = "127.0.0.1"
 const PLAYER_CAM = preload("res://multiplayer/player_cam.tscn")
+const SINGLE_CAM = preload("res://multiplayer/single_cam.tscn")
 
 var spawn_node = null
 
@@ -79,4 +80,10 @@ func remover_jogador(id: int):
 	if not spawn_node.has_node(str(id)):
 		return
 	spawn_node.get_node(str(id)).queue_free()
-	
+
+func single_player() -> void:
+	get_tree().change_scene_to_file("res://main.tscn")
+	await get_tree().create_timer(0.1).timeout
+	spawn_node = get_tree().current_scene.get_node("Players")
+	var new_player = SINGLE_CAM.instantiate()
+	spawn_node.add_child(new_player)

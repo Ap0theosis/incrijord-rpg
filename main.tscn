@@ -8,20 +8,73 @@
 [ext_resource type="Texture2D" uid="uid://d6adlucafrgp" path="res://data/icons/kaua-icon.png" id="5_lquwl"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7mycd"]
-properties/0/path = NodePath("HUD/MarginContainer2/HBoxContainer/RegionLabel:text")
+properties/0/path = NodePath("HUD/MarginContainer2/VBoxContainer/HBoxContainer/TimeLabel:text")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("HUD/MarginContainer2/HBoxContainer/OptionButton:selected")
+properties/1/path = NodePath("HUD/MarginContainer2/VBoxContainer/HBoxContainer/TimeLabel:visible")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("HUD/MarginContainer2/VBoxContainer/HBoxContainer/RegionLabel:text")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [sub_resource type="TileSet" id="TileSet_ghksg"]
 tile_shape = 3
 tile_offset_axis = 1
 tile_size = Vector2i(190, 170)
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_g4v7s"]
+color = Color(1, 1, 1, 1)
+thickness = 4
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
 bg_color = Color(0.44894964, 1.3055467e-06, 9.62615e-08, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efxa6"]
+bg_color = Color(0.10747974, 0.10747974, 0.10747967, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
+content_margin_left = 30.0
+content_margin_top = 30.0
+content_margin_right = 30.0
+content_margin_bottom = 30.0
+bg_color = Color(0.728822, 0.728822, 0.728822, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw27"]
+content_margin_left = 30.0
+content_margin_top = 30.0
+content_margin_right = 30.0
+content_margin_bottom = 30.0
+bg_color = Color(0.34509805, 0.34509805, 0.34509805, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
+content_margin_left = 30.0
+content_margin_top = 30.0
+content_margin_right = 30.0
+content_margin_bottom = 30.0
+bg_color = Color(0.34509805, 0.34509805, 0.34509805, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
+bg_color = Color(0, 0, 0, 0.49019608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kek77"]
+bg_color = Color(0, 0, 0, 0.49019608)
 
 [node name="Main" type="Node2D" unique_id=368505422]
 script = ExtResource("1_0xm2m")
@@ -72,91 +125,507 @@ token_icon = ExtResource("5_lquwl")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1631576763]
 
-[node name="Panel" type="Panel" parent="HUD" unique_id=545271435]
+[node name="FichaContainer" type="PanelContainer" parent="HUD" unique_id=1315059783]
+visible = false
 custom_minimum_size = Vector2(332, 0)
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -332.0
 grow_horizontal = 0
 grow_vertical = 2
-size_flags_horizontal = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD" unique_id=1255977952]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="Margin" type="MarginContainer" parent="HUD/FichaContainer" unique_id=1724228053]
+layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer" unique_id=1124522370]
+[node name="Geral" type="Control" parent="HUD/FichaContainer/Margin" unique_id=1432592724]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
 
-[node name="ZoomOut" type="Button" parent="HUD/MarginContainer/HBoxContainer" unique_id=1371982202]
-layout_mode = 2
-text = "-"
+[node name="ImageEditContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Geral" unique_id=641381632]
+visible = false
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 0
+offset_left = -191.0
+offset_top = -16.0
+offset_right = -101.0
+offset_bottom = 184.0
 
-[node name="ZoomValue" type="Label" parent="HUD/MarginContainer/HBoxContainer" unique_id=1717108904]
+[node name="ColorPickerButton" type="ColorPickerButton" parent="HUD/FichaContainer/Margin/Geral/ImageEditContainer" unique_id=1757438683]
 layout_mode = 2
-text = "100%"
-
-[node name="ZoomIn" type="Button" parent="HUD/MarginContainer/HBoxContainer" unique_id=1089113633]
-layout_mode = 2
-text = "+"
-
-[node name="ZoomReset" type="Button" parent="HUD/MarginContainer/HBoxContainer" unique_id=1167308593]
-layout_mode = 2
-text = "Reset"
-
-[node name="TargetReset" type="Button" parent="HUD/MarginContainer/HBoxContainer" unique_id=1765527873]
-layout_mode = 2
-text = "Re-select"
-
-[node name="DiceContainer" type="VBoxContainer" parent="HUD/MarginContainer" unique_id=2100689220]
-custom_minimum_size = Vector2(300, 72)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-
-[node name="Roll20" type="Button" parent="HUD/MarginContainer/DiceContainer" unique_id=2052337649]
-layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "D20"
+edit_alpha = false
+edit_intensity = false
 
-[node name="Roll6" type="Button" parent="HUD/MarginContainer/DiceContainer" unique_id=955733920]
+[node name="Button" type="Button" parent="HUD/FichaContainer/Margin/Geral/ImageEditContainer" unique_id=1899490978]
 layout_mode = 2
-size_flags_vertical = 3
-text = "D6"
+size_flags_vertical = 2
+text = "Upload
+(WIP)"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer" unique_id=2022034903]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Geral" unique_id=2022034903]
 custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 61.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="SelectedName" type="Label" parent="HUD/MarginContainer/VBoxContainer" unique_id=1541492221]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=1204560009]
 layout_mode = 2
+
+[node name="Name" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/HBoxContainer" unique_id=1541492221]
+layout_mode = 2
+size_flags_horizontal = 6
 theme_override_font_sizes/font_size = 24
 text = "NOME"
 horizontal_alignment = 1
 
-[node name="SelectedAttack" type="Button" parent="HUD/MarginContainer/VBoxContainer" unique_id=512882359]
+[node name="NameEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/HBoxContainer" unique_id=1795096335]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "NewName"
+
+[node name="Rank" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=1563554767]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "RANK X"
+horizontal_alignment = 1
+
+[node name="ImageContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=623331815]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/ImageContainer" unique_id=185161127]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("3_1bvp3")
+expand_mode = 1
+
+[node name="Race" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=1076365845]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "RAÇA"
+horizontal_alignment = 1
+
+[node name="Focus" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=578579136]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "FOCO"
+horizontal_alignment = 1
+
+[node name="Aspiration" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=603418909]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "ASPIRAÇÃO"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=483884536]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_g4v7s")
+
+[node name="AspectContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=1287380543]
+custom_maximum_size = Vector2(-1, 23)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/AspectContainer" unique_id=1613440554]
+layout_mode = 2
+text = "Aspecto:"
+
+[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/AspectContainer" unique_id=1678491008]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Polus"
+
+[node name="AlmaContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=155775370]
+custom_maximum_size = Vector2(-1, 23)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/AlmaContainer" unique_id=1185897783]
+layout_mode = 2
+text = "Alma:"
+
+[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/AlmaContainer" unique_id=361264786]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Sonar"
+
+[node name="AlmaEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/AlmaContainer" unique_id=142451413]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Value"
+
+[node name="FobiaContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=1055029332]
+custom_maximum_size = Vector2(-1, 23)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/FobiaContainer" unique_id=387359959]
+layout_mode = 2
+text = "Fobia:"
+
+[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/FobiaContainer" unique_id=1839392171]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Aranhas"
+
+[node name="FobiaEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/FobiaContainer" unique_id=305875938]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Value"
+
+[node name="CreditsContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=1078821176]
+custom_maximum_size = Vector2(-1, 23)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer" unique_id=397592342]
+layout_mode = 2
+text = "Créditos:"
+
+[node name="CreditsValue" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer" unique_id=964250788]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "32"
+
+[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer" unique_id=1249573574]
+layout_mode = 2
+text = "/"
+
+[node name="CreditsLimit" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer" unique_id=832196421]
+layout_mode = 2
+text = "32"
+
+[node name="CreditsValueEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer" unique_id=1830925520]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Value"
+
+[node name="CreditsLimitEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer" unique_id=1213582145]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Limit"
+
+[node name="MorteContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=404293771]
+custom_maximum_size = Vector2(-1, 23)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer" unique_id=543202545]
+layout_mode = 2
+text = "Morte:"
+
+[node name="Value" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer" unique_id=429926649]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0"
+
+[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer" unique_id=375017087]
+layout_mode = 2
+text = "/"
+
+[node name="Max" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer" unique_id=178523360]
+layout_mode = 2
+text = "3"
+
+[node name="MorteEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer" unique_id=2031353976]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Value"
+
+[node name="MorteMaxEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer" unique_id=441812972]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Max"
+
+[node name="MedoContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=1815267715]
+custom_maximum_size = Vector2(-1, 23)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer" unique_id=1714873477]
+layout_mode = 2
+text = "Medo:"
+
+[node name="Value" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer" unique_id=1850340870]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0"
+
+[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer" unique_id=1867912476]
+layout_mode = 2
+text = "/"
+
+[node name="Max" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer" unique_id=901422106]
+layout_mode = 2
+text = "3"
+
+[node name="MedoEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer" unique_id=1816039490]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Value"
+
+[node name="MedoMaxEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer" unique_id=273519413]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Max"
+
+[node name="VidaContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=1292406570]
+custom_maximum_size = Vector2(-1, 23)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer" unique_id=1382872550]
+layout_mode = 2
+text = "Vida:"
+
+[node name="Value" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer" unique_id=1842103923]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "16"
+
+[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer" unique_id=1935759112]
+layout_mode = 2
+text = "/"
+
+[node name="Max" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer" unique_id=455516058]
+layout_mode = 2
+text = "16"
+
+[node name="VidaEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer" unique_id=1607714244]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Value"
+
+[node name="VidaMaxEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer" unique_id=1248945649]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Max"
+
+[node name="TempContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=1531739525]
+custom_maximum_size = Vector2(-1, 23)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer" unique_id=678365478]
+layout_mode = 2
+text = "Vida Temp.:"
+
+[node name="Value" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer" unique_id=1578759483]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0"
+
+[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer" unique_id=1250725630]
+layout_mode = 2
+text = "/"
+
+[node name="Max" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer" unique_id=1640533210]
+layout_mode = 2
+text = "16"
+
+[node name="VTempEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer" unique_id=11029726]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Value"
+
+[node name="VTempMaxEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer" unique_id=1834592233]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Max"
+
+[node name="SanContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=760381747]
+custom_maximum_size = Vector2(-1, 23)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer" unique_id=1136664603]
+layout_mode = 2
+text = "Sanidade:"
+
+[node name="Value" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer" unique_id=2038838332]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "12"
+
+[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer" unique_id=97021267]
+layout_mode = 2
+text = "/"
+
+[node name="Max" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer" unique_id=93674371]
+layout_mode = 2
+text = "12"
+
+[node name="SanEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer" unique_id=440219840]
+visible = false
+custom_maximum_size = Vector2(60, 30)
+layout_mode = 2
+placeholder_text = "Value"
+
+[node name="SanMaxEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer" unique_id=1355890101]
+visible = false
+custom_maximum_size = Vector2(60, 30)
+layout_mode = 2
+placeholder_text = "Max"
+
+[node name="PosContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=880940209]
+custom_maximum_size = Vector2(-1, 23)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer" unique_id=2128886754]
+layout_mode = 2
+text = "Postura:"
+
+[node name="Value" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer" unique_id=1207272061]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "9"
+
+[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer" unique_id=1323266091]
+layout_mode = 2
+text = "/"
+
+[node name="Max" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer" unique_id=178206466]
+layout_mode = 2
+text = "9"
+
+[node name="PosEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer" unique_id=497111239]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Value"
+
+[node name="PosMaxEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer" unique_id=2137302909]
+visible = false
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+placeholder_text = "Max"
+
+[node name="SelectedAttack" type="Button" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=512882359]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_g4v7s")
 text = "ATACAR"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD" unique_id=653286571]
+visible = false
+custom_minimum_size = Vector2(40, 720)
+custom_maximum_size = Vector2(-1, 720)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -412.0
+offset_right = -332.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TargetReset" type="Button" parent="HUD/VBoxContainer" unique_id=1765527873]
+layout_mode = 2
+size_flags_vertical = 3
+text = "X"
+
+[node name="Button" type="Button" parent="HUD/VBoxContainer" unique_id=1698004998]
+custom_minimum_size = Vector2(40, 80)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Geral"
+
+[node name="Button4" type="Button" parent="HUD/VBoxContainer" unique_id=1500395323]
+custom_minimum_size = Vector2(40, 80)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Atributos"
+
+[node name="Button6" type="Button" parent="HUD/VBoxContainer" unique_id=1230623796]
+custom_minimum_size = Vector2(40, 80)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Perícias"
+
+[node name="Button2" type="Button" parent="HUD/VBoxContainer" unique_id=1199927367]
+custom_minimum_size = Vector2(40, 80)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Raça"
+
+[node name="Button3" type="Button" parent="HUD/VBoxContainer" unique_id=871937274]
+custom_minimum_size = Vector2(40, 80)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Foco"
+
+[node name="Button7" type="Button" parent="HUD/VBoxContainer" unique_id=26745949]
+custom_minimum_size = Vector2(40, 80)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Artefatos"
+
+[node name="Button5" type="Button" parent="HUD/VBoxContainer" unique_id=951185209]
+custom_minimum_size = Vector2(40, 80)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Fobia"
+
+[node name="EditButton" type="Button" parent="HUD/VBoxContainer" unique_id=1240979872]
+custom_minimum_size = Vector2(40, 80)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Edit"
+
+[node name="ZoomContainer" type="PanelContainer" parent="HUD" unique_id=199456731]
+custom_minimum_size = Vector2(300, 0)
+offset_left = 82.0
+offset_right = 382.0
+offset_bottom = 80.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/ZoomContainer" unique_id=1124522370]
+layout_mode = 2
+
+[node name="ZoomScrollBar" type="HScrollBar" parent="HUD/ZoomContainer/HBoxContainer" unique_id=1040334707]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/scroll = SubResource("StyleBoxFlat_efxa6")
+theme_override_styles/grabber = SubResource("StyleBoxFlat_272bh")
+theme_override_styles/grabber_highlight = SubResource("StyleBoxFlat_5vw27")
+theme_override_styles/grabber_pressed = SubResource("StyleBoxFlat_4c57u")
+min_value = 25.0
+max_value = 250.0
+step = 5.0
+value = 100.0
+rounded = true
+
+[node name="ZoomValue" type="Label" parent="HUD/ZoomContainer/HBoxContainer" unique_id=1717108904]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 1
+
+[node name="ZoomReset" type="Button" parent="HUD/ZoomContainer/HBoxContainer" unique_id=1167308593]
+layout_mode = 2
+text = "Reset"
 
 [node name="MarginContainer2" type="MarginContainer" parent="HUD" unique_id=492137118]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -332.0
+offset_left = 82.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -166,18 +635,57 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
 [node name="MousePosLabel" type="Label" parent="HUD/MarginContainer2" unique_id=1986857160]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 32
 text = "(0, 0)"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer2" unique_id=1753881612]
+[node name="VirtualJoystick" type="VirtualJoystick" parent="HUD/MarginContainer2" unique_id=683686998]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+joystick_mode = 1
+joystick_size = 205.0
+initial_offset_ratio = Vector2(0.32, 0.35)
+action_left = &"move_left"
+action_right = &"move_right"
+action_up = &"move_up"
+action_down = &"move_down"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer2" unique_id=19057325]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="OptionButton" type="OptionButton" parent="HUD/MarginContainer2/HBoxContainer" unique_id=350786803]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/MarginContainer2/VBoxContainer" unique_id=521935989]
+layout_mode = 2
+
+[node name="ChooseTimeButton" type="SpinBox" parent="HUD/MarginContainer2/VBoxContainer/HBoxContainer2" unique_id=1113032219]
+layout_mode = 2
+max_value = 23.0
+
+[node name="ChangeTimeButton" type="Button" parent="HUD/MarginContainer2/VBoxContainer/HBoxContainer2" unique_id=2138933383]
+layout_mode = 2
+size_flags_vertical = 3
+toggle_mode = true
+text = "Change"
+
+[node name="VisibleTimeButton" type="Button" parent="HUD/MarginContainer2/VBoxContainer/HBoxContainer2" unique_id=558554311]
+layout_mode = 2
+size_flags_vertical = 3
+toggle_mode = true
+text = "Visible"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer2/VBoxContainer" unique_id=1753881612]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 8
+
+[node name="OptionButton" type="OptionButton" parent="HUD/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=350786803]
 layout_mode = 2
 selected = 0
 item_count = 10
@@ -202,9 +710,9 @@ popup/item_8/id = 8
 popup/item_9/text = "Nartá"
 popup/item_9/id = 9
 
-[node name="RegionLabel" type="RichTextLabel" parent="HUD/MarginContainer2/HBoxContainer" unique_id=345693972]
-custom_minimum_size = Vector2(300, 32)
+[node name="RegionLabel" type="RichTextLabel" parent="HUD/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=345693972]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "Gama"
@@ -213,54 +721,188 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD" unique_id=653286571]
-custom_minimum_size = Vector2(40, 0)
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
+[node name="TimeLabel" type="RichTextLabel" parent="HUD/MarginContainer2/VBoxContainer/HBoxContainer" unique_id=1638340140]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "12:00"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuContainer" type="PanelContainer" parent="HUD" unique_id=739352775]
+custom_minimum_size = Vector2(80, 0)
+anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = -372.0
-offset_right = -332.0
-grow_horizontal = 0
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MenuContainer" unique_id=1064350965]
+layout_mode = 2
+
+[node name="MenuButton" type="Button" parent="HUD/MenuContainer/VBoxContainer" unique_id=670812993]
+visible = false
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 0
+text = "MENU"
+
+[node name="CameraButton" type="Button" parent="HUD/MenuContainer/VBoxContainer" unique_id=1236401519]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 0
+toggle_mode = true
+text = "CAMERA"
+
+[node name="DadosButton" type="Button" parent="HUD/MenuContainer/VBoxContainer" unique_id=264562966]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+toggle_mode = true
+text = "DADOS"
+
+[node name="Button4" type="Button" parent="HUD/MenuContainer/VBoxContainer" unique_id=471351993]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 10
+text = "ORDEM"
+
+[node name="Button5" type="Button" parent="HUD/MenuContainer/VBoxContainer" unique_id=1883922590]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 8
+text = "MESTRE"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MenuContainer/VBoxContainer" unique_id=728910664]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/MenuContainer/VBoxContainer/VBoxContainer" unique_id=1491128721]
+layout_mode = 2
+text = "Solo"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HUD/MenuContainer/VBoxContainer/VBoxContainer" unique_id=11338214]
+layout_mode = 2
+text = "3"
+horizontal_alignment = 1
+
+[node name="DiceContainer" type="PanelContainer" parent="HUD" unique_id=1129862501]
+visible = false
+custom_minimum_size = Vector2(300, 300)
+offset_left = 82.0
+offset_top = 84.0
+offset_right = 122.0
+offset_bottom = 124.0
+
+[node name="VboxContainer" type="VBoxContainer" parent="HUD/DiceContainer" unique_id=2100689220]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 0
 
-[node name="Button" type="Button" parent="HUD/VBoxContainer" unique_id=1698004998]
-custom_minimum_size = Vector2(40, 40)
+[node name="GridContainer" type="GridContainer" parent="HUD/DiceContainer/VboxContainer" unique_id=293368519]
 layout_mode = 2
-text = "Geral"
+columns = 3
 
-[node name="Button6" type="Button" parent="HUD/VBoxContainer" unique_id=1230623796]
-custom_minimum_size = Vector2(40, 40)
+[node name="Roll4" type="Button" parent="HUD/DiceContainer/VboxContainer/GridContainer" unique_id=1436079327]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Perícias"
+size_flags_horizontal = 3
+text = "D4"
 
-[node name="Button2" type="Button" parent="HUD/VBoxContainer" unique_id=1199927367]
-custom_minimum_size = Vector2(40, 40)
+[node name="Roll6" type="Button" parent="HUD/DiceContainer/VboxContainer/GridContainer" unique_id=955733920]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Raça"
+size_flags_horizontal = 3
+text = "D6
+"
 
-[node name="Button3" type="Button" parent="HUD/VBoxContainer" unique_id=871937274]
-custom_minimum_size = Vector2(40, 40)
+[node name="Roll8" type="Button" parent="HUD/DiceContainer/VboxContainer/GridContainer" unique_id=1941878670]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Foco"
+size_flags_horizontal = 3
+text = "D8"
 
-[node name="Button5" type="Button" parent="HUD/VBoxContainer" unique_id=951185209]
-custom_minimum_size = Vector2(40, 40)
+[node name="Roll10" type="Button" parent="HUD/DiceContainer/VboxContainer/GridContainer" unique_id=1328177772]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Fobia"
+size_flags_horizontal = 3
+text = "D10"
 
-[node name="Button4" type="Button" parent="HUD/VBoxContainer" unique_id=1240979872]
-custom_minimum_size = Vector2(40, 40)
+[node name="Roll20" type="Button" parent="HUD/DiceContainer/VboxContainer/GridContainer" unique_id=2052337649]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Edit"
+size_flags_horizontal = 3
+text = "D20"
 
-[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomOut" to="." method="_on_zoom_out_pressed"]
-[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomIn" to="." method="_on_zoom_in_pressed"]
-[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/ZoomReset" to="." method="_on_zoom_reset_pressed"]
-[connection signal="pressed" from="HUD/MarginContainer/HBoxContainer/TargetReset" to="." method="_on_target_reset_pressed"]
-[connection signal="pressed" from="HUD/MarginContainer/DiceContainer/Roll20" to="." method="_on_roll_20_pressed"]
-[connection signal="pressed" from="HUD/MarginContainer/DiceContainer/Roll6" to="." method="_on_roll_6_pressed"]
-[connection signal="button_down" from="HUD/MarginContainer/VBoxContainer/SelectedAttack" to="." method="_on_selected_attack_button_down"]
-[connection signal="item_selected" from="HUD/MarginContainer2/HBoxContainer/OptionButton" to="." method="set_region"]
+[node name="Roll100" type="Button" parent="HUD/DiceContainer/VboxContainer/GridContainer" unique_id=1007473433]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "D100"
+
+[node name="VantagemContainer" type="HBoxContainer" parent="HUD/DiceContainer/VboxContainer" unique_id=2011798113]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HUD/DiceContainer/VboxContainer/VantagemContainer" unique_id=1172343991]
+layout_mode = 2
+text = "Vantagem:"
+
+[node name="VantagemSpinbox" type="SpinBox" parent="HUD/DiceContainer/VboxContainer/VantagemContainer" unique_id=239417597]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/field_and_buttons_separation = 0
+theme_override_constants/buttons_width = 40
+theme_override_styles/up_background = SubResource("StyleBoxFlat_7mycd")
+theme_override_styles/down_background = SubResource("StyleBoxFlat_kek77")
+rounded = true
+alignment = 1
+
+[node name="BonusContainer" type="HBoxContainer" parent="HUD/DiceContainer/VboxContainer" unique_id=1764482145]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HUD/DiceContainer/VboxContainer/BonusContainer" unique_id=1927199873]
+layout_mode = 2
+text = "Bônus:"
+
+[node name="BonusSpinbox" type="SpinBox" parent="HUD/DiceContainer/VboxContainer/BonusContainer" unique_id=1384888244]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/field_and_buttons_separation = 0
+theme_override_constants/buttons_width = 40
+theme_override_styles/up_background = SubResource("StyleBoxFlat_7mycd")
+theme_override_styles/down_background = SubResource("StyleBoxFlat_kek77")
+min_value = -100.0
+rounded = true
+alignment = 1
+
+[node name="SecretContainer" type="HBoxContainer" parent="HUD/DiceContainer/VboxContainer" unique_id=729011800]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/DiceContainer/VboxContainer/SecretContainer" unique_id=86965723]
+layout_mode = 2
+text = "Secreto:"
+
+[node name="SecretDiceToggle" type="CheckButton" parent="HUD/DiceContainer/VboxContainer/SecretContainer" unique_id=1062761264]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[connection signal="button_down" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/SelectedAttack" to="." method="_on_selected_attack_button_down"]
+[connection signal="pressed" from="HUD/VBoxContainer/TargetReset" to="." method="_on_target_reset_pressed"]
+[connection signal="pressed" from="HUD/VBoxContainer/EditButton" to="." method="_on_edit_button_pressed"]
+[connection signal="value_changed" from="HUD/MarginContainer2/VBoxContainer/HBoxContainer2/ChooseTimeButton" to="." method="_on_choose_time_button_value_changed"]
+[connection signal="toggled" from="HUD/MarginContainer2/VBoxContainer/HBoxContainer2/ChangeTimeButton" to="." method="_on_change_time_button_toggled"]
+[connection signal="toggled" from="HUD/MarginContainer2/VBoxContainer/HBoxContainer2/VisibleTimeButton" to="." method="_on_visible_time_button_toggled"]
+[connection signal="item_selected" from="HUD/MarginContainer2/VBoxContainer/HBoxContainer/OptionButton" to="." method="set_region"]
+[connection signal="toggled" from="HUD/MenuContainer/VBoxContainer/CameraButton" to="." method="_on_camera_button_toggled"]
+[connection signal="toggled" from="HUD/MenuContainer/VBoxContainer/DadosButton" to="." method="_on_dados_button_toggled"]
+[connection signal="pressed" from="HUD/DiceContainer/VboxContainer/GridContainer/Roll6" to="." method="_on_roll_6_pressed"]
+[connection signal="pressed" from="HUD/DiceContainer/VboxContainer/GridContainer/Roll20" to="." method="_on_roll_20_pressed"]
+[connection signal="value_changed" from="HUD/DiceContainer/VboxContainer/VantagemContainer/VantagemSpinbox" to="." method="_on_vantagem_spinbox_value_changed"]
+[connection signal="value_changed" from="HUD/DiceContainer/VboxContainer/BonusContainer/BonusSpinbox" to="." method="_on_bonus_spinbox_value_changed"]
+[connection signal="toggled" from="HUD/DiceContainer/VboxContainer/SecretContainer/SecretDiceToggle" to="." method="_on_secret_dice_toggled"]

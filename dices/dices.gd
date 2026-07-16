@@ -1,34 +1,41 @@
 extends Control
 
-@onready var result_label: Label = $VBoxContainer/ResultLabel
-@onready var type_label: Label = $VBoxContainer/TypeLabel
-@onready var v_box_container: VBoxContainer = $VBoxContainer
-@onready var panel: Panel = $Panel
-@onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
+@onready var type_label: Label = $Panel/VBoxContainer/TypeLabel
+@onready var rng_label: Label = $Panel/VBoxContainer/RngLabel
+@onready var bonus_label: Label = $Panel/VBoxContainer/BonusLabel
+@onready var result_label: Label = $Panel/VBoxContainer/ResultLabel
 
 var type = ""
+var bonus : int = 0
+var secret = false
 
 const DICES = preload("res://dices/dices.tscn")
 
 func _ready() -> void:
 	type_label.text = type
+	if bonus != 0:
+		bonus_label.show()
 	match type:
 		"D6":
-			roll_d6()
+			roll(6)
 		"D20":
-			roll_d20()
+			roll(20)
 
-func roll_d20() -> void:
+func roll(dicetype) -> void:
+	var result = 0
+	var rng = "..."
+	bonus_label.text = str(bonus)
+	if bonus > 0:
+		bonus_label.modulate = Color(0.31, 0.699, 0.345, 1.0)
+	else:
+		bonus_label.modulate = Color(1.0, 0.337, 0.349, 1.0)
 	for i in range(10):
-		var rng = randi_range(1, 20)
-		result_label.text = str(rng)
+		rng = randi_range(1, dicetype)
+		rng_label.text = str(rng)
 		await get_tree().create_timer(0.1).timeout
-
-func roll_d6() -> void:
-	for i in range(10):
-		var rng = randi_range(1, 6)
-		result_label.text = str(rng)
-		await get_tree().create_timer(0.1).timeout
+	rng_label.modulate = Color(0.576, 0.148, 1.0, 1.0)
+	result = rng + bonus
+	result_label.text = str(result) 
 
 func _on_button_pressed() -> void:
 	queue_free()

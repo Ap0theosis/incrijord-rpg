@@ -2,22 +2,34 @@
 
 [ext_resource type="Script" uid="uid://cr7llbcgpklcy" path="res://dices/dices.gd" id="1_gvcav"]
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_g4v7s"]
+color = Color(0.10747976, 0.10747973, 0.10747973, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gvcav"]
-properties/0/path = NodePath("VBoxContainer/ResultLabel:text")
+properties/0/path = NodePath("Panel/VBoxContainer/TypeLabel:text")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("VBoxContainer/TypeLabel:text")
+properties/1/path = NodePath("Panel/VBoxContainer/RngLabel:text")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("Panel:size")
+properties/2/path = NodePath("Panel/VBoxContainer/BonusLabel:text")
 properties/2/spawn = true
 properties/2/replication_mode = 1
-properties/3/path = NodePath("VBoxContainer:size")
+properties/3/path = NodePath("Panel/VBoxContainer/ResultLabel:text")
 properties/3/spawn = true
 properties/3/replication_mode = 1
-properties/4/path = NodePath("Panel:position")
+properties/4/path = NodePath("Panel/VBoxContainer/BonusLabel:visible")
 properties/4/spawn = true
 properties/4/replication_mode = 1
+properties/5/path = NodePath("Panel/VBoxContainer/RngLabel:modulate")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("Panel/VBoxContainer/BonusLabel:modulate")
+properties/6/spawn = true
+properties/6/replication_mode = 1
 
 [node name="Dices" type="Control" unique_id=1359089665]
 custom_minimum_size = Vector2(86, 86)
@@ -27,22 +39,41 @@ offset_right = 86.0
 offset_bottom = 86.0
 script = ExtResource("1_gvcav")
 
-[node name="Panel" type="Panel" parent="." unique_id=269044869]
+[node name="Panel" type="PanelContainer" parent="." unique_id=475542823]
 layout_mode = 0
 offset_right = 86.0
 offset_bottom = 86.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1841972329]
-layout_mode = 0
-offset_right = 86.0
-offset_bottom = 86.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1841972329]
+layout_mode = 2
 
-[node name="TypeLabel" type="Label" parent="VBoxContainer" unique_id=507035694]
+[node name="TypeLabel" type="Label" parent="Panel/VBoxContainer" unique_id=507035694]
 layout_mode = 2
 text = "D20"
 horizontal_alignment = 1
 
-[node name="ResultLabel" type="Label" parent="VBoxContainer" unique_id=519106462]
+[node name="RngLabel" type="Label" parent="Panel/VBoxContainer" unique_id=519106462]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+text = "..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BonusLabel" type="Label" parent="Panel/VBoxContainer" unique_id=916917757]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+text = "..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=794035716]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_g4v7s")
+
+[node name="ResultLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1200391334]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 24

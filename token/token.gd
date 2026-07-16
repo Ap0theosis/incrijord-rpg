@@ -15,6 +15,7 @@ const DICES = preload("res://dices/dices.tscn")
 @export var attack_range = 2
 @export var power = 4
 
+@export var hided = false
 @export var in_region = ""
 @export var stats = {
 	"name": "",
@@ -35,6 +36,7 @@ const TARGET_MARKER = preload("res://token/target_marker.tscn")
 @onready var hp_label: Label = $Token/Bars/HpBar/HpContainer/Hp
 @onready var max_hp_label: Label = $Token/Bars/HpBar/HpContainer/MaxHp
 @onready var selected_hex: TextureRect = $SelectedHex
+@onready var hide_toggle: CheckButton = $HideToggle
 
 @onready var san_bar: ProgressBar = $Token/Bars/SanBar
 @onready var postura_bar: ProgressBar = $Token/Bars/PosturaBar
@@ -94,7 +96,6 @@ func _on_button_button_up() -> void:
 		print("Grid não encontrada!")
 
 func snap_to_grid() -> void:
-	print("snap grid")
 	var self_coor = hex_grid.local_to_map(global_position)
 	global_position = hex_grid.map_to_local(self_coor)
 	last_coor = hex_grid.local_to_map(global_position)
@@ -172,6 +173,13 @@ func attack() -> void:
 		new_marker.power = power
 		target_markers.add_child(new_marker)
 
+func _on_hide_toggled(toggled_on: bool) -> void:
+	hided = toggled_on
+	if hided:
+		esconder_menos_pro_host.rpc()
+	else:
+		mostrar_para_todos.rpc()
+
 # --- FUNÇÕES DE REDE (RPC) ---
 # "authority" significa: apenas o Servidor/Host pode mandar os outros executarem.
 # "call_local" significa: o Host também vai rodar essa função na tela dele.
@@ -205,15 +213,34 @@ func finalizar_movimento_no_servidor(self_coor: Vector2i, can_move_to: Array):
 	update_hud.rpc()
 
 @rpc("any_peer", "call_local")
-func spawn_dice(type, advantage = 0):
+func spawn_dice(type, advantage = 0, bonus = 0, secret = false):
 	if not multiplayer.is_server():
 		return
+	
+	var quem_solicitou = multiplayer.get_remote_sender_id()
+	
 	for child in $Dices.get_children():
 		child.queue_free()
+	
 	for i in range(advantage + 1):
 		var new_dice = DICES.instantiate()
 		new_dice.type = type
+		new_dice.bonus = bonus
 		$Dices.add_child(new_dice, true)
+	if secret:
+		hide_dice.rpc(quem_solicitou)
+	else:
+		show_dice.rpc()
+
+@rpc("any_peer", "call_local")
+func hide_dice(id_do_dono: int):
+	if multiplayer.get_unique_id() == id_do_dono:
+		return
+	$Dices.visible = false
+
+@rpc("any_peer", "call_local")
+func show_dice():
+	$Dices.visible = true
 
 @rpc("authority", "call_local", "reliable")
 func update_hud() -> void:
@@ -223,4 +250,18 @@ func update_hud() -> void:
 	max_hp_label.text = str(stats["max_health"])
 	
 	selected_hex.visible = selected
+	if multiplayer.is_server():
+		hide_toggle.visible = selected
+	
 	name_label.text = stats["name"]
+
+@rpc("any_peer", "call_local")
+func esconder_menos_pro_host() -> void:
+	if multiplayer.get_unique_id() != 1:
+		hide()
+	modulate = Color(1,1,1, 0.5)
+
+@rpc("any_peer", "call_local")
+func mostrar_para_todos() -> void:
+	show()
+	modulate = Color(1,1,1, 1)
