@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Rede="*uid://dfjshb8h8wwj3"
-Races="*uid://bwc1peaipjyjq"
 TokensData="*uid://decnxdc7vvaxf"
 
 [display]

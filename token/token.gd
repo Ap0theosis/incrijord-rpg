@@ -147,8 +147,11 @@ func _on_hide_toggled(toggled_on: bool) -> void:
 	else:
 		mostrar_para_todos.rpc()
 
-func apply_hex_color(color : Color = Color(0.536, 0.275, 1.0, 1.0)) -> void:
-	token_texture.self_modulate = color
+func apply_hex_color() -> void:
+	if not stats:
+		return
+	token_texture.self_modulate = stats["token_color"]
+	get_parent().get_parent().definir_ficha()
 	bg_token_texture.self_modulate = token_texture.self_modulate.darkened(0.4)
 	selected_hex_texture.self_modulate = token_texture.self_modulate.darkened(0.8)
 

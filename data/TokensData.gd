@@ -38,6 +38,54 @@ var players = {
 		
 		"resist_fisica" = 0,
 		"resist_magica" = 0,
+		
+		"corpo" = 0,
+		"destreza" = 0,
+		"mente" = 0,
+		"espirito" = 0,
+		"carisma" = 0,
+		
+		"bonus_rank" = 0,
+		"incrementos" = 0,
+		
+		"pericias" = {
+			"fisico" = {
+				"furtividade" = {"value" = 0, "active" = false},
+				"prestidigitacao" = {"value" = 0, "active" = false},
+				"instinto" = {"value" = 0, "active" = false},
+				"acrobacia" = {"value" = 0, "active" = false},
+				"atletismo" = {"value" = 0, "active" = false},
+				"adrenalina" = {"value" = 0, "active" = false},
+				"rigidez" = {"value" = 0, "active" = false}
+			},
+			"social" = {
+				"intimidacao" = {"value" = 0, "active" = false},
+				"artes" = {"value" = 0, "active" = false},
+				"persuasao" = {"value" = 0, "active" = false},
+				"perspicacia" = {"value" = 0, "active" = false},
+				"lidar_criaturas" = {"value" = 0, "active" = false},
+				"encorajar" = {"value" = 0, "active" = false},
+				"encantar" = {"value" = 0, "active" = false}
+			},
+			"mental" = {
+				"aparelhagem" = {"value" = 0, "active" = false},
+				"medicina" = {"value" = 0, "active" = false},
+				"gastronomia" = {"value" = 0, "active" = false},
+				"investigacao" = {"value" = 0, "active" = false},
+				"criacao" = {"value" = 0, "active" = false},
+				"coragem" = {"value" = 0, "active" = false},
+				"sobrevivencia" = {"value" = 0, "active" = false}
+			},
+			"espiritual" = {
+				"purificacao" = {"value" = 0, "active" = false},
+				"ilusao" = {"value" = 0, "active" = false},
+				"selo" = {"value" = 0, "active" = false},
+				"bencao_maldicao" = {"value" = 0, "active" = false},
+				"conjuracao" = {"value" = 0, "active" = false},
+				"clarividencia" = {"value" = 0, "active" = false},
+				"sobrecarga" = {"value" = 0, "active" = false}
+			}
+		}
 	},
 	
 	"kauã" = {
@@ -77,5 +125,53 @@ var players = {
 		
 		"resist_fisica" = 110,
 		"resist_magica" = 49,
+		
+		"corpo" = 0,
+		"destreza" = 0,
+		"mente" = 0,
+		"espirito" = 0,
+		"carisma" = 0,
+		
+		"bonus_rank" = 0,
+		"incrementos" = 0,
+		
+		"pericias" = {
+			"fisico" = {
+				"furtividade" = {"value" = 0, "active" = false},
+				"prestidigitacao" = {"value" = 0, "active" = false},
+				"instinto" = {"value" = 0, "active" = false},
+				"acrobacia" = {"value" = 0, "active" = false},
+				"atletismo" = {"value" = 0, "active" = false},
+				"adrenalina" = {"value" = 0, "active" = false},
+				"rigidez" = {"value" = 0, "active" = false}
+			},
+			"social" = {
+				"intimidacao" = {"value" = 0, "active" = false},
+				"artes" = {"value" = 0, "active" = false},
+				"persuasao" = {"value" = 0, "active" = false},
+				"perspicacia" = {"value" = 0, "active" = false},
+				"lidar_criaturas" = {"value" = 0, "active" = false},
+				"encorajar" = {"value" = 0, "active" = false},
+				"encantar" = {"value" = 0, "active" = false}
+			},
+			"mental" = {
+				"aparelhagem" = {"value" = 0, "active" = false},
+				"medicina" = {"value" = 0, "active" = false},
+				"gastronomia" = {"value" = 0, "active" = false},
+				"investigacao" = {"value" = 0, "active" = false},
+				"criacao" = {"value" = 0, "active" = false},
+				"coragem" = {"value" = 0, "active" = false},
+				"sobrevivencia" = {"value" = 0, "active" = false}
+			},
+			"espiritual" = {
+				"purificacao" = {"value" = 0, "active" = false},
+				"ilusao" = {"value" = 0, "active" = false},
+				"selo" = {"value" = 0, "active" = false},
+				"bencao_maldicao" = {"value" = 0, "active" = false},
+				"conjuracao" = {"value" = 0, "active" = false},
+				"clarividencia" = {"value" = 0, "active" = false},
+				"sobrecarga" = {"value" = 0, "active" = false}
+			}
+		}
 	},
 }

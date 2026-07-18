@@ -25,7 +25,8 @@ func _ready():
 func _process(delta):
 	if not is_multiplayer_authority():
 		return
-	
+	if get_parent().get_parent().editing:
+		return
 	var cam_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if cam_direction:
 		camera.global_position += cam_direction * delta * SPEED * zoom_speed_mult
