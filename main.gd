@@ -7,8 +7,7 @@ extends Node2D
 
 
 @onready var ficha_container: PanelContainer = $HUD/FichaContainer
-@onready var selected_name: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/HBoxContainer/Name
-@onready var target_reset_button: Button = $HUD/VBoxContainer/TargetReset
+@onready var close_target_button: Button = $HUD/EditCloseContainer/CloseTarget
 
 @onready var mouse_pos_label: Label = $HUD/MarginContainer2/MousePosLabel
 @onready var tokens_node: Node2D = $Tokens
@@ -21,7 +20,6 @@ extends Node2D
 @onready var time_options: HBoxContainer = $HUD/MarginContainer2/VBoxContainer/HBoxContainer2
 
 @onready var EDIT_LINES =[
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/HBoxContainer/NameEdit,
 	$HUD/FichaContainer/Margin/Geral/VBoxContainer/AlmaContainer/AlmaEdit,
 	$HUD/FichaContainer/Margin/Geral/VBoxContainer/FobiaContainer/FobiaEdit,
 	$HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer/CreditsValueEdit,
@@ -38,7 +36,8 @@ extends Node2D
 	$HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer/SanMaxEdit,
 	$HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer/PosEdit,
 	$HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer/PosMaxEdit,
-	$HUD/FichaContainer/Margin/Geral/ImageEditContainer
+	$HUD/EditCloseContainer/ColorPickerButton,
+	$HUD/EditCloseContainer/UploadButton
 ]
 
 @onready var dice_container: PanelContainer = $HUD/DiceContainer
@@ -46,31 +45,37 @@ extends Node2D
 @onready var vantagem_spinbox: SpinBox = $HUD/DiceContainer/VboxContainer/VantagemContainer/VantagemSpinbox
 @onready var bonus_spinbox: SpinBox = $HUD/DiceContainer/VboxContainer/BonusContainer/BonusSpinbox
 @onready var secret_dice_toggle: CheckButton = $HUD/DiceContainer/VboxContainer/SecretContainer/SecretDiceToggle
+@onready var mestre_button: Button = $HUD/MenuContainer/VBoxContainer/MestreButton
+@onready var iniciativa_button: Button = $HUD/MenuContainer/VBoxContainer/IniciativaButton
+@onready var color_picker_button: ColorPickerButton = $HUD/EditCloseContainer/ColorPickerButton
 
+
+enum REGIONS {Gama, Tiamatia, Svenia, Magilith, Rubiavéu, Yamagon, Breu, Levorith, MundoHumano, Nartá, X}
 var zoom = 100
 var selected = null
-enum REGIONS {Gama, Tiamatia, Svenia, Magilith, Rubiavéu, Yamagon, Breu, Levorith, MundoHumano, Nartá}
 var time = 0
 var day_night = false
 var editing = false
 
 func _ready() -> void:
 	if OS.has_feature("web_android"):
-		$HUD/VirtualJoystick.show()
+		$HUD/MarginContainer2/VirtualJoystick.show()
 	if not multiplayer.is_server():
 		region_option_button.hide()
 		choose_time_button.hide()
 		time_options.hide()
-	
-	selected_name.text = "Nenhum Alvo"
+		mestre_button.hide()
 
 func _process(_delta: float) -> void:
 	mouse_pos_label.text = str(hex_grid.local_to_map(get_global_mouse_position()))
 
-
 func _on_selected_token(id) -> void:
 	$HUD/VBoxContainer.show()
-	ficha_container.show()
+	$HUD/EditCloseContainer.show()
+	editing = false
+	for edit in EDIT_LINES:
+		edit.hide()
+
 	
 	for child in $Tokens.get_children():
 		if child.name != id:
@@ -78,7 +83,11 @@ func _on_selected_token(id) -> void:
 			child.update_hud()
 		else:
 			selected = child
-			selected_name.text = selected.stats["name"]
+	
+	definir_ficha()
+	ficha_container.show()
+	
+	
 
 func _on_selected_attack_button_down() -> void:
 	if selected:
@@ -86,6 +95,7 @@ func _on_selected_attack_button_down() -> void:
 
 func _on_target_reset_pressed() -> void:
 	$HUD/VBoxContainer.hide()
+	$HUD/EditCloseContainer.hide()
 	ficha_container.hide()
 	
 	for child in $Tokens.get_children():
@@ -94,19 +104,71 @@ func _on_target_reset_pressed() -> void:
 	for child in $TargetMarkers.get_children():
 		child.queue_free()
 	selected = null
-	selected_name.text = "Nenhum Alvo"
+
+
+@onready var ficha_name: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/HBoxContainer/Name
+@onready var ficha_rank: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/Rank
+@onready var ficha_icon: TextureRect = $HUD/FichaContainer/Margin/Geral/VBoxContainer/ImageContainer/Icon
+@onready var ficha_race: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/Race
+@onready var ficha_foco: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/Focus
+@onready var ficha_aspiration: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/Aspiration
+@onready var ficha_aspecto: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/AspectContainer/Label2
+@onready var ficha_alma: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/AlmaContainer/Label2
+@onready var ficha_fobia: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/FobiaContainer/Label2
+@onready var ficha_credits: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer/CreditsValue
+@onready var ficha_limit: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer/CreditsLimit
+@onready var ficha_morte: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer/Value
+@onready var ficha_max_morte: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer/Max
+@onready var ficha_medo: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer/Value
+@onready var ficha_max_medo: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer/Max
+@onready var ficha_vida: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer/Value
+@onready var ficha_max_vida: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer/Max
+@onready var ficha_vidatemp: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer/Value
+@onready var ficha_max_vidatemp: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer/Max
+@onready var ficha_sanidade: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer/Value
+@onready var ficha_max_sanidade: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer/Max
+@onready var ficha_postura: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer/Value
+@onready var ficha_max_postura: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer/Max
+@onready var ficha_resist_fisica: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/ResContainer/Value
+@onready var ficha_resist_magica: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/ResContainer/Value2
+
+func definir_ficha() -> void:
+	color_picker_button.color = selected.token_texture.self_modulate
+	if selected.stats:
+		ficha_name.text = selected.stats["name"]
+		ficha_rank.text = "Rank " + selected.stats["rank"]
+		ficha_icon.texture = selected.stats["icon"]
+		ficha_race.text = selected.stats["race"]
+		ficha_foco.text = selected.stats["foco"]
+		ficha_aspiration.text = selected.stats["aspiration"]
+		ficha_aspecto.text = selected.stats["aspecto"]
+		ficha_alma.text = selected.stats["alma"]
+		ficha_fobia.text = selected.stats["fobia"]
+		ficha_credits.text = str(selected.stats["credits"])
+		ficha_limit.text = str(selected.stats["limit"])
+		ficha_morte.text = str(selected.stats["morte"])
+		ficha_max_morte.text = str(selected.stats["max_morte"])
+		ficha_medo.text = str(selected.stats["medo"])
+		ficha_max_medo.text = str(selected.stats["max_medo"])
+		ficha_vida.text = str(selected.stats["vida"])
+		ficha_max_vida.text = str(selected.stats["max_vida"])
+		ficha_vidatemp.text = str(selected.stats["vidatemp"])
+		ficha_max_vidatemp.text = str(selected.stats["max_vidatemp"])
+		ficha_sanidade.text = str(selected.stats["sanidade"])
+		ficha_max_sanidade.text = str(selected.stats["max_sanidade"])
+		ficha_postura.text = str(selected.stats["postura"])
+		ficha_max_postura.text = str(selected.stats["max_postura"])
+		ficha_resist_fisica.text = str(selected.stats["resist_fisica"])
+		ficha_resist_magica.text = str(selected.stats["resist_magica"])
+
 
 var dice_advantage = 0
 var dice_bonus = 0
 var dice_secret = false
 
-func _on_roll_20_pressed() -> void:
+func _on_roll_pressed(dice: String) -> void:
 	if selected:
-		selected.spawn_dice.rpc("D20", dice_advantage, dice_bonus, dice_secret)
-
-func _on_roll_6_pressed() -> void:
-	if selected:
-		selected.spawn_dice.rpc("D6", dice_advantage, dice_bonus, dice_secret)
+		selected.spawn_dice.rpc(dice, dice_advantage, dice_bonus, dice_secret)
 
 func set_region(region: int):
 	region_label.text = REGIONS.find_key(region)
@@ -123,14 +185,11 @@ func _on_choose_time_button_value_changed(value: int) -> void:
 		return
 	time_label.text = str(value) + ":00"
 
-
 func _on_change_time_button_toggled(toggled_on: bool) -> void:
 	day_night = toggled_on
 
-
 func _on_visible_time_button_toggled(toggled_on: bool) -> void:
 	time_label.visible = toggled_on
-
 
 func _on_edit_button_pressed() -> void:
 	if not editing:
@@ -141,7 +200,6 @@ func _on_edit_button_pressed() -> void:
 		editing = false
 		for edit in EDIT_LINES:
 			edit.hide()
-
 
 func _on_dados_button_toggled(toggled_on: bool) -> void:
 	dice_container.visible = toggled_on
@@ -157,3 +215,15 @@ func _on_bonus_spinbox_value_changed(value: float) -> void:
 
 func _on_vantagem_spinbox_value_changed(value: float) -> void:
 	dice_advantage = value
+
+func _on_color_picker_button_color_changed(color: Color) -> void:
+	if selected:
+		selected.apply_hex_color(color)
+
+
+func _on_vida_edit_text_submitted(new_text: String) -> void:
+	var token_id = selected.stats["id"]
+	TokensData.players[token_id]["vida"] = int(new_text)
+	print("Nova vida: " + str(TokensData.players[token_id]["vida"]))
+	selected.update_hud.rpc()
+	definir_ficha()

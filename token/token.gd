@@ -9,7 +9,6 @@ var last_coor : Vector2 = Vector2(0, 0)
 
 const DICES = preload("res://dices/dices.tscn")
 
-@export var health = 16
 @export var moves = 40
 @export var move_range = 1
 @export var attack_range = 2
@@ -17,13 +16,9 @@ const DICES = preload("res://dices/dices.tscn")
 
 @export var hided = false
 @export var in_region = ""
-@export var stats = {
-	"name": "",
-	"race": "",
-	"max_health": 0,
-	"max_sanity": 0,
-	"increments": 0,
-}
+
+@export var stats = {}
+@export var id : String
 
 @export var token_icon : Texture2D 
 
@@ -32,32 +27,18 @@ const DICES = preload("res://dices/dices.tscn")
 const GRID_MARKER = preload("res://token/grid_marker.tscn")
 const TARGET_MARKER = preload("res://token/target_marker.tscn")
 
-@onready var hp_bar: ProgressBar = $Token/Bars/HpBar
-@onready var hp_label: Label = $Token/Bars/HpBar/HpContainer/Hp
-@onready var max_hp_label: Label = $Token/Bars/HpBar/HpContainer/MaxHp
-@onready var selected_hex: TextureRect = $SelectedHex
-@onready var hide_toggle: CheckButton = $HideToggle
-
-@onready var san_bar: ProgressBar = $Token/Bars/SanBar
-@onready var postura_bar: ProgressBar = $Token/Bars/PosturaBar
-@onready var moves_value: Label = $MovesContainer/Moves
-@onready var moves_container: HBoxContainer = $MovesContainer
-@onready var name_label: Label = $Name
 @onready var icon_texture: TextureRect = $BG/Icon
+@onready var selected_hex_texture: TextureRect = $SelectedHex
+@onready var token_texture: TextureRect = $Token
+@onready var bg_token_texture: TextureRect = $BG
+@onready var res_container: HBoxContainer = $Token/ResContainer
+
 
 func _ready() -> void:
-	var token_race = stats["race"]
-	if stats["race"]:
-		for key in Races.get(token_race):
-			if stats.has(key):
-				stats[key] = Races.get(token_race)[key]
-		print(stats)
-	
-	
-	
+	load_data()
+	apply_hex_color()
 	
 	selection.connect(get_tree().current_scene._on_selected_token)
-	hp_bar.max_value = stats["max_health"]
 	hex_grid = get_tree().get_first_node_in_group("grid")
 	if multiplayer.is_server():
 		snap_to_grid()
@@ -133,20 +114,6 @@ func clear_marker() -> void:
 	for i in child:
 		i.queue_free()
 
-func _on_button_mouse_entered() -> void:
-	z_index = 1
-	san_bar.show()
-	postura_bar.show()
-	moves_container.show()
-	$Token/Bars.position.y -= 30
-
-func _on_button_mouse_exited() -> void:
-	z_index = 0
-	san_bar.hide()
-	postura_bar.hide()
-	moves_container.hide()
-	$Token/Bars.position.y += 30
-
 func attack() -> void:
 	var center_cell = hex_grid.local_to_map(global_position)
 	var visited = {}
@@ -180,7 +147,15 @@ func _on_hide_toggled(toggled_on: bool) -> void:
 	else:
 		mostrar_para_todos.rpc()
 
-# --- FUNÇÕES DE REDE (RPC) ---
+func apply_hex_color(color : Color = Color(0.536, 0.275, 1.0, 1.0)) -> void:
+	token_texture.self_modulate = color
+	bg_token_texture.self_modulate = token_texture.self_modulate.darkened(0.4)
+	selected_hex_texture.self_modulate = token_texture.self_modulate.darkened(0.8)
+
+func load_data() -> void:
+	stats = TokensData.players.get(id)
+	
+
 # "authority" significa: apenas o Servidor/Host pode mandar os outros executarem.
 # "call_local" significa: o Host também vai rodar essa função na tela dele.
 # "reliable" significa: o pacote de dados TEM que chegar (essencial para status/vida).
@@ -189,7 +164,7 @@ func _on_hide_toggled(toggled_on: bool) -> void:
 func take_damage(amount: int) -> void:
 	if not multiplayer.is_server():
 		return
-	health -= amount
+	stats["vida"] -= amount
 	update_hud.rpc()
 
 @rpc("any_peer", "unreliable")
@@ -222,11 +197,13 @@ func spawn_dice(type, advantage = 0, bonus = 0, secret = false):
 	for child in $Dices.get_children():
 		child.queue_free()
 	
+	
 	for i in range(advantage + 1):
 		var new_dice = DICES.instantiate()
 		new_dice.type = type
 		new_dice.bonus = bonus
 		$Dices.add_child(new_dice, true)
+	
 	if secret:
 		hide_dice.rpc(quem_solicitou)
 	else:
@@ -242,18 +219,91 @@ func hide_dice(id_do_dono: int):
 func show_dice():
 	$Dices.visible = true
 
+
+@onready var hide_toggle: CheckButton = $HideToggle
+@onready var name_label: Label = $Name
+
+@onready var hp_bar: ProgressBar = $Token/Bars/HpBar
+@onready var hp_label: Label = $Token/Bars/HpBar/HpContainer/Hp
+@onready var max_hp_label: Label = $Token/Bars/HpBar/HpContainer/MaxHp
+
+@onready var temp_hp_bar: ProgressBar = $Token/Bars/HpBar/TempHpBar
+
+@onready var san_bar: ProgressBar = $Token/Bars/SanBar
+@onready var san_label: Label = $Token/Bars/SanBar/SanContainer/San
+@onready var max_san_label: Label = $Token/Bars/SanBar/SanContainer/MaxSan
+
+@onready var postura_bar: ProgressBar = $Token/Bars/PosturaBar
+@onready var postura_label: Label = $Token/Bars/PosturaBar/PosturaContainer/Postura
+@onready var max_postura_label: Label = $Token/Bars/PosturaBar/PosturaContainer/MaxPostura
+
+@onready var resist_fisica_label: Label = $Token/ResContainer/ResFTexture/Label
+@onready var resist_magica_label: Label = $Token/ResContainer/ResMTexture/Label
+
+@onready var moves_value: Label = $MovesContainer/Moves
+@onready var moves_container: HBoxContainer = $MovesContainer
+
 @rpc("authority", "call_local", "reliable")
 func update_hud() -> void:
 	moves_value.text = str(moves)
-	hp_label.text = str(health)
-	hp_bar.value = health
-	max_hp_label.text = str(stats["max_health"])
+	selected_hex_texture.visible = selected
+	if stats:
+		name_label.text = stats["name"]
+		icon_texture.texture = stats["icon"]
+		
+		hp_bar.max_value = stats["max_vida"]
+		hp_bar.value = stats["vida"]
+		max_hp_label.text = str(stats["max_vida"])
+		hp_label.text = str(stats["vida"])
+		
+		if stats["vidatemp"] > 0:
+			temp_hp_bar.show()
+			temp_hp_bar.max_value = stats["max_vidatemp"]
+			temp_hp_bar.value = stats["vidatemp"]
+		else:
+			temp_hp_bar.hide()
+		
+		san_bar.max_value = stats["max_sanidade"]
+		san_bar.value = stats["sanidade"]
+		max_san_label.text = str(stats["max_sanidade"])
+		san_label.text = str(stats["sanidade"])
+		
+		if stats["max_postura"] > 0:
+			postura_bar.max_value = stats["max_postura"]
+			postura_bar.value = stats["postura"]
+			max_postura_label.text = str(stats["max_postura"])
+			postura_label.text = str(stats["postura"])
+		else:
+			postura_bar.hide()
+		
+		resist_fisica_label.text = str(stats["resist_fisica"])
+		resist_magica_label.text = str(stats["resist_magica"])
+		
 	
-	selected_hex.visible = selected
 	if multiplayer.is_server():
 		hide_toggle.visible = selected
-	
-	name_label.text = stats["name"]
+
+func _on_button_mouse_entered() -> void:
+	z_index = 1
+	san_bar.show()
+	if stats:
+		if stats["postura"] > 0:
+			postura_bar.show()
+	moves_container.show()
+	res_container.show()
+	res_container.position.y -= 30
+	$Token/Bars.position.y -= 30
+
+func _on_button_mouse_exited() -> void:
+	z_index = 0
+	san_bar.hide()
+	if stats:
+		if stats["postura"] > 0:
+			postura_bar.hide()
+	moves_container.hide()
+	res_container.hide()
+	res_container.position.y += 30
+	$Token/Bars.position.y += 30
 
 @rpc("any_peer", "call_local")
 func esconder_menos_pro_host() -> void:

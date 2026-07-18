@@ -19,11 +19,13 @@ config/icon="res://icon.svg"
 
 Rede="*uid://dfjshb8h8wwj3"
 Races="*uid://bwc1peaipjyjq"
+TokensData="*uid://decnxdc7vvaxf"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/size/initial_position_type=0
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"

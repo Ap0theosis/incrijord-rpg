@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://d02ktuuko3f6"]
 
 [ext_resource type="Script" uid="uid://gqanybgr8541" path="res://token/token.gd" id="1_gm8bg"]
-[ext_resource type="Texture2D" uid="uid://et8ct8ww2osu" path="res://token/hex.png" id="2_tjkmq"]
+[ext_resource type="Texture2D" uid="uid://c7f1jbv146k7u" path="res://data/icons/resistance-token-icon.png" id="3_gm8bg"]
 [ext_resource type="Texture2D" uid="uid://oqntmadkr0xb" path="res://token/hex-mask.png" id="3_golxd"]
-[ext_resource type="Texture2D" uid="uid://dd3nc043vyxjc" path="res://icon.svg" id="4_oriu4"]
+[ext_resource type="Texture2D" uid="uid://d0o48768pmikv" path="res://data/icons/allace-icon.png" id="3_gy0pe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 radius = 37.01351
@@ -37,6 +37,9 @@ properties/7/replication_mode = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghksg"]
 bg_color = Color(0.22352941, 0.80784315, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gy0pe"]
+bg_color = Color(0, 0.679627, 0.73354554, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfd23"]
 bg_color = Color(0.4630264, 0.40817776, 0.9999828, 1)
 
@@ -66,7 +69,7 @@ offset_bottom = 84.0
 flat = true
 
 [node name="SelectedHex" type="TextureRect" parent="." unique_id=601396068]
-self_modulate = Color(0.13218838, 0.00013847217, 0.20931855, 1)
+self_modulate = Color(0.01883621, 0.00017866134, 0.565247, 1)
 offset_left = -110.0
 offset_top = -111.0
 offset_right = 90.0
@@ -76,20 +79,20 @@ mouse_filter = 2
 texture = ExtResource("3_golxd")
 
 [node name="Token" type="TextureRect" parent="." unique_id=857649829]
+self_modulate = Color(0.38431373, 0.5647059, 1, 1)
 offset_left = -100.0
 offset_top = -101.0
 offset_right = 100.0
 offset_bottom = 99.0
 mouse_filter = 2
-texture = ExtResource("2_tjkmq")
+texture = ExtResource("3_golxd")
 
 [node name="Bars" type="VBoxContainer" parent="Token" unique_id=1381284309]
+z_index = 1
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 2.0
-offset_right = 2.0
-offset_bottom = 18.0
+offset_bottom = 62.0
 grow_horizontal = 2
 mouse_filter = 2
 
@@ -136,6 +139,18 @@ text = "/"
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "98"
+
+[node name="TempHpBar" type="ProgressBar" parent="Token/Bars/HpBar" unique_id=1098776410]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 0
+offset_top = -2.0
+offset_right = 200.0
+offset_bottom = 2.0
+mouse_filter = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_gy0pe")
+step = 1.0
+value = 50.0
+show_percentage = false
 
 [node name="SanBar" type="ProgressBar" parent="Token/Bars" unique_id=1692019654]
 custom_minimum_size = Vector2(0, 18)
@@ -225,8 +240,64 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "9"
 
+[node name="ResContainer" type="HBoxContainer" parent="Token" unique_id=1748616306]
+layout_mode = 0
+offset_left = -69.0
+offset_top = -11.0
+offset_right = 269.0
+offset_bottom = 54.0
+theme_override_constants/separation = 194
+
+[node name="ResFTexture" type="TextureRect" parent="Token/ResContainer" unique_id=2058282498]
+self_modulate = Color(0.36712068, 0.5360759, 1, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_gm8bg")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Token/ResContainer/ResFTexture" unique_id=1370436521]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResMTexture" type="TextureRect" parent="Token/ResContainer" unique_id=2125925673]
+self_modulate = Color(0.34100297, 0.26594782, 0.9321339, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_gm8bg")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Token/ResContainer/ResMTexture" unique_id=892686521]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="BG" type="TextureRect" parent="." unique_id=214344344]
-self_modulate = Color(0.3399112, 0.0007461229, 0.49011976, 1)
+self_modulate = Color(0.13771838, 0.33275056, 0.9999475, 1)
 clip_children = 2
 anchors_preset = 8
 anchor_left = 0.5
@@ -255,7 +326,7 @@ offset_top = 4.960001
 offset_right = 198.96
 offset_bottom = 204.96
 mouse_filter = 2
-texture = ExtResource("4_oriu4")
+texture = ExtResource("3_gy0pe")
 expand_mode = 1
 
 [node name="MovesContainer" type="HBoxContainer" parent="." unique_id=484358644]
@@ -283,20 +354,21 @@ text = "TOKEN_NAME"
 horizontal_alignment = 1
 
 [node name="Dices" type="HBoxContainer" parent="." unique_id=559022638]
-custom_minimum_size = Vector2(360, 86)
-offset_left = -180.0
-offset_top = -247.0
-offset_right = 180.0
-offset_bottom = -161.0
+custom_minimum_size = Vector2(460, 86)
+custom_maximum_size = Vector2(460, -1)
+offset_left = -230.0
+offset_top = -212.0
+offset_right = 230.0
+offset_bottom = -126.0
 mouse_filter = 2
 alignment = 1
 
 [node name="HideToggle" type="CheckButton" parent="." unique_id=1912496362]
-visible = false
 offset_left = -43.0
 offset_top = 85.0
 offset_right = 41.0
 offset_bottom = 136.0
+size_flags_vertical = 8
 text = "Hide"
 
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

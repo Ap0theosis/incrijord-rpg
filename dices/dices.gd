@@ -13,13 +13,24 @@ const DICES = preload("res://dices/dices.tscn")
 
 func _ready() -> void:
 	type_label.text = type
-	if bonus != 0:
+	get_parent().position.y = -212
+	get_parent().position.x = -230
+	if bonus:
+		get_parent().position.y = -252
 		bonus_label.show()
 	match type:
+		"D4":
+			roll(4)
 		"D6":
 			roll(6)
+		"D8":
+			roll(8)
+		"D10":
+			roll(10)
 		"D20":
 			roll(20)
+		"D100":
+			roll(100)
 
 func roll(dicetype) -> void:
 	var result = 0
