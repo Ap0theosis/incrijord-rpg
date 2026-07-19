@@ -168,6 +168,7 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
 [node name="Geral" type="Control" parent="HUD/FichaContainer/Margin" unique_id=1432592724]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Geral" unique_id=2022034903]
@@ -184,14 +185,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 24
 text = "NOME"
-horizontal_alignment = 1
-
-[node name="Rank" type="Label" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=1563554767]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 24
-text = "RANK X"
 horizontal_alignment = 1
 
 [node name="IconBG" type="TextureRect" parent="HUD/FichaContainer/Margin/Geral/VBoxContainer" unique_id=185161127]
@@ -573,7 +566,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_g4v7s")
 text = "ATACAR"
 
 [node name="Atributos" type="Control" parent="HUD/FichaContainer/Margin" unique_id=53582750]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Atributos" unique_id=1894049103]
@@ -1326,7 +1318,6 @@ layout_mode = 2
 placeholder_text = "Value"
 
 [node name="EditCloseContainer" type="VBoxContainer" parent="HUD" unique_id=1426062475]
-visible = false
 custom_minimum_size = Vector2(50, 206)
 custom_maximum_size = Vector2(-1, 206)
 anchors_preset = 1

@@ -100,9 +100,6 @@ func _ready() -> void:
 		time_options.hide()
 		mestre_button.hide()
 
-func _process(_delta: float) -> void:
-	mouse_pos_label.text = str(hex_grid.local_to_map(get_global_mouse_position()))
-
 func _on_selected_token(id) -> void:
 	ficha_menu_container.show()
 	geral_button.button_pressed = true
@@ -144,7 +141,6 @@ func _on_target_reset_pressed() -> void:
 
 
 @onready var ficha_name: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/Name
-@onready var ficha_rank: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/Rank
 @onready var ficha_icon: TextureRect = $HUD/FichaContainer/Margin/Geral/VBoxContainer/IconBG/Icon
 @onready var ficha_icon_bg: TextureRect = $HUD/FichaContainer/Margin/Geral/VBoxContainer/IconBG
 @onready var ficha_race: Label = $HUD/FichaContainer/Margin/Geral/VBoxContainer/Race
@@ -206,16 +202,18 @@ func _on_target_reset_pressed() -> void:
 @onready var ficha_atributos_conjuracao: Label = $HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ConjuracaoContainer/ConjuracaoValue
 @onready var ficha_atributos_clarividencia: Label = $HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ClarividenciaContainer/ClarividenciaValue
 @onready var ficha_atributos_sobrecarga: Label = $HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/SobrecargaContainer/SobrecargaValue
-
+@onready var ficha_rank_icon: TextureRect = $HUD/FichaContainer/Margin/Geral/VBoxContainer/IconBG/RankIcon
+@onready var ficha_atributos_bonus_rank: Label = $HUD/FichaContainer/Margin/Atributos/VBoxContainer/BonusRankContainer/BonusRankValue
 
 func definir_ficha() -> void:
 	if selected:
 		if selected.stats:
+			ficha_rank_icon.texture = TokensData.RANK_ICONS[selected.stats["rank"]]
+			
 			color_picker_button.color = selected.token_texture.self_modulate
 			ficha_atributos_icon.self_modulate = selected.stats["token_color"]
 			ficha_name.text = selected.stats["name"]
 			ficha_atributos_name.text = selected.stats["name"]
-			ficha_rank.text = "Rank " + selected.stats["rank"]
 			ficha_atributos_rank.text = "Rank " + selected.stats["rank"]
 			ficha_icon.texture = selected.stats["icon"]
 			ficha_race.text = selected.stats["race"]
@@ -279,6 +277,8 @@ func definir_ficha() -> void:
 			ficha_atributos_conjuracao.text = str(selected.stats["pericias"]["espiritual"]["conjuracao"]["value"])
 			ficha_atributos_clarividencia.text = str(selected.stats["pericias"]["espiritual"]["clarividencia"]["value"])
 			ficha_atributos_sobrecarga.text = str(selected.stats["pericias"]["espiritual"]["sobrecarga"]["value"])
+			
+			ficha_atributos_bonus_rank.text = str(selected.stats["bonus_rank"])
 			
 
 
