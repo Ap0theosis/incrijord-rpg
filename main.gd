@@ -92,7 +92,7 @@ var day_night = false
 var editing = false
 
 func _ready() -> void:
-	if OS.has_feature("web_android"):
+	if OS.has_feature("web_android") or OS.has_feature("mobile"):
 		virtual_joystick.show()
 	if not multiplayer.is_server():
 		region_option_button.hide()

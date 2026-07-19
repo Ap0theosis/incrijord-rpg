@@ -1,7 +1,8 @@
 extends Node
 
 const PORT = 8080
-const ADDRESS = "127.0.0.1"
+var ADDRESS = "127.0.0.1"
+
 const PLAYER_CAM = preload("res://multiplayer/player_cam.tscn")
 const SINGLE_CAM = preload("res://multiplayer/single_cam.tscn")
 
@@ -51,7 +52,6 @@ func _on_peer_disconnected(id: int):
 
 func _on_connected_to_server():
 	print("Sucesso! Conectado ao servidor.")
-	# Agora que o cliente está oficialmente conectado, ele pode mudar de cena com segurança
 	iniciar_partida()
 
 func _on_connection_failed():
