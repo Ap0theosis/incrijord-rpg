@@ -106,10 +106,10 @@ var players = {
 		"icon" = load("res://data/icons/kaua-icon.png"),
 		"token_color" = Color(0.536, 0.275, 1.0, 1.0),
 		"rank" = "B+",
-		"race" = "Galvan",
+		"race" = "Vampiro",
 		"foco" = "Marcial",
 		"aspiration" = "Combate",
-		"aspecto" = "Polus",
+		"aspecto" = "Minus",
 		
 		"alma" = "Gongo",
 		"fobia" = "???",
@@ -138,6 +138,94 @@ var players = {
 		"resist_fisica" = 110,
 		"resist_magica" = 49,
 		
+		"corpo" = 6,
+		"destreza" = 6,
+		"mente" = 3,
+		"espirito" = 2,
+		"carisma" = 7,
+		
+		"bonus_rank" = 2,
+		"incrementos" = 0,
+		"up_atributos" = 0,
+		
+		"pericias" = {
+			"fisico" = {
+				"furtividade" = {"value" = 0, "active" = false},
+				"prestidigitacao" = {"value" = 0, "active" = false},
+				"instinto" = {"value" = 0, "active" = false},
+				"acrobacia" = {"value" = 0, "active" = false},
+				"atletismo" = {"value" = 0, "active" = false},
+				"adrenalina" = {"value" = 0, "active" = false},
+				"rigidez" = {"value" = 0, "active" = false}
+			},
+			"social" = {
+				"intimidacao" = {"value" = 0, "active" = false},
+				"artes" = {"value" = 0, "active" = false},
+				"persuasao" = {"value" = 0, "active" = false},
+				"perspicacia" = {"value" = 0, "active" = false},
+				"lidar_criaturas" = {"value" = 0, "active" = false},
+				"encorajar" = {"value" = 0, "active" = false},
+				"encantar" = {"value" = 0, "active" = false}
+			},
+			"mental" = {
+				"aparelhagem" = {"value" = 0, "active" = false},
+				"medicina" = {"value" = 0, "active" = false},
+				"gastronomia" = {"value" = 0, "active" = false},
+				"investigacao" = {"value" = 0, "active" = false},
+				"criacao" = {"value" = 0, "active" = false},
+				"coragem" = {"value" = 0, "active" = false},
+				"sobrevivencia" = {"value" = 0, "active" = false}
+			},
+			"espiritual" = {
+				"purificacao" = {"value" = 0, "active" = false},
+				"ilusao" = {"value" = 0, "active" = false},
+				"selo" = {"value" = 0, "active" = false},
+				"bencao_maldicao" = {"value" = 0, "active" = false},
+				"conjuracao" = {"value" = 0, "active" = false},
+				"clarividencia" = {"value" = 0, "active" = false},
+				"sobrecarga" = {"value" = 0, "active" = false}
+			}
+		}
+	},
+	
+	"yonnahu" = {
+		"id" = "yonnahu",
+		"name" = "Yonnahu",
+		"icon" = load("res://data/icons/yonnahu-icon.png"),
+		"token_color" = Color(0.536, 0.275, 1.0, 1.0),
+		"rank" = "C",
+		"race" = "Galvan",
+		"foco" = "Selo",
+		"aspiration" = "Mantra",
+		"aspecto" = "Polus",
+		
+		"alma" = "Plasma",
+		"fobia" = "",
+		
+		"credits" = 0,
+		"limit" = 0,
+		
+		"morte" = 0,
+		"max_morte" = 3,
+		
+		"medo" = 0,
+		"max_medo" = 3,
+		
+		"vida" = 16,
+		"max_vida" = 16,
+		
+		"vidatemp" = 0,
+		"max_vidatemp" = 16,
+		
+		"sanidade" = 12,
+		"max_sanidade" = 12,
+		
+		"postura" = 0,
+		"max_postura" = 0,
+		
+		"resist_fisica" = 0,
+		"resist_magica" = 0,
+		
 		"corpo" = 0,
 		"destreza" = 0,
 		"mente" = 0,
@@ -145,7 +233,7 @@ var players = {
 		"carisma" = 0,
 		
 		"bonus_rank" = 2,
-		"incrementos" = 0,
+		"incrementos" = 4,
 		"up_atributos" = 0,
 		
 		"pericias" = {
@@ -221,3 +309,17 @@ func increase_limit(token_id : String, amount: int) -> void:
 			token["rank"] = RANKS[current_rank_index + 1]
 			return
 		rank_up(token_id)
+
+func get_maior_atributo(token_atributos):
+	var atributos = {}
+	atributos.set("Corpo", token_atributos["corpo"])
+	atributos.set("Destreza", token_atributos["destreza"])
+	atributos.set("Mente", token_atributos["mente"])
+	atributos.set("Espirito", token_atributos["espirito"])
+	atributos.set("Carisma", token_atributos["carisma"])
+	var maior_atributo_final = {}
+	var atributos_value =  atributos.values()
+	atributos_value.sort()
+	var maior_atributo_value = atributos_value[-1]
+	maior_atributo_final.set(atributos.find_key(maior_atributo_value), maior_atributo_value)
+	return maior_atributo_final

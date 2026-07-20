@@ -352,6 +352,7 @@ func _on_geral_edit_text_submitted(new_text: String, type) -> void:
 		TokensData.players[token_id][type] = int(new_text)
 	selected.update_hud.rpc()
 	definir_ficha()
+	ficha_container.definir_ficha()
 	editing = false
 	for edit_line in EDIT_LINES:
 		edit_line.hide()
@@ -384,13 +385,17 @@ func _on_pericia_edit_text_submitted(new_text: String, type) -> void:
 
 @onready var ficha_geral: Control = $HUD/FichaContainer/Margin/Geral
 @onready var ficha_atributos: Control = $HUD/FichaContainer/Margin/Atributos
+@onready var ficha_habilidades: Control = $HUD/FichaContainer/Margin/Habilidades
 
 func _on_atributos_button_toggled(toggled_on: bool) -> void:
 	ficha_atributos.visible = toggled_on
 
 func _on_geral_button_toggled(toggled_on: bool) -> void:
 	ficha_geral.visible = toggled_on
-	
+
+func _on_habilidades_button_toggled(toggled_on: bool) -> void:
+	ficha_habilidades.visible = toggled_on
+
 @onready var fisico_container: VBoxContainer = $HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer
 @onready var social_container: VBoxContainer = $HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer
 @onready var mental_container: VBoxContainer = $HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer
@@ -407,3 +412,10 @@ func _on_metal_button_toggled(toggled_on: bool) -> void:
 
 func _on_espiritual_button_toggled(toggled_on: bool) -> void:
 	espiritual_container.visible = toggled_on
+
+func _on_color_picker_button_popup_closed() -> void:
+	editing = false
+	for edit_line in EDIT_LINES:
+		edit_line.hide()
+		if edit_line is LineEdit:
+			edit_line.clear()

@@ -19,11 +19,13 @@ config/icon="res://icon.svg"
 
 Rede="*uid://dfjshb8h8wwj3"
 TokensData="*uid://decnxdc7vvaxf"
+Alma="*uid://rm7bjeael6yu"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=4
 window/size/initial_position_type=0
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
@@ -32,6 +34,10 @@ window/stretch/aspect="expand"
 
 grid=""
 move_marker=""
+
+[gui]
+
+theme/custom_font="uid://dfka5ss4wevjd"
 
 [input]
 

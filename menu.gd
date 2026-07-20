@@ -11,7 +11,6 @@ func _on_host_pressed():
 func _on_join_pressed():
 	Rede.conectar_ao_host()
 
-
 func _on_single_player_pressed() -> void:
 	Rede.single_player()
 

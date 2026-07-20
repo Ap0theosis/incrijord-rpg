@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dxeko683gdc86"]
 
 [ext_resource type="Script" uid="uid://c0fgptv45yxhq" path="res://menu.gd" id="1_lti8b"]
+[ext_resource type="Texture2D" uid="uid://cx62a85gipgpx" path="res://data/HUD/menu/Titulo-Cor.png" id="2_ouk20"]
 
 [node name="Menu" type="Control" unique_id=1812320889]
 layout_mode = 3
@@ -13,6 +14,15 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_lti8b")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=500730039]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1886657259]
 custom_minimum_size = Vector2(350, 350)
 layout_mode = 1
@@ -21,10 +31,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -175.0
+offset_top = -88.0
+offset_right = 175.0
+offset_bottom = 262.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -60,7 +70,26 @@ layout_mode = 2
 text = "???"
 horizontal_alignment = 1
 
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=631590952]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 288.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" unique_id=1065303603]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer" unique_id=412257717]
+custom_minimum_size = Vector2(1000, 240)
+layout_mode = 2
+texture = ExtResource("2_ouk20")
+expand_mode = 3
+stretch_mode = 4
+
 [connection signal="pressed" from="VBoxContainer/SinglePlayer" to="." method="_on_single_player_pressed"]
 [connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_pressed"]
-[connection signal="text_submitted" from="VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="text_changed" from="VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_pressed"]

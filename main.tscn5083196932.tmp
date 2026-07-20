@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://tpnxwan18y5d" path="res://data/HUD/minus.png" id="8_efxa6"]
 [ext_resource type="Texture2D" uid="uid://1t2fks8t22bq" path="res://data/icons/rank-b-icon.png" id="8_kek77"]
 [ext_resource type="Texture2D" uid="uid://idcjpi0liwsd" path="res://data/HUD/polus.png" id="9_dg77c"]
-[ext_resource type="FontFile" uid="uid://cyfah0w4f828x" path="res://data/config/Fredoka-Medium.ttf" id="10_4c57u"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7mycd"]
 properties/0/path = NodePath("HUD/MarginContainer2/VBoxContainer/HBoxContainer/TimeLabel:text")
@@ -255,19 +254,6 @@ animations = [{
 color = Color(1, 1, 1, 1)
 thickness = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57qmd"]
-bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
-bg_color = Color(0, 0, 0, 0.49019608)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kek77"]
-bg_color = Color(0, 0, 0, 0.49019608)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cegan"]
 bg_color = Color(0, 0, 0, 1)
 
@@ -321,6 +307,12 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
+bg_color = Color(0, 0, 0, 0.49019608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kek77"]
+bg_color = Color(0, 0, 0, 0.49019608)
 
 [node name="Main" type="Node2D" unique_id=368505422]
 script = ExtResource("1_0xm2m")
@@ -1616,46 +1608,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer" unique_id=1254223984]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_57qmd")
-
-[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/Panel" unique_id=40017997]
-self_modulate = Color(0.7058824, 0.37254903, 0.023529412, 1)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("10_4c57u")
-text = "Habilidade Comum"
-horizontal_alignment = 1
-
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer" unique_id=1917188477]
-custom_minimum_size = Vector2(0, 90)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer" unique_id=1631818608]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=841038821]
-layout_mode = 2
-text = "Acerto:"
-
-[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=783145931]
-layout_mode = 2
-text = "123 + 123"
-
-[node name="Label3" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=781583141]
-layout_mode = 2
-text = "123 + 123"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1041724907]
-layout_mode = 2
-size_flags_vertical = 10
-
-[node name="Label3" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=803063268]
-layout_mode = 2
-text = "Inverter"
-
-[node name="CheckButton" type="CheckButton" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1618702385]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer" unique_id=875255121]
@@ -1665,39 +1618,12 @@ text = "Cargas"
 
 [node name="SpinBox" type="SpinBox" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer" unique_id=1557046658]
 layout_mode = 2
-theme_override_constants/field_and_buttons_separation = 0
-theme_override_constants/buttons_width = 20
-theme_override_styles/up_background = SubResource("StyleBoxFlat_7mycd")
-theme_override_styles/down_background = SubResource("StyleBoxFlat_kek77")
 min_value = 1.0
 value = 1.0
 rounded = true
+editable = false
 
-[node name="Panel2" type="PanelContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer" unique_id=1662814036]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_57qmd")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/Panel2" unique_id=2139672488]
-layout_mode = 2
-
-[node name="Valor" type="RichTextLabel" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/Panel2/VBoxContainer" unique_id=1473618175]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "Valor por Carga: [color=ff9900]123"
-horizontal_alignment = 1
-
-[node name="ValorMaximo" type="RichTextLabel" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/Panel2/VBoxContainer" unique_id=1811632778]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
-text = "[color=ff9900]Valor máximo: 123"
-horizontal_alignment = 1
-
-[node name="Custo" type="RichTextLabel" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/Panel2/VBoxContainer" unique_id=1640677393]
+[node name="Custo" type="RichTextLabel" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer" unique_id=1640677393]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2029,6 +1955,7 @@ text = "3"
 horizontal_alignment = 1
 
 [node name="DiceContainer" type="PanelContainer" parent="HUD" unique_id=1129862501]
+visible = false
 custom_minimum_size = Vector2(300, 300)
 offset_left = 82.0
 offset_top = 84.0
@@ -2188,12 +2115,10 @@ size_flags_horizontal = 10
 [connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ConjuracaoContainer/ConjuracaoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["conjuracao"]]
 [connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ClarividenciaContainer/ClarividenciaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["clarividencia"]]
 [connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/SobrecargaContainer/SobrecargaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["sobrecarga"]]
-[connection signal="toggled" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/CheckButton" to="HUD/FichaContainer" method="_on_check_button_toggled"]
 [connection signal="value_changed" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/SpinBox" to="HUD/FichaContainer" method="_on_cargas_value_changed"]
 [connection signal="pressed" from="HUD/EditCloseContainer/CloseTarget" to="." method="_on_target_reset_pressed"]
 [connection signal="pressed" from="HUD/EditCloseContainer/EditButton" to="." method="_on_edit_button_pressed"]
 [connection signal="color_changed" from="HUD/EditCloseContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
-[connection signal="popup_closed" from="HUD/EditCloseContainer/ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]
 [connection signal="toggled" from="HUD/FichaMenuContainer/GeralButton" to="." method="_on_geral_button_toggled"]
 [connection signal="toggled" from="HUD/FichaMenuContainer/AtributosButton" to="." method="_on_atributos_button_toggled"]
 [connection signal="toggled" from="HUD/FichaMenuContainer/HabilidadesButton" to="." method="_on_habilidades_button_toggled"]

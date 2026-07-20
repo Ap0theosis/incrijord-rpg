@@ -20,8 +20,6 @@ const DICES = preload("res://dices/dices.tscn")
 @export var stats = {}
 @export var id : String
 
-@export var token_icon : Texture2D 
-
 @onready var grid_markers: Node2D = $"../../GridMarkers"
 @onready var target_markers: Node2D = $"../../TargetMarkers"
 const GRID_MARKER = preload("res://token/grid_marker.tscn")
@@ -32,6 +30,7 @@ const TARGET_MARKER = preload("res://token/target_marker.tscn")
 @onready var token_texture: TextureRect = $Token
 @onready var bg_token_texture: TextureRect = $BG
 @onready var res_container: HBoxContainer = $Token/ResContainer
+@onready var ficha_container: PanelContainer = $"../../HUD/FichaContainer"
 
 
 func _ready() -> void:
@@ -39,11 +38,12 @@ func _ready() -> void:
 	apply_hex_color()
 	
 	selection.connect(get_tree().current_scene._on_selected_token)
+	selection.connect(ficha_container._on_selected_token)
 	hex_grid = get_tree().get_first_node_in_group("grid")
 	if multiplayer.is_server():
 		snap_to_grid()
+	
 	update_hud()
-	icon_texture.texture = token_icon
 
 func _process(_delta: float) -> void:
 	if is_dragging:
@@ -157,6 +157,8 @@ func apply_hex_color() -> void:
 
 func load_data() -> void:
 	stats = TokensData.players.get(id)
+	if stats:
+		icon_texture.texture = stats["icon"]
 	
 
 # "authority" significa: apenas o Servidor/Host pode mandar os outros executarem.

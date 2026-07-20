@@ -1,0 +1,532 @@
+[gd_scene format=3 uid="uid://bmf6ajodu8q3j"]
+
+[ext_resource type="Script" uid="uid://cqw7pn0f164wi" path="res://hud/ficha_detalhes.gd" id="1_33xn7"]
+[ext_resource type="FontFile" uid="uid://cyfah0w4f828x" path="res://data/config/Fredoka-Medium.ttf" id="2_66wdo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_66wdo"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+bg_color = Color(0, 0, 0, 0.39215687)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrrya"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+bg_color = Color(0.48178947, 0.48178947, 0.48178947, 0.39215687)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d8rg0"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_yf5fn"]
+color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_g4v7s"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+vertical = true
+
+[node name="FichaDetalhes" type="Control" unique_id=501526614]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_33xn7")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=825559732]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=840473806]
+custom_minimum_size = Vector2(960, 540)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4c57u")
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=895967694]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -410.0
+offset_top = 44.0
+offset_right = 498.0
+offset_bottom = 607.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/panel = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_66wdo")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_yrrya")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_d8rg0")
+current_tab = 0
+
+[node name="Raça" type="Control" parent="TabContainer" unique_id=433898509]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="RaceTitle" type="RichTextLabel" parent="TabContainer/Raça" unique_id=1134892992]
+custom_minimum_size = Vector2(500, 24)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -484.0
+offset_right = 476.0
+offset_bottom = 33.0
+grow_horizontal = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[b]>> Raça <<"
+horizontal_alignment = 1
+
+[node name="Galvan" type="Control" parent="TabContainer/Raça" unique_id=854277338]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -2.0
+offset_right = 22.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Raça/Galvan" unique_id=1858706967]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Raça/Galvan/MarginContainer" unique_id=477917229]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer" unique_id=1133440862]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatsContainer" type="VBoxContainer" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1494416522]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VidaStats" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer/StatsContainer" unique_id=1986033223]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=00ff00]Vida Base:[/color] 16"
+horizontal_alignment = 1
+
+[node name="VidaStats2" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer/StatsContainer" unique_id=531886458]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=4a86e8]Sanidade:[/color] 12"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1719767726]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_yf5fn")
+
+[node name="SkillTitle1" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1247725828]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=00ff00][b]Alta Adaptabilidade"
+horizontal_alignment = 1
+
+[node name="SkillDesc1" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer" unique_id=942941298]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Ao estar fora de [color=9900ff]Gama[/color] recebem [color=ff0000]Vantagem[/color] em suas perícias"
+horizontal_alignment = 1
+
+[node name="SkillTitle2" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer" unique_id=880965320]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=00ff00][b]Sanidade Estável"
+horizontal_alignment = 1
+
+[node name="SkillDesc2" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1281733276]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Role [color=ff0000]Mente[/color], para recuperar [color=#4a86e8]1/3[/color] de sanidade quando ela zerar. 1x por descanso longo.  [color=ff0000]Dificuldade: 15"
+horizontal_alignment = 1
+
+[node name="SkillTitle3" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer" unique_id=971506566]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=00ff00][b]Autossuficiência"
+horizontal_alignment = 1
+
+[node name="SkillDesc3" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer" unique_id=840262208]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Sempre restauram [color=00ff00]25%[/color] da vida máxima em descansos longos"
+horizontal_alignment = 1
+
+[node name="SkillTitle4" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1509697540]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=ff0000][b]Orgulho Alto"
+horizontal_alignment = 1
+
+[node name="SkillDesc4" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer" unique_id=170571840]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Possui [color=ff0000]Desvantagem[/color] em testes de [color=ff0000]Sociais[/color] ao interagir com outras raças que não têm ligação com [color=9900ff]Gama"
+horizontal_alignment = 1
+
+[node name="SkillTitle5" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1255491655]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=ff0000][b]Anti-Minus"
+horizontal_alignment = 1
+
+[node name="SkillDesc5" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1548525070]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Só pode manipular [color=ff9900]Polus"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer" unique_id=180793463]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_g4v7s")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer" unique_id=2021805116]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SkillTitle" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1985366490]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=00ffff][b]Devoção Galvan"
+horizontal_alignment = 1
+
+[node name="Var1" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=221829817]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=00ffff]>> ATUAL <<"
+horizontal_alignment = 1
+
+[node name="SkillDesc" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1383849117]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "Quando atingir Rank B, escolha um Foco Secundário. 
+
+Esse sempre terá um nível a menos que o principal, você adquire seus atributos, perícias e habilidades disponíveis."
+horizontal_alignment = 1
+
+[node name="Var2" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=961164970]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "Concedendo atualmente:"
+horizontal_alignment = 1
+
+[node name="Var3" type="RichTextLabel" parent="TabContainer/Raça/Galvan/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=898307163]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = ">> <<"
+horizontal_alignment = 1
+
+[node name="Vampiro" type="Control" parent="TabContainer/Raça" unique_id=1038110557]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -2.0
+offset_right = 22.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Raça/Vampiro" unique_id=1337249821]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Raça/Vampiro/MarginContainer" unique_id=1537773442]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer" unique_id=1008561415]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatsContainer" type="VBoxContainer" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2146798768]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VidaStats" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer/StatsContainer" unique_id=566172094]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=ff0000]Vida Base:[/color] 22"
+horizontal_alignment = 1
+
+[node name="VidaStats2" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer/StatsContainer" unique_id=653438643]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=4a86e8]Sanidade:[/color] 9"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1181621590]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_yf5fn")
+
+[node name="SkillTitle1" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer" unique_id=990601123]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=00ff00][b]Sentidos Aguçados"
+horizontal_alignment = 1
+
+[node name="SkillDesc1" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer" unique_id=420456193]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Ganham [color=ff0000]Vantagem[/color] em perícias [color=ff0000]Físicas"
+horizontal_alignment = 1
+
+[node name="SkillTitle2" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2077009318]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=00ff00][b]Linhagem Dracônica"
+horizontal_alignment = 1
+
+[node name="SkillDesc2" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer" unique_id=902521707]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[color=ff0000]Vantagem[/color] quando se trata de cuidar de algo ou alguém que tenha fortes relações"
+horizontal_alignment = 1
+
+[node name="SkillTitle3" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1188386101]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=ff0000][b]Sede de sangue"
+horizontal_alignment = 1
+
+[node name="SkillDesc3" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer" unique_id=4907510]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Quando uma criatura começa a sangrar role [color=ff0000]Mente[/color].
+Perde [color=4a86e8]1/3[/color] da sanidade se falhar.
+Os pontos são recuperados se morder o alvo"
+horizontal_alignment = 1
+
+[node name="SkillTitle4" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2019900088]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=ff0000][b]Fotossensíveis"
+horizontal_alignment = 1
+
+[node name="SkillDesc4" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1859866937]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "No sol: Perde [color=ff0000]50%[/color] das resistências
+Perde [color=ff0000]25% de Vida máxima[/color] por turno"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer" unique_id=320480698]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_g4v7s")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer" unique_id=1374233319]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SkillTitle" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=602382549]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=00ffff][b]Hemomancia"
+horizontal_alignment = 1
+
+[node name="Var1" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1226257349]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=00ffff]>> ATUAL <<"
+horizontal_alignment = 1
+
+[node name="SkillDesc" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=152287351]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "[color=ff0000]Executor:[/color] Execute alvos - 1/5/15 Vítimas
+
+[color=ff0000]Redentor:[/color] Perdoe alvos - 1/3/10 Vítimas
+
+[color=ff0000]Ritualista:[/color] Crie um laço - Rank B/A/S
+
+[color=ff0000]Draconismo: [/color]Evolua Rank e outras Hemomancias"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Var2" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1609404632]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = "Concedendo atualmente:"
+horizontal_alignment = 1
+
+[node name="Var3" type="RichTextLabel" parent="TabContainer/Raça/Vampiro/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=2063229770]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/bold_font = ExtResource("2_66wdo")
+bbcode_enabled = true
+text = ">> <<"
+horizontal_alignment = 1
+
+[node name="Foco" type="Control" parent="TabContainer" unique_id=1419255910]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="TabContainer/Foco" unique_id=489831619]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 20.0
+text = "EM PROGRESSO"
+
+[node name="Aspiração" type="Control" parent="TabContainer" unique_id=199280382]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Label" type="Label" parent="TabContainer/Aspiração" unique_id=931700887]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 20.0
+text = "EM PROGRESSO"
+
+[node name="Fobia" type="Control" parent="TabContainer" unique_id=1305608571]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="Label" type="Label" parent="TabContainer/Fobia" unique_id=1581586880]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 20.0
+text = "EM PROGRESSO"
+
+[node name="Rank" type="Control" parent="TabContainer" unique_id=957124123]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="Label" type="Label" parent="TabContainer/Rank" unique_id=1876417870]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 20.0
+text = "EM PROGRESSO"
+
+[node name="Polaridade" type="Control" parent="TabContainer" unique_id=646339356]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 5
+
+[node name="Label" type="Label" parent="TabContainer/Polaridade" unique_id=1192611680]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 20.0
+text = "EM PROGRESSO"
+
+[node name="Button" type="Button" parent="." unique_id=905292213]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 44.0
+offset_right = -141.0
+offset_bottom = 90.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "Fechar"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
