@@ -347,10 +347,11 @@ tile_set = SubResource("TileSet_ghksg")
 [node name="Tokens" type="Node2D" parent="." unique_id=516393696]
 
 [node name="Token" parent="Tokens" unique_id=1425657095 instance=ExtResource("1_ig7tw")]
-position = Vector2(35, -240)
+position = Vector2(311, -204)
+id = "cain"
 
 [node name="Token2" parent="Tokens" unique_id=1350576037 instance=ExtResource("1_ig7tw")]
-position = Vector2(907, -287)
+position = Vector2(733, -294)
 id = "yonnahu"
 
 [node name="Token3" parent="Tokens" unique_id=1235005061 instance=ExtResource("1_ig7tw")]
@@ -360,6 +361,14 @@ id = "kauã"
 [node name="Token4" parent="Tokens" unique_id=1644514532 instance=ExtResource("1_ig7tw")]
 position = Vector2(676, 428)
 id = "homero"
+
+[node name="Token5" parent="Tokens" unique_id=2007609425 instance=ExtResource("1_ig7tw")]
+position = Vector2(1037, -137)
+id = "shield"
+
+[node name="Token6" parent="Tokens" unique_id=1447420383 instance=ExtResource("1_ig7tw")]
+position = Vector2(1227, -250)
+id = "zincflinc"
 
 [node name="TargetMarkers" type="Node2D" parent="." unique_id=1824685374]
 
@@ -1604,11 +1613,11 @@ layout_mode = 2
 text = "Habilidade de Alma"
 horizontal_alignment = 1
 
-[node name="RankC" type="Control" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer" unique_id=8474122]
+[node name="SoulSkill" type="Control" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer" unique_id=8474122]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC" unique_id=263300780]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill" unique_id=263300780]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1616,54 +1625,64 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer" unique_id=1254223984]
+[node name="Panel" type="PanelContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer" unique_id=1254223984]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_57qmd")
 
-[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/Panel" unique_id=40017997]
-self_modulate = Color(0.7058824, 0.37254903, 0.023529412, 1)
+[node name="RankSkill" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/Panel" unique_id=40017997]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("10_4c57u")
 text = "Habilidade Comum"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer" unique_id=1917188477]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer" unique_id=1917188477]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer" unique_id=1631818608]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer" unique_id=1631818608]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=841038821]
+[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=841038821]
 layout_mode = 2
 text = "Acerto:"
 
-[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=783145931]
+[node name="Label2" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=783145931]
 layout_mode = 2
 text = "123 + 123"
 
-[node name="Label3" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=781583141]
+[node name="Label3" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=781583141]
 layout_mode = 2
 text = "123 + 123"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1041724907]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1041724907]
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="Label3" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=803063268]
+[node name="Label3" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=803063268]
 layout_mode = 2
 text = "Inverter"
 
-[node name="CheckButton" type="CheckButton" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1618702385]
+[node name="CheckButton" type="CheckButton" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1618702385]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer" unique_id=875255121]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=670924997]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="Label3" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1660397410]
+layout_mode = 2
+text = "Postura"
+
+[node name="CheckButton" type="CheckButton" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=944710264]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer" unique_id=875255121]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Cargas"
 
-[node name="SpinBox" type="SpinBox" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer" unique_id=1557046658]
+[node name="SpinBox" type="SpinBox" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer" unique_id=1557046658]
 layout_mode = 2
 theme_override_constants/field_and_buttons_separation = 0
 theme_override_constants/buttons_width = 20
@@ -1673,15 +1692,15 @@ min_value = 1.0
 value = 1.0
 rounded = true
 
-[node name="Panel2" type="PanelContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer" unique_id=1662814036]
+[node name="Panel2" type="PanelContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer" unique_id=1662814036]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_57qmd")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/Panel2" unique_id=2139672488]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/Panel2" unique_id=2139672488]
 layout_mode = 2
 
-[node name="Valor" type="RichTextLabel" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/Panel2/VBoxContainer" unique_id=1473618175]
+[node name="Valor" type="RichTextLabel" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/Panel2/VBoxContainer" unique_id=1473618175]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1689,7 +1708,7 @@ bbcode_enabled = true
 text = "Valor por Carga: [color=ff9900]123"
 horizontal_alignment = 1
 
-[node name="ValorMaximo" type="RichTextLabel" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/Panel2/VBoxContainer" unique_id=1811632778]
+[node name="ValorMaximo" type="RichTextLabel" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/Panel2/VBoxContainer" unique_id=1811632778]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1697,7 +1716,7 @@ bbcode_enabled = true
 text = "[color=ff9900]Valor máximo: 123"
 horizontal_alignment = 1
 
-[node name="Custo" type="RichTextLabel" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/Panel2/VBoxContainer" unique_id=1640677393]
+[node name="Custo" type="RichTextLabel" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/Panel2/VBoxContainer" unique_id=1640677393]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1705,7 +1724,16 @@ bbcode_enabled = true
 text = "Você perderá [color=4a86e8]1 de Sanidade"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer" unique_id=1497678126]
+[node name="Insuficiente" type="RichTextLabel" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/Panel2/VBoxContainer" unique_id=1901220207]
+visible = false
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[color=ff0000]Insuficiente!!"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer" unique_id=1497678126]
 layout_mode = 2
 text = "ROLAR CARGAS"
 
@@ -2192,9 +2220,10 @@ size_flags_horizontal = 10
 [connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ConjuracaoContainer/ConjuracaoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["conjuracao"]]
 [connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ClarividenciaContainer/ClarividenciaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["clarividencia"]]
 [connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/SobrecargaContainer/SobrecargaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["sobrecarga"]]
-[connection signal="toggled" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/CheckButton" to="HUD/FichaContainer" method="_on_check_button_toggled"]
-[connection signal="value_changed" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/SpinBox" to="HUD/FichaContainer" method="_on_cargas_value_changed"]
-[connection signal="pressed" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/Button" to="HUD/FichaContainer" method="_on_rolar_cargas_pressed"]
+[connection signal="toggled" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/CheckButton" to="HUD/FichaContainer" method="_on_check_button_toggled"]
+[connection signal="toggled" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/CheckButton" to="HUD/FichaContainer" method="_on_postura_toggled"]
+[connection signal="value_changed" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/SpinBox" to="HUD/FichaContainer" method="_on_cargas_value_changed"]
+[connection signal="pressed" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/Button" to="HUD/FichaContainer" method="_on_rolar_cargas_pressed"]
 [connection signal="pressed" from="HUD/EditCloseContainer/CloseTarget" to="." method="_on_target_reset_pressed"]
 [connection signal="pressed" from="HUD/EditCloseContainer/EditButton" to="." method="_on_edit_button_pressed"]
 [connection signal="color_changed" from="HUD/EditCloseContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]

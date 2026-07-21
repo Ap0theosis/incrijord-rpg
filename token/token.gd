@@ -203,6 +203,8 @@ func spawn_dice(type, advantage = 0, bonus = 0, secret = false):
 	for child in $Dices.get_children():
 		child.queue_free()
 	
+	for child in $CenterContainer.get_children():
+		child.queue_free()
 	
 	for i in range(advantage + 1):
 		var new_dice = DICES.instantiate()
@@ -228,6 +230,7 @@ func spawn_charges(amount, value, crit, type):
 	
 	var new_dice = CHARGES_DICE.instantiate()
 	new_dice.amount = amount
+	new_dice.value = value
 	new_dice.type = type
 	$CenterContainer.add_child(new_dice, true)
 

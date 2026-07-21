@@ -802,4 +802,5 @@ offset_right = 86.0
 offset_bottom = 86.0
 flat = true
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

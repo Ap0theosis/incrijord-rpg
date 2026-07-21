@@ -218,7 +218,7 @@ func definir_ficha() -> void:
 			ficha_icon.texture = selected.stats["icon"]
 			ficha_race.text = selected.stats["race"]
 			ficha_foco.text = selected.stats["foco"]
-			ficha_aspiration.text = selected.stats["aspiration"]
+			ficha_aspiration.text = selected.stats["aspiration"].keys()[0]
 			ficha_aspecto.text = selected.stats["aspecto"]
 			ficha_alma.text = selected.stats["alma"]
 			ficha_fobia.text = selected.stats["fobia"]
