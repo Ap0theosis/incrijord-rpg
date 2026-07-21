@@ -4,7 +4,6 @@ var parent = null
 
 @onready var hex_grid: TileMapLayer = $"../../TileMapLayer"
 @onready var grid_markers: Node2D = $"../../GridMarkers"
-const GRID_MARKER = preload("res://token/grid_marker.tscn")
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.get_parent() != parent:

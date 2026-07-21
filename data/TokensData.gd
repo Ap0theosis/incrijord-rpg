@@ -129,7 +129,7 @@ var players = {
 		"vidatemp" = 250,
 		"max_vidatemp" = 300,
 		
-		"sanidade" = 10,
+		"sanidade" = 900,
 		"max_sanidade" = 12,
 		
 		"postura" = 1,

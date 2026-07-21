@@ -1705,6 +1705,10 @@ bbcode_enabled = true
 text = "Você perderá [color=4a86e8]1 de Sanidade"
 horizontal_alignment = 1
 
+[node name="Button" type="Button" parent="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer" unique_id=1497678126]
+layout_mode = 2
+text = "ROLAR CARGAS"
+
 [node name="EditCloseContainer" type="VBoxContainer" parent="HUD" unique_id=1426062475]
 custom_minimum_size = Vector2(50, 206)
 custom_maximum_size = Vector2(-1, 206)
@@ -2190,6 +2194,7 @@ size_flags_horizontal = 10
 [connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/SobrecargaContainer/SobrecargaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["sobrecarga"]]
 [connection signal="toggled" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/CheckButton" to="HUD/FichaContainer" method="_on_check_button_toggled"]
 [connection signal="value_changed" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/HBoxContainer/SpinBox" to="HUD/FichaContainer" method="_on_cargas_value_changed"]
+[connection signal="pressed" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/RankC/VBoxContainer/Button" to="HUD/FichaContainer" method="_on_rolar_cargas_pressed"]
 [connection signal="pressed" from="HUD/EditCloseContainer/CloseTarget" to="." method="_on_target_reset_pressed"]
 [connection signal="pressed" from="HUD/EditCloseContainer/EditButton" to="." method="_on_edit_button_pressed"]
 [connection signal="color_changed" from="HUD/EditCloseContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]

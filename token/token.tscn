@@ -373,6 +373,12 @@ offset_bottom = 136.0
 size_flags_vertical = 8
 text = "Hide"
 
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1141101463]
+offset_left = -230.0
+offset_top = -212.0
+offset_right = 230.0
+offset_bottom = -126.0
+
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

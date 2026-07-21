@@ -89,3 +89,16 @@ func _on_cargas_value_changed(value: float) -> void:
 func _on_check_button_toggled(toggled_on: bool) -> void:
 	invertido = toggled_on
 	definir_ficha()
+
+func _on_rolar_cargas_pressed() -> void:
+	var aspecto_atual = token.stats["aspecto"]
+	if invertido:
+		match aspecto_atual:
+			"Polus":
+				aspecto_atual = "Minus"
+			"Minus":
+				aspecto_atual = "Polus"
+	if token.stats["sanidade"] >= custo:
+		token.stats["sanidade"] -= custo
+		token.spawn_charges.rpc(cargas, valor, 1, aspecto_atual)
+		definir_ficha()

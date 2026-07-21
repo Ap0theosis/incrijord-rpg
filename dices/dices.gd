@@ -9,8 +9,6 @@ var type = ""
 var bonus : int = 0
 var secret = false
 
-const DICES = preload("res://dices/dices.tscn")
-
 func _ready() -> void:
 	type_label.text = type
 	get_parent().position.y = -212

@@ -8,6 +8,7 @@ var hex_grid : TileMapLayer = null
 var last_coor : Vector2 = Vector2(0, 0)
 
 const DICES = preload("res://dices/dices.tscn")
+const CHARGES_DICE = preload("res://dices/charges.tscn")
 
 @export var moves = 40
 @export var move_range = 1
@@ -213,6 +214,23 @@ func spawn_dice(type, advantage = 0, bonus = 0, secret = false):
 		hide_dice.rpc(quem_solicitou)
 	else:
 		show_dice.rpc()
+
+@rpc("any_peer", "call_local")
+func spawn_charges(amount, value, crit, type):
+	if not multiplayer.is_server():
+		return
+	
+	for child in $Dices.get_children():
+		child.queue_free()
+		
+	for child in $CenterContainer.get_children():
+		child.queue_free()
+	
+	var new_dice = CHARGES_DICE.instantiate()
+	new_dice.amount = amount
+	new_dice.type = type
+	$CenterContainer.add_child(new_dice, true)
+
 
 @rpc("any_peer", "call_local")
 func hide_dice(id_do_dono: int):

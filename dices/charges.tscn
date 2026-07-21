@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bwc8d21d0capp"]
+
+[ext_resource type="Script" uid="uid://du17gnymxxbsr" path="res://dices/charges.gd" id="1_nklia"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nklia"]
+bg_color = Color(0.08235294, 0.08235294, 0.08235294, 0.49803922)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[node name="Charges" type="Control" unique_id=1359089665]
+custom_minimum_size = Vector2(86, 86)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 86.0
+offset_bottom = 86.0
+mouse_filter = 2
+script = ExtResource("1_nklia")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=475542823]
+layout_mode = 0
+offset_right = 86.0
+offset_bottom = 86.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nklia")
+
+[node name="GridContainer" type="GridContainer" parent="Panel" unique_id=170837787]
+layout_mode = 2
+mouse_filter = 2
+columns = 5
+
+[node name="Timer" type="Timer" parent="." unique_id=562304658]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
