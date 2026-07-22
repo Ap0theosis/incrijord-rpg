@@ -14,6 +14,9 @@ func _ready():
 	zoom_scroll_bar.value_changed.connect(_on_zoom_scroll_bar_value_changed)
 
 func _process(delta):
+	if $"../../HUD/FichaContainer".editing:
+		return
+	
 	var cam_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if cam_direction:
 		camera.global_position += cam_direction * delta * SPEED * zoom_speed_mult

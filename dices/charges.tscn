@@ -9,6 +9,26 @@ corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nklia"]
+properties/0/path = NodePath(".:custom_minimum_size")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Label:custom_minimum_size")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:final_value")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Label:text")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Label:modulate")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Label:theme_override_font_sizes/font_size")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+
 [node name="Charges" type="Control" unique_id=1359089665]
 custom_minimum_size = Vector2(86, 86)
 layout_mode = 3
@@ -42,5 +62,12 @@ offset_right = 86.0
 text = "..."
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1537015000]
+_spawnable_scenes = PackedStringArray("uid://b70rhohr3bkaf")
+spawn_path = NodePath("../Panel/GridContainer")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1550047259]
+replication_config = SubResource("SceneReplicationConfig_nklia")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

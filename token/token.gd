@@ -16,9 +16,11 @@ const CHARGES_DICE = preload("res://dices/charges.tscn")
 @export var power = 4
 
 @export var hided = false
+@export var stats_hided = false
+@export var name_hided = false
 @export var in_region = ""
 
-@export var stats = {}
+@export var stats: TokenData
 @export var id : String
 
 @onready var grid_markers: Node2D = $"../../GridMarkers"
@@ -33,12 +35,14 @@ const TARGET_MARKER = preload("res://token/target_marker.tscn")
 @onready var res_container: HBoxContainer = $Token/ResContainer
 @onready var ficha_container: PanelContainer = $"../../HUD/FichaContainer"
 
+@onready var main: Node2D = $"../.."
+
+@onready var bars: VBoxContainer = $Token/Bars
 
 func _ready() -> void:
 	load_data()
 	apply_hex_color()
 	
-	selection.connect(get_tree().current_scene._on_selected_token)
 	selection.connect(ficha_container._on_selected_token)
 	hex_grid = get_tree().get_first_node_in_group("grid")
 	if multiplayer.is_server():
@@ -55,6 +59,9 @@ func _process(_delta: float) -> void:
 			rpc_id(1, "atualizar_arrasto_tempo_real", mouse_pos)
 
 func _on_button_button_down() -> void:
+	if stats_hided and not multiplayer.is_server():
+		return
+	
 	if not selected:
 		selected = true
 		update_hud()
@@ -62,7 +69,9 @@ func _on_button_button_down() -> void:
 		return
 	get_parent().move_child(self, -1)
 	is_dragging = true
-	spawn_marker()
+	
+	if not main.free_movement:
+		spawn_marker()
 
 func _on_button_button_up() -> void:
 	is_dragging = false
@@ -141,25 +150,20 @@ func attack() -> void:
 		new_marker.power = power
 		target_markers.add_child(new_marker)
 
-func _on_hide_toggled(toggled_on: bool) -> void:
-	hided = toggled_on
-	if hided:
-		esconder_menos_pro_host.rpc()
-	else:
-		mostrar_para_todos.rpc()
+
 
 func apply_hex_color() -> void:
 	if not stats:
 		return
-	token_texture.self_modulate = stats["token_color"]
-	get_parent().get_parent().definir_ficha()
+	token_texture.self_modulate = stats.token_cor
+	ficha_container.definir_ficha()
 	bg_token_texture.self_modulate = token_texture.self_modulate.darkened(0.4)
 	selected_hex_texture.self_modulate = token_texture.self_modulate.darkened(0.8)
 
 func load_data() -> void:
-	stats = TokensData.players.get(id)
+	stats = TokensManager.players[id]
 	if stats:
-		icon_texture.texture = stats["icon"]
+		icon_texture.texture = stats.icone
 	
 
 # "authority" significa: apenas o Servidor/Host pode mandar os outros executarem.
@@ -184,6 +188,11 @@ func finalizar_movimento_no_servidor(self_coor: Vector2i, can_move_to: Array):
 	if not multiplayer.is_server(): 
 		return 
 	
+	if main.free_movement and not self in main.iniciativa:
+		global_position = hex_grid.map_to_local(self_coor)
+		last_coor = self_coor
+		update_hud.rpc()
+		return
 	if can_move_to.has(self_coor) and moves > 0:
 		moves -= 1
 		global_position = hex_grid.map_to_local(self_coor)
@@ -246,8 +255,13 @@ func show_dice():
 	$Dices.visible = true
 
 
-@onready var hide_toggle: CheckButton = $HideToggle
-@onready var name_label: Label = $Name
+@onready var hide_toggle: CheckButton = $PanelContainer2/HBoxContainer/HideToggle
+@onready var hidestats_toggle: CheckButton = $PanelContainer2/HBoxContainer/HideStatsToggle
+@onready var hidename_toggle: CheckButton = $PanelContainer2/HBoxContainer/HideNameToggle
+@onready var hide_container: PanelContainer = $PanelContainer2
+
+
+@onready var name_label: Label = $PanelContainer/Name
 
 @onready var hp_bar: ProgressBar = $Token/Bars/HpBar
 @onready var hp_label: Label = $Token/Bars/HpBar/HpContainer/Hp
@@ -269,53 +283,56 @@ func show_dice():
 @onready var moves_value: Label = $MovesContainer/Moves
 @onready var moves_container: HBoxContainer = $MovesContainer
 
-@rpc("authority", "call_local", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func update_hud() -> void:
 	moves_value.text = str(moves)
 	selected_hex_texture.visible = selected
 	if stats:
-		name_label.text = stats["name"]
-		icon_texture.texture = stats["icon"]
+		name_label.text = stats.nome
+		icon_texture.texture = stats.icone
 		
-		hp_bar.max_value = stats["max_vida"]
-		hp_bar.value = stats["vida"]
-		max_hp_label.text = str(stats["max_vida"])
-		hp_label.text = str(stats["vida"])
+		hp_bar.max_value = stats.max_vida
+		hp_bar.value = stats.vida
+		max_hp_label.text = str(stats.max_vida)
+		hp_label.text = str(stats.vida)
 		
-		if stats["vidatemp"] > 0:
+		if stats.vidatemp > 0:
 			temp_hp_bar.show()
-			temp_hp_bar.max_value = stats["max_vidatemp"]
-			temp_hp_bar.value = stats["vidatemp"]
+			temp_hp_bar.max_value = stats.max_vidatemp
+			temp_hp_bar.value = stats.vidatemp
 		else:
 			temp_hp_bar.hide()
 		
-		san_bar.max_value = stats["max_sanidade"]
-		san_bar.value = stats["sanidade"]
-		max_san_label.text = str(stats["max_sanidade"])
-		san_label.text = str(stats["sanidade"])
+		san_bar.max_value = stats.max_sanidade
+		san_bar.value = stats.sanidade
+		max_san_label.text = str(stats.max_sanidade)
+		san_label.text = str(stats.sanidade)
 		
-		if stats["max_postura"] > 0:
-			postura_bar.max_value = stats["max_postura"]
-			postura_bar.value = stats["postura"]
-			max_postura_label.text = str(stats["max_postura"])
-			postura_label.text = str(stats["postura"])
+		if stats.max_postura > 0:
+			postura_bar.max_value = stats.max_postura
+			postura_bar.value = stats.postura
+			max_postura_label.text = str(stats.max_postura)
+			postura_label.text = str(stats.postura)
 		else:
 			postura_bar.hide()
 		
-		resist_fisica_label.text = str(stats["resist_fisica"])
-		resist_magica_label.text = str(stats["resist_magica"])
+		resist_fisica_label.text = str(stats.resist_fisica)
+		resist_magica_label.text = str(stats.resist_magica)
 		
 	
 	if multiplayer.is_server():
-		hide_toggle.visible = selected
+		hide_container.visible = selected
 
 func _on_button_mouse_entered() -> void:
 	z_index = 1
+	if stats_hided and not multiplayer.is_server():
+		return
 	san_bar.show()
 	if stats:
-		if stats["postura"] > 0:
+		if stats.postura > 0:
 			postura_bar.show()
-	moves_container.show()
+	if self in main.iniciativa:
+		moves_container.show()
 	res_container.show()
 	res_container.position.y -= 30
 	$Token/Bars.position.y -= 30
@@ -341,3 +358,54 @@ func esconder_menos_pro_host() -> void:
 func mostrar_para_todos() -> void:
 	show()
 	modulate = Color(1,1,1, 1)
+
+@rpc("any_peer", "call_local")
+func esconder_stats_menos_pro_host() -> void:
+	if multiplayer.get_unique_id() != 1:
+		bars.hide()
+		res_container.hide()
+		moves_container.hide()
+	bars.modulate = Color(1,1,1, 0.5)
+	res_container.modulate = Color(1,1,1, 0.5)
+	moves_container.modulate = Color(1,1,1, 0.5)
+
+@rpc("any_peer", "call_local")
+func mostrar_stats_para_todos() -> void:
+	bars.show()
+	res_container.show()
+	moves_container.show()
+	bars.modulate = Color(1,1,1, 1)
+	res_container.modulate = Color(1,1,1, 1)
+	moves_container.modulate = Color(1,1,1, 1)
+
+@rpc("any_peer", "call_local")
+func esconder_name_menos_pro_host() -> void:
+	if multiplayer.get_unique_id() != 1:
+		name_label.text = "???"
+		return
+	name_label.text = stats.nome + "(???)"
+
+@rpc("any_peer", "call_local")
+func mostrar_name_para_todos() -> void:
+	name_label.text = stats.nome
+
+func _on_hide_toggled(toggled_on: bool) -> void:
+	hided = toggled_on
+	if hided:
+		esconder_menos_pro_host.rpc()
+	else:
+		mostrar_para_todos.rpc()
+
+func _on_hide_stats_toggled(toggled_on: bool) -> void:
+	stats_hided = toggled_on
+	if stats_hided:
+		esconder_stats_menos_pro_host.rpc()
+	else:
+		mostrar_stats_para_todos.rpc()
+
+func _on_hide_name_toggled(toggled_on: bool) -> void:
+	name_hided = toggled_on
+	if name_hided:
+		esconder_name_menos_pro_host.rpc()
+	else:
+		mostrar_name_para_todos.rpc()

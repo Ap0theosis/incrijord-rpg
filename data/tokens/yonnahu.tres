@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TokenData" format=3 uid="uid://ctwfn2xwq85yc"]
+
+[ext_resource type="Script" uid="uid://ce2y6sqfptt2m" path="res://data/tokens/TokenData.gd" id="1_bgk5x"]
+[ext_resource type="Texture2D" uid="uid://i5w1a1apprc0" path="res://data/icons/yonnahu-icon.png" id="1_e6kn3"]
+
+[resource]
+script = ExtResource("1_bgk5x")
+id = "yonnahu"
+nome = "Yonnahu"
+icone = ExtResource("1_e6kn3")
+raca = "Galvan"
+foco = "Selo"
+aspiracao = "Mantra"
+especializacao = "Ofensivo"
+aspecto = "Polus"
+alma = "Plasma"
+fobia = "???"
+vida = 16
+max_vida = 16
+max_vidatemp = 16
+sanidade = 12
+max_sanidade = 12
+bonus_rank = 2
+incrementos = 4
+metadata/_custom_type_script = "uid://ce2y6sqfptt2m"

@@ -324,6 +324,7 @@ corner_radius_bottom_left = 20
 
 [node name="Main" type="Node2D" unique_id=368505422]
 script = ExtResource("1_0xm2m")
+free_movement = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2134173596]
 replication_config = SubResource("SceneReplicationConfig_7mycd")
@@ -346,29 +347,9 @@ tile_set = SubResource("TileSet_ghksg")
 
 [node name="Tokens" type="Node2D" parent="." unique_id=516393696]
 
-[node name="Token" parent="Tokens" unique_id=1425657095 instance=ExtResource("1_ig7tw")]
-position = Vector2(311, -204)
-id = "cain"
-
 [node name="Token2" parent="Tokens" unique_id=1350576037 instance=ExtResource("1_ig7tw")]
-position = Vector2(733, -294)
+position = Vector2(652, 96)
 id = "yonnahu"
-
-[node name="Token3" parent="Tokens" unique_id=1235005061 instance=ExtResource("1_ig7tw")]
-position = Vector2(437, 146)
-id = "kauã"
-
-[node name="Token4" parent="Tokens" unique_id=1644514532 instance=ExtResource("1_ig7tw")]
-position = Vector2(676, 428)
-id = "homero"
-
-[node name="Token5" parent="Tokens" unique_id=2007609425 instance=ExtResource("1_ig7tw")]
-position = Vector2(1037, -137)
-id = "shield"
-
-[node name="Token6" parent="Tokens" unique_id=1447420383 instance=ExtResource("1_ig7tw")]
-position = Vector2(1227, -250)
-id = "zincflinc"
 
 [node name="TargetMarkers" type="Node2D" parent="." unique_id=1824685374]
 
@@ -809,7 +790,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_g4v7s")
 text = "ATACAR"
 
 [node name="Atributos" type="Control" parent="HUD/FichaContainer/Margin" unique_id=53582750]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Atributos" unique_id=1894049103]
@@ -1430,6 +1410,7 @@ size_flags_horizontal = 10
 text = "0"
 
 [node name="PurificacaoEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/PurificacaoContainer" unique_id=425282693]
+visible = false
 custom_maximum_size = Vector2(60, -1)
 layout_mode = 2
 placeholder_text = "Value"
@@ -1448,6 +1429,7 @@ size_flags_horizontal = 10
 text = "0"
 
 [node name="IlusaoEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/IlusaoContainer" unique_id=1003931920]
+visible = false
 custom_maximum_size = Vector2(60, -1)
 layout_mode = 2
 placeholder_text = "Value"
@@ -1466,6 +1448,7 @@ size_flags_horizontal = 10
 text = "0"
 
 [node name="SeloEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/SeloContainer" unique_id=755065442]
+visible = false
 custom_maximum_size = Vector2(60, -1)
 layout_mode = 2
 placeholder_text = "Value"
@@ -1484,6 +1467,7 @@ size_flags_horizontal = 10
 text = "0"
 
 [node name="BencaoMaldicaoEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/BencaoMaldicaoContainer" unique_id=841190384]
+visible = false
 custom_maximum_size = Vector2(60, -1)
 layout_mode = 2
 placeholder_text = "Value"
@@ -1502,6 +1486,7 @@ size_flags_horizontal = 10
 text = "0"
 
 [node name="ConjuracaoEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ConjuracaoContainer" unique_id=239117191]
+visible = false
 custom_maximum_size = Vector2(60, -1)
 layout_mode = 2
 placeholder_text = "Value"
@@ -1520,6 +1505,7 @@ size_flags_horizontal = 10
 text = "0"
 
 [node name="ClarividenciaEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ClarividenciaContainer" unique_id=1353099072]
+visible = false
 custom_maximum_size = Vector2(60, -1)
 layout_mode = 2
 placeholder_text = "Value"
@@ -1538,11 +1524,13 @@ size_flags_horizontal = 10
 text = "0"
 
 [node name="SobrecargaEdit" type="LineEdit" parent="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/SobrecargaContainer" unique_id=1065632349]
+visible = false
 custom_maximum_size = Vector2(60, -1)
 layout_mode = 2
 placeholder_text = "Value"
 
 [node name="Habilidades" type="Control" parent="HUD/FichaContainer/Margin" unique_id=1054732694]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/FichaContainer/Margin/Habilidades" unique_id=1041281779]
@@ -2164,70 +2152,70 @@ text = "Secreto:"
 layout_mode = 2
 size_flags_horizontal = 10
 
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/AlmaContainer/AlmaEdit" to="." method="_on_geral_edit_text_submitted" binds= ["alma"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/FobiaContainer/FobiaEdit" to="." method="_on_geral_edit_text_submitted" binds= ["fobia"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer/CreditsValueEdit" to="." method="_on_geral_edit_text_submitted" binds= ["credits"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer/CreditsLimitEdit" to="." method="_on_geral_edit_text_submitted" binds= ["limit"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer/MorteEdit" to="." method="_on_geral_edit_text_submitted" binds= ["morte"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer/MorteMaxEdit" to="." method="_on_geral_edit_text_submitted" binds= ["max_morte"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer/MedoEdit" to="." method="_on_geral_edit_text_submitted" binds= ["medo"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer/MedoMaxEdit" to="." method="_on_geral_edit_text_submitted" binds= ["max_medo"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer/VidaEdit" to="." method="_on_geral_edit_text_submitted" binds= ["vida"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer/VidaMaxEdit" to="." method="_on_geral_edit_text_submitted" binds= ["max_vida"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer/VTempEdit" to="." method="_on_geral_edit_text_submitted" binds= ["vidatemp"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer/VTempMaxEdit" to="." method="_on_geral_edit_text_submitted" binds= ["max_vidatemp"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer/SanEdit" to="." method="_on_geral_edit_text_submitted" binds= ["sanidade"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer/SanMaxEdit" to="." method="_on_geral_edit_text_submitted" binds= ["max_sanidade"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer/PosEdit" to="." method="_on_geral_edit_text_submitted" binds= ["postura"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer/PosMaxEdit" to="." method="_on_geral_edit_text_submitted" binds= ["max_postura"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/ResContainer/ResFEdit" to="." method="_on_geral_edit_text_submitted" binds= ["resist_fisica"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/ResContainer/ResMEdit" to="." method="_on_geral_edit_text_submitted" binds= ["resist_magica"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/AlmaContainer/AlmaEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["alma"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/FobiaContainer/FobiaEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["fobia"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer/CreditsValueEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["creditos"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer/CreditsLimitEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["limite"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer/MorteEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["morte"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer/MorteMaxEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["max_morte"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer/MedoEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["medo"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer/MedoMaxEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["max_medo"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer/VidaEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["vida"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer/VidaMaxEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["max_vida"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer/VTempEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["vidatemp"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer/VTempMaxEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["max_vidatemp"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer/SanEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["sanidade"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer/SanMaxEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["max_sanidade"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer/PosEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["postura"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer/PosMaxEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["max_postura"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/ResContainer/ResFEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["resist_fisica"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/ResContainer/ResMEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["resist_magica"]]
 [connection signal="button_down" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/SelectedAttack" to="." method="_on_selected_attack_button_down"]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/CorpoContainer/CorpoEdit" to="." method="_on_geral_edit_text_submitted" binds= ["corpo"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/DestrezaContainer/DestrezaEdit" to="." method="_on_geral_edit_text_submitted" binds= ["destreza"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/MenteContainer/MenteEdit" to="." method="_on_geral_edit_text_submitted" binds= ["mente"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/EspiritoContainer/EspiritoEdit" to="." method="_on_geral_edit_text_submitted" binds= ["espirito"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/CarismaContainer/CarismaEdit" to="." method="_on_geral_edit_text_submitted" binds= ["carisma"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/CorpoContainer/CorpoEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["corpo"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/DestrezaContainer/DestrezaEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["destreza"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/MenteContainer/MenteEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["mente"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/EspiritoContainer/EspiritoEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["espirito"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/CarismaContainer/CarismaEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["carisma"]]
 [connection signal="toggled" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PericiaContainer/FisicoButton" to="." method="_on_fisico_button_toggled"]
 [connection signal="toggled" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PericiaContainer/SocialButton" to="." method="_on_social_button_toggled"]
 [connection signal="toggled" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PericiaContainer/MetalButton" to="." method="_on_metal_button_toggled"]
 [connection signal="toggled" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PericiaContainer/EspiritualButton" to="." method="_on_espiritual_button_toggled"]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/FurtividadeContainer/FurtividadeEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["furtividade"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/PrestidigitacaoContainer/PrestidigitacaoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["prestidigitacao"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/InstintoContainer/InstintoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["instinto"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/AcrobaciaContainer/AcrobaciaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["acrobacia"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/AtletismoContainer/AtletismoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["atletismo"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/AdrenalinaContainer/AdrenalinaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["adrenalina"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/RigidezContainer/RigidezEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["rigidez"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/IntimidacaoContainer/IntimidacaoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["intimidacao"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/ArtesContainer/ArtesEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["artes"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/PersuasaoContainer/PersuasaoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["persuasao"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/PerspicaciaContainer/PerspicaciaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["perspicacia"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/LidarCriaturasContainer/LidarCriaturasEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["lidar_criaturas"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/EncorajarContainer/EncorajarEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["encorajar"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/EncantarContainer/EncantarEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["encantar"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/AparelhagemContainer/AparelhagemEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["aparelhagem"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/MedicinaContainer/MedicinaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["medicina"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/GastronomiaContainer/GastronomiaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["gastronomia"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/InvestigacaoContainer/InvestigacaoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["investigacao"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/CriaçãoContainer/CriaçãoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["criacao"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/CoragemContainer/CoragemEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["coragem"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/SobrevivenciaContainer/SobrevivenciaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["sobrevivencia"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/PurificacaoContainer/PurificacaoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["purificacao"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/IlusaoContainer/IlusaoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["ilusao"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/SeloContainer/SeloEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["selo"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/BencaoMaldicaoContainer/BencaoMaldicaoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["bencao_maldicao"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ConjuracaoContainer/ConjuracaoEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["conjuracao"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ClarividenciaContainer/ClarividenciaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["clarividencia"]]
-[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/SobrecargaContainer/SobrecargaEdit" to="." method="_on_pericia_edit_text_submitted" binds= ["sobrecarga"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/FurtividadeContainer/FurtividadeEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["furtividade"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/PrestidigitacaoContainer/PrestidigitacaoEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["prestidigitacao"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/InstintoContainer/InstintoEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["instinto"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/AcrobaciaContainer/AcrobaciaEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["acrobacia"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/AtletismoContainer/AtletismoEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["atletismo"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/AdrenalinaContainer/AdrenalinaEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["adrenalina"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/RigidezContainer/RigidezEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["rigidez"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/IntimidacaoContainer/IntimidacaoEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["intimidacao"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/ArtesContainer/ArtesEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["artes"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/PersuasaoContainer/PersuasaoEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["persuasao"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/PerspicaciaContainer/PerspicaciaEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["perspicacia"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/LidarCriaturasContainer/LidarCriaturasEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["lidar_criaturas"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/EncorajarContainer/EncorajarEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["encorajar"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/EncantarContainer/EncantarEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["encantar"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/AparelhagemContainer/AparelhagemEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["aparelhagem"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/MedicinaContainer/MedicinaEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["medicina"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/GastronomiaContainer/GastronomiaEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["gastronomia"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/InvestigacaoContainer/InvestigacaoEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["investigacao"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/CriaçãoContainer/CriaçãoEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["criacao"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/CoragemContainer/CoragemEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["coragem"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/SobrevivenciaContainer/SobrevivenciaEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["sobrevivencia"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/PurificacaoContainer/PurificacaoEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["purificacao"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/IlusaoContainer/IlusaoEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["ilusao"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/SeloContainer/SeloEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["selo"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/BencaoMaldicaoContainer/BencaoMaldicaoEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["bencao_maldicao"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ConjuracaoContainer/ConjuracaoEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["conjuracao"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ClarividenciaContainer/ClarividenciaEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["clarividencia"]]
+[connection signal="text_submitted" from="HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/SobrecargaContainer/SobrecargaEdit" to="HUD/FichaContainer" method="_on_pericia_edit_text_submitted" binds= ["sobrecarga"]]
 [connection signal="toggled" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/CheckButton" to="HUD/FichaContainer" method="_on_check_button_toggled"]
 [connection signal="toggled" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/CheckButton" to="HUD/FichaContainer" method="_on_postura_toggled"]
 [connection signal="value_changed" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/HBoxContainer/SpinBox" to="HUD/FichaContainer" method="_on_cargas_value_changed"]
 [connection signal="pressed" from="HUD/FichaContainer/Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/Button" to="HUD/FichaContainer" method="_on_rolar_cargas_pressed"]
 [connection signal="pressed" from="HUD/EditCloseContainer/CloseTarget" to="." method="_on_target_reset_pressed"]
-[connection signal="pressed" from="HUD/EditCloseContainer/EditButton" to="." method="_on_edit_button_pressed"]
-[connection signal="color_changed" from="HUD/EditCloseContainer/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
-[connection signal="popup_closed" from="HUD/EditCloseContainer/ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]
+[connection signal="pressed" from="HUD/EditCloseContainer/EditButton" to="HUD/FichaContainer" method="_on_edit_button_pressed"]
+[connection signal="color_changed" from="HUD/EditCloseContainer/ColorPickerButton" to="HUD/FichaContainer" method="_on_color_changed"]
+[connection signal="popup_closed" from="HUD/EditCloseContainer/ColorPickerButton" to="HUD/FichaContainer" method="_on_color_popup_closed"]
 [connection signal="toggled" from="HUD/FichaMenuContainer/GeralButton" to="." method="_on_geral_button_toggled"]
 [connection signal="toggled" from="HUD/FichaMenuContainer/AtributosButton" to="." method="_on_atributos_button_toggled"]
 [connection signal="toggled" from="HUD/FichaMenuContainer/HabilidadesButton" to="." method="_on_habilidades_button_toggled"]

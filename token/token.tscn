@@ -15,35 +15,68 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:moves")
 properties/1/spawn = true
 properties/1/replication_mode = 2
-properties/2/path = NodePath("Token/Bars/HpBar:value")
+properties/2/path = NodePath(".:stats_hided")
 properties/2/spawn = true
-properties/2/replication_mode = 2
-properties/3/path = NodePath("Token/Bars/HpBar/HpContainer/Hp:text")
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:z_index")
 properties/3/spawn = true
-properties/3/replication_mode = 2
-properties/4/path = NodePath(".:stats")
+properties/3/replication_mode = 1
+properties/4/path = NodePath("SelectedHex:self_modulate")
 properties/4/spawn = true
-properties/4/replication_mode = 2
-properties/5/path = NodePath(".:in_region")
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Token:self_modulate")
 properties/5/spawn = true
-properties/5/replication_mode = 2
-properties/6/path = NodePath("HideToggle:button_pressed")
+properties/5/replication_mode = 1
+properties/6/path = NodePath("BG:self_modulate")
 properties/6/spawn = true
 properties/6/replication_mode = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gm8bg"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghksg"]
 bg_color = Color(0.22352941, 0.80784315, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjkmq"]
+bg_color = Color(0, 0, 0, 0)
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gy0pe"]
 bg_color = Color(0, 0.679627, 0.73354554, 1)
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yfd23"]
 bg_color = Color(0.4630264, 0.40817776, 0.9999828, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3v8uw"]
 bg_color = Color(0.72510576, 0.4307525, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
-[node name="Token" type="Node2D" unique_id=1425657095]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0, 0, 0, 0.6156863)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Token" type="Node2D" unique_id=1425657095 groups=["tokens"]]
 script = ExtResource("1_gm8bg")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=111681101]
@@ -57,6 +90,10 @@ replication_config = SubResource("SceneReplicationConfig_gm8bg")
 [node name="DiceSpawner" type="MultiplayerSpawner" parent="." unique_id=1626503408]
 _spawnable_scenes = PackedStringArray("uid://1fs8q7xwr4mr")
 spawn_path = NodePath("../Dices")
+
+[node name="ChargesSpawner" type="MultiplayerSpawner" parent="." unique_id=1391524675]
+_spawnable_scenes = PackedStringArray("uid://bwc8d21d0capp")
+spawn_path = NodePath("../CenterContainer")
 
 [node name="Button" type="Button" parent="." unique_id=542862556]
 offset_left = -78.0
@@ -78,9 +115,9 @@ texture = ExtResource("3_golxd")
 [node name="Token" type="TextureRect" parent="." unique_id=857649829]
 self_modulate = Color(0.38431373, 0.5647059, 1, 1)
 offset_left = -100.0
-offset_top = -101.0
+offset_top = -100.0
 offset_right = 100.0
-offset_bottom = 99.0
+offset_bottom = 100.0
 mouse_filter = 2
 texture = ExtResource("3_golxd")
 
@@ -97,6 +134,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_gm8bg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ghksg")
 step = 1.0
 value = 50.0
@@ -118,32 +156,38 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="Token/Bars/HpBar/HpContainer" unique_id=1040036686]
+z_index = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Vida:"
 
 [node name="Hp" type="Label" parent="Token/Bars/HpBar/HpContainer" unique_id=1780712473]
+z_index = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "98"
 
 [node name="Separator" type="Label" parent="Token/Bars/HpBar/HpContainer" unique_id=1176488994]
+z_index = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "/"
 
 [node name="MaxHp" type="Label" parent="Token/Bars/HpBar/HpContainer" unique_id=1650701416]
+z_index = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "98"
 
 [node name="TempHpBar" type="ProgressBar" parent="Token/Bars/HpBar" unique_id=1098776410]
+z_index = 1
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 0
-offset_top = -2.0
+offset_top = 10.0
 offset_right = 200.0
-offset_bottom = 2.0
+offset_bottom = 18.106382
 mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_tjkmq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_gy0pe")
 step = 1.0
 value = 50.0
@@ -154,6 +198,7 @@ visible = false
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_gm8bg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yfd23")
 step = 1.0
 value = 50.0
@@ -199,6 +244,7 @@ visible = false
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_gm8bg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3v8uw")
 step = 1.0
 value = 50.0
@@ -304,9 +350,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -86.0
+offset_left = -85.0
 offset_top = -84.0
-offset_right = 84.0
+offset_right = 85.0
 offset_bottom = 86.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -345,15 +391,6 @@ text = "Movimentos: "
 layout_mode = 2
 text = "4"
 
-[node name="Name" type="Label" parent="." unique_id=606901237]
-custom_minimum_size = Vector2(200, 0)
-offset_left = -103.0
-offset_top = 66.0
-offset_right = 97.0
-offset_bottom = 89.0
-text = "TOKEN_NAME"
-horizontal_alignment = 1
-
 [node name="Dices" type="HBoxContainer" parent="." unique_id=559022638]
 custom_minimum_size = Vector2(460, 86)
 custom_maximum_size = Vector2(460, -1)
@@ -364,15 +401,6 @@ offset_bottom = -126.0
 mouse_filter = 2
 alignment = 1
 
-[node name="HideToggle" type="CheckButton" parent="." unique_id=1912496362]
-visible = false
-offset_left = -43.0
-offset_top = 85.0
-offset_right = 41.0
-offset_bottom = 136.0
-size_flags_vertical = 8
-text = "Hide"
-
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1141101463]
 offset_left = -468.0
 offset_top = -212.0
@@ -380,8 +408,58 @@ offset_right = 468.0
 offset_bottom = -81.50435
 mouse_filter = 2
 
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1567691835]
+offset_left = -69.0
+offset_top = 74.0
+offset_right = 67.0
+offset_bottom = 94.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="Name" type="Label" parent="PanelContainer" unique_id=606901237]
+custom_maximum_size = Vector2(116, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "TOKEN-NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=414468029]
+visible = false
+offset_left = 74.0
+offset_top = -70.0
+offset_right = 202.0
+offset_bottom = 74.0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer2" unique_id=1356361866]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HideToggle" type="CheckButton" parent="PanelContainer2/HBoxContainer" unique_id=1912496362]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Hide"
+
+[node name="HideStatsToggle" type="CheckButton" parent="PanelContainer2/HBoxContainer" unique_id=1860022629]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Hide Stats"
+
+[node name="HideNameToggle" type="CheckButton" parent="PanelContainer2/HBoxContainer" unique_id=1416183504]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Hide Name"
+
+[node name="Delete" type="Button" parent="PanelContainer2/HBoxContainer" unique_id=2023361814]
+layout_mode = 2
+text = "Delete"
+
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
-[connection signal="toggled" from="HideToggle" to="." method="_on_hide_toggled"]
+[connection signal="toggled" from="PanelContainer2/HBoxContainer/HideToggle" to="." method="_on_hide_toggled"]
+[connection signal="toggled" from="PanelContainer2/HBoxContainer/HideStatsToggle" to="." method="_on_hide_stats_toggled"]
+[connection signal="toggled" from="PanelContainer2/HBoxContainer/HideNameToggle" to="." method="_on_hide_name_toggled"]

@@ -22,7 +22,7 @@ extends Control
 var token = null
 
 func _ready() -> void:
-	var token_race = token.stats["race"]
+	var token_race = token.stats.raca
 	races[token_race]["node"].show()
 	print(races[token_race])
 	race_title.text = "[b][color=%s] %s" % [races[token_race]["color"], token_race]

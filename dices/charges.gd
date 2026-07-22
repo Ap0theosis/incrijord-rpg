@@ -33,7 +33,7 @@ func _ready() -> void:
 func _on_timer_timeout() -> void:
 	queue_free()
 
-var final_value = 0
+@export var final_value = 0
 var times = 0
 
 func _get_final_value(new_value, new_crit) -> void:

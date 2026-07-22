@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Rede="*uid://dfjshb8h8wwj3"
-TokensData="*uid://decnxdc7vvaxf"
+TokensManager="*uid://decnxdc7vvaxf"
 Alma="*uid://rm7bjeael6yu"
 
 [display]
@@ -34,6 +34,7 @@ window/stretch/aspect="expand"
 
 grid=""
 move_marker=""
+tokens=""
 
 [gui]
 
