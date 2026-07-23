@@ -25,7 +25,7 @@ func _ready():
 func _process(delta):
 	if not is_multiplayer_authority():
 		return
-	if $"../../HUD/FichaContainer".editing:
+	if $"../../HUD/FichaContainer".editing or $"../..".editing:
 		return
 	var cam_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if cam_direction:

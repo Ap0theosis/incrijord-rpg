@@ -51,6 +51,11 @@ func _ready() -> void:
 	update_hud()
 
 func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("special"):
+		ServerSaver.salvar_ficha(stats)
+	if Input.is_action_just_pressed("special2"):
+		carregar_save_do_token()
+	
 	if is_dragging:
 		var mouse_pos = get_global_mouse_position()
 		if multiplayer.is_server():
@@ -202,8 +207,15 @@ func finalizar_movimento_no_servidor(self_coor: Vector2i, can_move_to: Array):
 		
 	update_hud.rpc()
 
-@rpc("any_peer", "call_local")
+func solicitar_rolagem(type, advantage = 0, bonus = 0, secret = false) -> void:
+	spawn_dice.rpc_id(1, type, advantage, bonus, secret)
+
+@rpc("any_peer", "call_local", "reliable")
 func spawn_dice(type, advantage = 0, bonus = 0, secret = false):
+	var sender_id = multiplayer.get_remote_sender_id()
+	if sender_id == 0:
+		sender_id = multiplayer.get_unique_id()
+	
 	if not multiplayer.is_server():
 		return
 	
@@ -241,6 +253,8 @@ func spawn_charges(amount, value, crit, type):
 	new_dice.amount = amount
 	new_dice.value = value
 	new_dice.type = type
+	print("critico para aplicar:" + str(crit))
+	new_dice.crit_mult = crit
 	$CenterContainer.add_child(new_dice, true)
 
 
@@ -288,7 +302,8 @@ func update_hud() -> void:
 	moves_value.text = str(moves)
 	selected_hex_texture.visible = selected
 	if stats:
-		name_label.text = stats.nome
+		if not name_hided:
+			name_label.text = stats.nome
 		icon_texture.texture = stats.icone
 		
 		hp_bar.max_value = stats.max_vida
@@ -339,6 +354,8 @@ func _on_button_mouse_entered() -> void:
 
 func _on_button_mouse_exited() -> void:
 	z_index = 0
+	if stats_hided and not multiplayer.is_server():
+		return
 	san_bar.hide()
 	if stats:
 		if stats["postura"] > 0:
@@ -409,3 +426,50 @@ func _on_hide_name_toggled(toggled_on: bool) -> void:
 		esconder_name_menos_pro_host.rpc()
 	else:
 		mostrar_name_para_todos.rpc()
+
+func carregar_save_do_token() -> void:
+	if not multiplayer.is_server():
+		return # Apenas o Host carrega do disco
+		
+	var dados_carregados = ServerSaver.carregar_ficha(stats.id)
+	if dados_carregados:
+		# 1. Atualiza no Host
+		stats = dados_carregados
+		
+		# 2. Injeta nos Clientes instantaneamente! (sem passar ID = manda pra todos)
+		Rede.transmitir_token(self)
+
+@rpc("any_peer", "call_local", "reliable")
+func sincronizar_atributo(propriedade: String, new_valor) -> void:
+	if not stats:
+		return
+	
+	# 1. Atualiza a propriedade no Resource do Token em TODAS as máquinas
+	stats.set(propriedade, new_valor)
+	
+	# 2. Se mudou a cor, atualiza a textura do nó 2D no mapa para todo mundo
+	if propriedade == "token_cor":
+		apply_hex_color()
+		
+	# 3. Atualiza o HUD visual flutuante do token (vida/sanidade em cima da cabeça)
+	update_hud()
+
+	# 4. Se a ficha aberta na tela DESTE jogador for a DESTE token, redesenha a UI
+	var ficha = ficha_container
+	if ficha and ficha.token == self:
+		ficha.definir_ficha()
+
+@rpc("any_peer", "call_local", "reliable")
+func sincronizar_pericia(categoria: String, nome_pericia: String, novo_valor: int) -> void:
+	if not stats:
+		return
+	
+	stats.pericias[categoria][nome_pericia]["value"] = novo_valor
+	
+	var ficha = ficha_container
+	if ficha and ficha.token == self:
+		ficha.definir_ficha()
+
+
+func _on_delete_pressed() -> void:
+	queue_free()

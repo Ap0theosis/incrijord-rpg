@@ -17,19 +17,28 @@ properties/1/spawn = true
 properties/1/replication_mode = 2
 properties/2/path = NodePath(".:stats_hided")
 properties/2/spawn = true
-properties/2/replication_mode = 1
+properties/2/replication_mode = 2
 properties/3/path = NodePath(".:z_index")
 properties/3/spawn = true
-properties/3/replication_mode = 1
+properties/3/replication_mode = 2
 properties/4/path = NodePath("SelectedHex:self_modulate")
 properties/4/spawn = true
-properties/4/replication_mode = 1
+properties/4/replication_mode = 2
 properties/5/path = NodePath("Token:self_modulate")
 properties/5/spawn = true
-properties/5/replication_mode = 1
+properties/5/replication_mode = 2
 properties/6/path = NodePath("BG:self_modulate")
 properties/6/spawn = true
-properties/6/replication_mode = 1
+properties/6/replication_mode = 2
+properties/7/path = NodePath(".:id")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("Dices:position")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath(".:name_hided")
+properties/9/spawn = true
+properties/9/replication_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gm8bg"]
 bg_color = Color(0, 0, 0, 1)
@@ -463,3 +472,4 @@ text = "Delete"
 [connection signal="toggled" from="PanelContainer2/HBoxContainer/HideToggle" to="." method="_on_hide_toggled"]
 [connection signal="toggled" from="PanelContainer2/HBoxContainer/HideStatsToggle" to="." method="_on_hide_stats_toggled"]
 [connection signal="toggled" from="PanelContainer2/HBoxContainer/HideNameToggle" to="." method="_on_hide_name_toggled"]
+[connection signal="pressed" from="PanelContainer2/HBoxContainer/Delete" to="." method="_on_delete_pressed"]

@@ -13,6 +13,7 @@ const RANK_ICONS = {
 
 var players = {
 	"yonnahu": preload("res://data/tokens/yonnahu.tres"),
+	"kaua": preload("res://data/tokens/kaua.tres")
 	
 	#"template" = {
 		#"id" = "",

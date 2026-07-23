@@ -16,62 +16,6 @@ extends Node2D
 @onready var region_label: RichTextLabel = $HUD/MarginContainer2/VBoxContainer/HBoxContainer/RegionLabel
 @onready var time_options: HBoxContainer = $HUD/MarginContainer2/VBoxContainer/HBoxContainer2
 
-@onready var EDIT_LINES =[
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/AlmaContainer/AlmaEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/FobiaContainer/FobiaEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer/CreditsValueEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer/CreditsLimitEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer/MorteEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/MorteContainer/MorteMaxEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer/MedoEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/MedoContainer/MedoMaxEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer/VidaEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/VidaContainer/VidaMaxEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer/VTempEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/TempContainer/VTempMaxEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer/SanEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/SanContainer/SanMaxEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer/PosEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/PosContainer/PosMaxEdit,
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/ResContainer/ResFEdit, 
-	$HUD/FichaContainer/Margin/Geral/VBoxContainer/ResContainer/ResMEdit,
-	$HUD/EditCloseContainer/ColorPickerButton,
-	$HUD/EditCloseContainer/UploadButton,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/CorpoContainer/CorpoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/DestrezaContainer/DestrezaEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/MenteContainer/MenteEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/EspiritoContainer/EspiritoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/CarismaContainer/CarismaEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/PurificacaoContainer/PurificacaoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/IlusaoContainer/IlusaoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/SeloContainer/SeloEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/BencaoMaldicaoContainer/BencaoMaldicaoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ConjuracaoContainer/ConjuracaoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/ClarividenciaContainer/ClarividenciaEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer/SobrecargaContainer/SobrecargaEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/FurtividadeContainer/FurtividadeEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/PrestidigitacaoContainer/PrestidigitacaoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/InstintoContainer/InstintoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/AcrobaciaContainer/AcrobaciaEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/AtletismoContainer/AtletismoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/AdrenalinaContainer/AdrenalinaEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/FisicoContainer/RigidezContainer/RigidezEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/IntimidacaoContainer/IntimidacaoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/ArtesContainer/ArtesEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/PersuasaoContainer/PersuasaoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/PerspicaciaContainer/PerspicaciaEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/LidarCriaturasContainer/LidarCriaturasEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/EncorajarContainer/EncorajarEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer/EncantarContainer/EncantarEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/AparelhagemContainer/AparelhagemEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/MedicinaContainer/MedicinaEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/GastronomiaContainer/GastronomiaEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/InvestigacaoContainer/InvestigacaoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/CriaçãoContainer/CriaçãoEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/CoragemContainer/CoragemEdit,
-	$HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer/SobrevivenciaContainer/SobrevivenciaEdit
-]
-
 @onready var dice_container: PanelContainer = $HUD/DiceContainer
 @onready var zoom_container: PanelContainer = $HUD/ZoomContainer
 @onready var vantagem_spinbox: SpinBox = $HUD/DiceContainer/VboxContainer/VantagemContainer/VantagemSpinbox
@@ -82,6 +26,7 @@ extends Node2D
 
 @onready var ficha_menu_container: VBoxContainer = $HUD/FichaMenuContainer
 
+const TOKEN_SCENE = preload("res://token/token.tscn")
 
 enum REGIONS {Gama, Tiamatia, Svenia, Magilith, Rubiavéu, Yamagon, Breu, Levorith, MundoHumano, Nartá, X}
 var zoom = 100
@@ -118,8 +63,10 @@ func _on_target_reset_pressed() -> void:
 	for child in $Tokens.get_children():
 		child.selected = false
 		child.update_hud()
+	
 	for child in $TargetMarkers.get_children():
 		child.queue_free()
+	
 	selected = null
 
 var dice_advantage = 0
@@ -128,7 +75,7 @@ var dice_secret = false
 
 func _on_roll_pressed(dice: String) -> void:
 	if selected:
-		selected.spawn_dice.rpc(dice, dice_advantage, dice_bonus, dice_secret)
+		selected.solicitar_rolagem(dice, dice_advantage, dice_bonus, dice_secret)
 
 func set_region(region: int):
 	region_label.text = REGIONS.find_key(region)
@@ -186,6 +133,7 @@ func _on_habilidades_button_toggled(toggled_on: bool) -> void:
 @onready var social_container: VBoxContainer = $HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/SocialContainer
 @onready var mental_container: VBoxContainer = $HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/MentalContainer
 @onready var espiritual_container: VBoxContainer = $HUD/FichaContainer/Margin/Atributos/VBoxContainer/PanelContainer/EspiritualContainer
+@onready var spawn_container: PanelContainer = $HUD/SpawnContainer
 
 func _on_fisico_button_toggled(toggled_on: bool) -> void:
 	fisico_container.visible = toggled_on
@@ -198,3 +146,24 @@ func _on_metal_button_toggled(toggled_on: bool) -> void:
 
 func _on_espiritual_button_toggled(toggled_on: bool) -> void:
 	espiritual_container.visible = toggled_on
+
+func _on_spawn_button_toggled(toggled_on: bool) -> void:
+	spawn_container.visible = toggled_on
+
+var spawn_id : String
+
+func _on_spawn_id_text_changed(new_text: String) -> void:
+	spawn_id = new_text
+
+func _on_button_pressed() -> void:
+	if not multiplayer.is_server():
+		return
+	var new_token = TOKEN_SCENE.instantiate()
+	new_token.position = get_global_mouse_position()
+	new_token.id = spawn_id
+	new_token.name = "Token_" + new_token.id + "_" + str(randi() % 1000)
+	tokens_node.add_child(new_token, true)
+
+
+func _on_line_edit_editing_toggled(toggled_on: bool) -> void:
+	editing = toggled_on

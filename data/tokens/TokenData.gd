@@ -93,6 +93,21 @@ extends Resource
 	}
 }
 
+@export var artefatos : Dictionary = {}
+
+@export var habilidades_raca : Dictionary = {}
+@export var habilidades_foco : Dictionary = {}
+@export_enum("Bestial", "Aparato", "Cataclismo") var tipo_fobia : String = ""
+@export var habilidades_fobia : Dictionary = {}
+
+@export var habilidades_c : int = 0
+@export var habilidades_secundarias : int = 0
+@export var habilidades_b : int = 0
+@export var habilidades_a : int = 0
+@export var habilidades_s : int = 0
+@export var habilidades_lendaria : int = 0
+
+@export var anotacao : String = ""
 # --- FUNÇÕES DE LÓGICA DO PERSONAGEM (Embutidas no Resource!) ---
 
 func rank_up() -> void:

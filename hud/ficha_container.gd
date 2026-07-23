@@ -84,8 +84,6 @@ func _ready() -> void:
 	HUD = get_parent()
 
 func _on_selected_token(id) -> void:
-	$"../..".selected = token
-	
 	ficha_menu_container.show()
 	ficha_geral.show()
 	edit_close_container.show()
@@ -102,7 +100,8 @@ func _on_selected_token(id) -> void:
 			child.update_hud()
 		else:
 			token = child
-			
+	
+	$"../..".selected = token
 	definir_ficha()
 	show()
 	$Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/Panel2/VBoxContainer/Insuficiente.hide()
@@ -351,10 +350,24 @@ func _on_rolar_cargas_pressed() -> void:
 	var valor_atual = token.stats.get(moeda)
 	
 	if valor_atual >= custo:
+		var critical_multiplier = 1
 		var novo_valor = valor_atual - custo
-		sincronizar_atributo.rpc(moeda, novo_valor)
+		token.sincronizar_atributo.rpc(moeda, novo_valor)
 		
-		token.spawn_charges.rpc(cargas, valor, 1, aspecto_atual)
+		
+		match token.stats["rank"]:
+			"C", "C+":
+				if token.stats["aspecto"] == "Polus":
+					critical_multiplier = Alma.RANK_C["Polus"]["critico"]
+				else:
+					critical_multiplier = Alma.RANK_C["Minus"]["critico"]
+			"B", "B+":
+				if token.stats["aspecto"] == "Polus":
+					critical_multiplier = Alma.RANK_B["Polus"]["critico"]
+				else:
+					critical_multiplier = Alma.RANK_B["Minus"]["critico"]
+		
+		token.spawn_charges.rpc(cargas, valor, critical_multiplier, aspecto_atual)
 		token.update_hud.rpc()
 		
 		$Margin/Habilidades/VBoxContainer/SoulSkill/VBoxContainer/Panel2/VBoxContainer/Insuficiente.hide()
@@ -368,7 +381,7 @@ func _on_postura_toggled(toggled_on: bool) -> void:
 
 func _on_color_changed(color: Color) -> void:
 	if token and token.stats:
-		sincronizar_atributo.rpc("token_cor", color)
+		token.sincronizar_atributo.rpc("token_cor", color)
 
 var editing = false
 
@@ -401,7 +414,7 @@ func _on_geral_edit_text_submitted(new_text: String, type) -> void:
 	else:
 		valor_final = int(new_text)
 	
-	sincronizar_atributo.rpc(type, valor_final)
+	token.sincronizar_atributo.rpc(type, valor_final)
 	token.update_hud.rpc()
 	
 	editing = false
@@ -422,38 +435,16 @@ func _on_pericia_edit_text_submitted(new_text: String, type) -> void:
 	var new_valor = int(new_text)
 	
 	if FISICO.has(type):
-		sincronizar_pericia.rpc("fisico", type, new_valor)
+		token.sincronizar_pericia.rpc("fisico", type, new_valor)
 	elif SOCIAL.has(type):
-		sincronizar_pericia.rpc("social", type, new_valor)
+		token.sincronizar_pericia.rpc("social", type, new_valor)
 	elif MENTAL.has(type):
-		sincronizar_pericia.rpc("mental", type, new_valor)
+		token.sincronizar_pericia.rpc("mental", type, new_valor)
 	elif ESPIRITUAL.has(type):
-		sincronizar_pericia.rpc("espiritual", type, new_valor)
+		token.sincronizar_pericia.rpc("espiritual", type, new_valor)
 	
 	editing = false
 	for edit_line in EDIT_LINES:
 		edit_line.hide()
 		if edit_line is LineEdit:
 			edit_line.clear()
-
-
-@rpc("any_peer", "call_local", "reliable")
-func sincronizar_atributo(propriedade: String, new_valor) -> void:
-	if not (token and token.stats):
-		return
-	
-	token.stats.set(propriedade, new_valor)
-	
-	if propriedade == "token_cor":
-		token.apply_hex_color()
-	
-	definir_ficha()
-	
-
-@rpc("any_peer", "call_local", "reliable")
-func sincronizar_pericia(categoria: String, nome_pericia: String, novo_valor: int) -> void:
-	if not (token and token.stats):
-		return
-		
-	token.stats.pericias[categoria][nome_pericia]["value"] = novo_valor
-	definir_ficha()

@@ -8,6 +8,7 @@ script = ExtResource("1_bgk5x")
 id = "yonnahu"
 nome = "Yonnahu"
 icone = ExtResource("1_e6kn3")
+rank = "B"
 raca = "Galvan"
 foco = "Selo"
 aspiracao = "Mantra"

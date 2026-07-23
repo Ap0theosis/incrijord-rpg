@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TokenData" format=3 uid="uid://jc2s1clm8c05"]
+
+[ext_resource type="Texture2D" uid="uid://d6adlucafrgp" path="res://data/icons/kaua-icon.png" id="1_01pmd"]
+[ext_resource type="Script" uid="uid://ce2y6sqfptt2m" path="res://data/tokens/TokenData.gd" id="1_3mb0d"]
+
+[resource]
+script = ExtResource("1_3mb0d")
+id = "kaua"
+nome = "Kauã Orlando"
+icone = ExtResource("1_01pmd")
+rank = "B"
+raca = "Galvan"
+foco = "Marcial"
+aspiracao = "Combate"
+especializacao = "Lutador"
+aspecto = "Polus"
+alma = "Gongo"
+fobia = "???"
+metadata/_custom_type_script = "uid://ce2y6sqfptt2m"

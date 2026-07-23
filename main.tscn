@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dbgxetmrkpa4e"]
 
 [ext_resource type="Script" uid="uid://br8hw6kqcdex3" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://d02ktuuko3f6" path="res://token/token.tscn" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://duhfgbow263y4" path="res://data/background/prova1.jpg" id="2_7mycd"]
 [ext_resource type="Texture2D" uid="uid://d0o48768pmikv" path="res://data/icons/allace-icon.png" id="3_1bvp3"]
 [ext_resource type="Script" uid="uid://laqj3mcfj7bg" path="res://hud/ficha_container.gd" id="8_4c57u"]
@@ -322,6 +321,9 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_yf5fn"]
+allow_unpress = true
+
 [node name="Main" type="Node2D" unique_id=368505422]
 script = ExtResource("1_0xm2m")
 free_movement = true
@@ -332,6 +334,10 @@ replication_config = SubResource("SceneReplicationConfig_7mycd")
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=297530759]
 _spawnable_scenes = PackedStringArray("uid://blbk3ydylp1pr")
 spawn_path = NodePath("../Players")
+
+[node name="TokenSpawner" type="MultiplayerSpawner" parent="." unique_id=697369983]
+_spawnable_scenes = PackedStringArray("uid://d02ktuuko3f6")
+spawn_path = NodePath("../Tokens")
 
 [node name="Background" type="Node2D" parent="." unique_id=853342755]
 
@@ -347,10 +353,6 @@ tile_set = SubResource("TileSet_ghksg")
 
 [node name="Tokens" type="Node2D" parent="." unique_id=516393696]
 
-[node name="Token2" parent="Tokens" unique_id=1350576037 instance=ExtResource("1_ig7tw")]
-position = Vector2(652, 96)
-id = "yonnahu"
-
 [node name="TargetMarkers" type="Node2D" parent="." unique_id=1824685374]
 
 [node name="Players" type="Node2D" parent="." unique_id=361414048]
@@ -358,6 +360,7 @@ id = "yonnahu"
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1631576763]
 
 [node name="FichaContainer" type="PanelContainer" parent="HUD" unique_id=1315059783]
+visible = false
 custom_minimum_size = Vector2(332, 0)
 anchors_preset = 11
 anchor_left = 1.0
@@ -1726,6 +1729,7 @@ layout_mode = 2
 text = "ROLAR CARGAS"
 
 [node name="EditCloseContainer" type="VBoxContainer" parent="HUD" unique_id=1426062475]
+visible = false
 custom_minimum_size = Vector2(50, 206)
 custom_maximum_size = Vector2(-1, 206)
 anchors_preset = 1
@@ -1771,6 +1775,7 @@ text = "Upload
 (WIP)"
 
 [node name="FichaMenuContainer" type="VBoxContainer" parent="HUD" unique_id=653286571]
+visible = false
 custom_minimum_size = Vector2(40, 400)
 custom_maximum_size = Vector2(-1, 720)
 anchors_preset = 1
@@ -1832,8 +1837,9 @@ text = "Detalhes"
 visible = false
 custom_minimum_size = Vector2(300, 0)
 offset_left = 82.0
+offset_top = 84.0
 offset_right = 382.0
-offset_bottom = 80.0
+offset_bottom = 164.0
 mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/ZoomContainer" unique_id=1124522370]
@@ -1865,7 +1871,6 @@ layout_mode = 2
 text = "Reset"
 
 [node name="MarginContainer2" type="MarginContainer" parent="HUD" unique_id=492137118]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1922,6 +1927,7 @@ text = "Change"
 layout_mode = 2
 size_flags_vertical = 3
 toggle_mode = true
+button_pressed = true
 text = "Visible"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer2/VBoxContainer" unique_id=1753881612]
@@ -2008,13 +2014,15 @@ text = "CAMERA"
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 toggle_mode = true
+button_group = SubResource("ButtonGroup_yf5fn")
 text = "DADOS"
 
-[node name="AddButton" type="Button" parent="HUD/MenuContainer/VBoxContainer" unique_id=1541155126]
+[node name="SpawnButton" type="Button" parent="HUD/MenuContainer/VBoxContainer" unique_id=1541155126]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-disabled = true
-text = "ADD"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_yf5fn")
+text = "SPAWN"
 text_overrun_behavior = 1
 autowrap_mode = 1
 
@@ -2049,11 +2057,12 @@ text = "3"
 horizontal_alignment = 1
 
 [node name="DiceContainer" type="PanelContainer" parent="HUD" unique_id=1129862501]
+visible = false
 custom_minimum_size = Vector2(300, 300)
 offset_left = 82.0
-offset_top = 84.0
-offset_right = 122.0
-offset_bottom = 124.0
+offset_top = 168.0
+offset_right = 382.0
+offset_bottom = 468.0
 
 [node name="VboxContainer" type="VBoxContainer" parent="HUD/DiceContainer" unique_id=2100689220]
 custom_minimum_size = Vector2(300, 300)
@@ -2152,6 +2161,34 @@ text = "Secreto:"
 layout_mode = 2
 size_flags_horizontal = 10
 
+[node name="SpawnContainer" type="PanelContainer" parent="HUD" unique_id=1322960258]
+visible = false
+offset_left = 82.0
+offset_top = 252.0
+offset_right = 289.0
+offset_bottom = 332.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/SpawnContainer" unique_id=1371153773]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/SpawnContainer/VBoxContainer" unique_id=892344482]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/SpawnContainer/VBoxContainer/HBoxContainer" unique_id=816894688]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "ID:"
+
+[node name="LineEdit" type="LineEdit" parent="HUD/SpawnContainer/VBoxContainer/HBoxContainer" unique_id=1823723300]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Button" type="Button" parent="HUD/SpawnContainer/VBoxContainer" unique_id=2059582837]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Confirmar"
+
 [connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/AlmaContainer/AlmaEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["alma"]]
 [connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/FobiaContainer/FobiaEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["fobia"]]
 [connection signal="text_submitted" from="HUD/FichaContainer/Margin/Geral/VBoxContainer/CreditsContainer/CreditsValueEdit" to="HUD/FichaContainer" method="_on_geral_edit_text_submitted" binds= ["creditos"]]
@@ -2226,6 +2263,7 @@ size_flags_horizontal = 10
 [connection signal="item_selected" from="HUD/MarginContainer2/VBoxContainer/HBoxContainer/OptionButton" to="." method="set_region"]
 [connection signal="toggled" from="HUD/MenuContainer/VBoxContainer/CameraButton" to="." method="_on_camera_button_toggled"]
 [connection signal="toggled" from="HUD/MenuContainer/VBoxContainer/DadosButton" to="." method="_on_dados_button_toggled"]
+[connection signal="toggled" from="HUD/MenuContainer/VBoxContainer/SpawnButton" to="." method="_on_spawn_button_toggled"]
 [connection signal="pressed" from="HUD/DiceContainer/VboxContainer/GridContainer/Roll4" to="." method="_on_roll_pressed" binds= ["D4"]]
 [connection signal="pressed" from="HUD/DiceContainer/VboxContainer/GridContainer/Roll6" to="." method="_on_roll_pressed" binds= ["D6"]]
 [connection signal="pressed" from="HUD/DiceContainer/VboxContainer/GridContainer/Roll8" to="." method="_on_roll_pressed" binds= ["D8"]]
@@ -2235,3 +2273,6 @@ size_flags_horizontal = 10
 [connection signal="value_changed" from="HUD/DiceContainer/VboxContainer/VantagemContainer/VantagemSpinbox" to="." method="_on_vantagem_spinbox_value_changed"]
 [connection signal="value_changed" from="HUD/DiceContainer/VboxContainer/BonusContainer/BonusSpinbox" to="." method="_on_bonus_spinbox_value_changed"]
 [connection signal="toggled" from="HUD/DiceContainer/VboxContainer/SecretContainer/SecretDiceToggle" to="." method="_on_secret_dice_toggled"]
+[connection signal="editing_toggled" from="HUD/SpawnContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_editing_toggled"]
+[connection signal="text_changed" from="HUD/SpawnContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_spawn_id_text_changed"]
+[connection signal="pressed" from="HUD/SpawnContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

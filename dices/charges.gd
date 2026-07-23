@@ -2,7 +2,7 @@ extends Control
 
 var amount := 0
 var value := 0
-var crit := 0
+var crit_mult : float = 0
 var type = ""
 
 var charge_instances = []
@@ -15,6 +15,7 @@ const CHARGE = preload("res://dices/charge_instance.tscn")
 func _ready() -> void:
 	final_value = 0
 	times = 0
+	crit_trigger = 0
 	custom_minimum_size.x = 86 * amount
 	label.custom_minimum_size.x = 86 * amount
 	for i in range(amount):
@@ -35,14 +36,23 @@ func _on_timer_timeout() -> void:
 
 @export var final_value = 0
 var times = 0
+var crit_trigger = 0
 
-func _get_final_value(new_value, new_crit) -> void:
+func _get_final_value(new_value, crit_times) -> void:
 	times += 1
+	print("Vez: " +  str(times))
+	crit_trigger += crit_times
+	print("Criticos: "  + str(crit_trigger))
 	final_value += new_value
-	label.text = str(final_value)
 	if times == amount:
 		label.add_theme_font_size_override("font_size", 32)
 		if type == "Polus":
-			label.modulate = Color("#ff9900")
+			label.add_theme_color_override("font_color", Color("#ff9900"))
 		else:
-			label.modulate = Color("#ff0000")
+			label.add_theme_color_override("font_color", Color("#ff0000"))
+		if crit_trigger >= 2:
+			final_value *= crit_mult
+			print("APLICANDO CRÍTICO DE %s!!!" % crit_mult)
+	label.text = str(int(final_value))
+	if crit_trigger >= 2:
+		label.text = str(int(final_value)) + "!!"
